@@ -5,6 +5,12 @@ import TvShowPage from './pages/tvShow-page/TvShowPage';
 import ProfilePage from './pages/profile-page/ProfilePage';
 import NewsPage from './pages/news-page/NewsPage';
 import Footer from './components/Footer';
+import ProfileList from './pages/profile-page/profile-list';
+import ProfileDetails from './pages/profile-page/profile-details';
+import TvShowList from './pages/tvShow-page/tvShow-list';
+import TvShowDetails from './pages/tvShow-page/tvShow-details';
+import NewsList from './pages/news-page/news-list';
+import NewsDetails from './pages/news-page/news-details';
 function App() {
   return (
     <div className="App">
@@ -12,11 +18,20 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/tvshow" element={<TvShowPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/news" element={<NewsPage />} />
+          <Route path="/tvshow" element={<TvShowPage />}>
+            <Route path="" element={<TvShowList />} />
+            <Route path=":id" element={<TvShowDetails />} />
+          </Route>
+          <Route path="/profile" element={<ProfilePage />}>
+            <Route path="" element={<ProfileList />} />
+            <Route path=":id" element={<ProfileDetails />} />
+          </Route>
+          <Route path="/news" element={<NewsPage />}>
+            <Route path="" element={<NewsList />} />
+            <Route path=":id" element={<NewsDetails />} />
+          </Route>
         </Routes>
-        <Footer/>
+        <Footer />
       </Router>
     </div>
   );

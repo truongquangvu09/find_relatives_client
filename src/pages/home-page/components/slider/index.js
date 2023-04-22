@@ -1,5 +1,5 @@
 import Item from "./items/item";
-import './index.css';
+import './slider.css';
 function Slider() {
     return ( 
         <div className="slider">

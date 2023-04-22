@@ -68,6 +68,7 @@
 .image {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .view-all {
@@ -83,6 +84,7 @@
 
 .TV-show {
     display: flex;
+    padding-bottom: 15px;
 }
 
 .left-show {
@@ -96,6 +98,7 @@
 
 .right-show {
     width: 40%;
+    padding: 0 20px;
     
 }
 
@@ -122,4 +125,8 @@
 
 .featured-news-date{
     display: block;
+}
+
+.featured-video ul li{
+    list-style: none;
 }

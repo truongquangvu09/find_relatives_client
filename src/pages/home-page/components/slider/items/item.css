@@ -1,14 +1,14 @@
-.profile {
+.profiles {
     width: 235px;
     padding: 20px;
 }
 
-.profile h4 {
+.profiles h4 {
     color: #5F5F5F;
     margin: 10px 0 0;
 }
 
-.profile h3 {
+.profiles h3 {
     margin-top: 0px;
     color: red;
     font-size: 18px;

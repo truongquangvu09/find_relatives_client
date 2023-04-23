@@ -1,0 +1,86 @@
+.container{
+    margin: 0 auto;
+    width: 75%;
+}
+
+.newsDetail{
+    float: left;
+    width: 68%;
+}
+
+.title-block{
+    display: block;
+    font-size: 19px;
+    padding: 6px 0;
+    text-transform: uppercase;
+}
+
+.title-block a{
+    text-decoration: none;
+    color: #AD0000;
+}
+
+.content-block{
+    background: none repeat scroll 0 0 #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 15px;
+    min-height: 250px;
+}
+
+.title-content{
+    font-size: 25px;
+    color: #AD0000;
+    margin: 10px 0;
+}
+
+.sub-title{
+    color: #606060;
+    line-height: 20px;
+    margin: 10px 0;
+}
+
+.block-image{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-newdetails{
+    margin-left: 17%;
+    max-width: 100%;
+}
+
+p{
+    line-height: 20px;
+    margin: 10px 0;
+    font-size: 12px;
+}
+
+.comment-block{
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #ccc;
+}
+
+form p .title-comment{
+    display: inline-block;
+    width: 60px;
+    vertical-align: top;
+}
+
+form p textarea,form p .text{
+    padding: 4px;
+    width: 598px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+form .comment-form-save{
+    width: 598px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.form-submit{
+    text-align: center;
+}

@@ -11,6 +11,7 @@ import TvShowList from './pages/tvShow-page/tvShow-list';
 import TvShowDetails from './pages/tvShow-page/tvShow-details';
 import NewsList from './pages/news-page/news-list';
 import NewsDetails from './pages/news-page/news-details';
+import SearchRegistration from './utils/searchRegistration';
 function App() {
   return (
     <div className="App">
@@ -22,6 +23,7 @@ function App() {
             <Route path="" element={<TvShowList />} />
             <Route path=":id" element={<TvShowDetails />} />
           </Route>
+          <Route  path="/searchRegistration" element={<SearchRegistration />}  />
           <Route path="/profile" element={<ProfilePage />}>
             <Route path="" element={<ProfileList />} />
             <Route path=":id" element={<ProfileDetails />} />

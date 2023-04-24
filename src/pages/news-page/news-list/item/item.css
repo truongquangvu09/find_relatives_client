@@ -1,0 +1,47 @@
+.new{
+    border-bottom: 1px solid #D7D7D7;
+    display: block;
+    list-style: none outside none;
+    overflow: hidden;
+    padding: 15px 0;
+}
+
+.list-title{
+    color: #AD0000;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.list-title a{
+    color: #AD0000;
+    text-decoration: none;
+}
+
+.sub-content{
+    display: flex;
+    padding: 10px 10px 0 0;
+}
+
+.content-new-left{
+    margin-right: 10px;
+}
+
+.block-image img{
+    display: block;
+    height: auto;
+    width: 170px;
+}
+.sub-title{
+    font-size: 10px;
+    margin-top: 13px;
+}
+
+.list-excerpt{
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.img-item{
+    width: 170px;
+    height: 120px;
+}

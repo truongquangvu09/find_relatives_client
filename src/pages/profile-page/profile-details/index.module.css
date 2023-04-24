@@ -1,46 +1,47 @@
-.title {
+.head-title {
     display: block;
     font-size: 18px;
     padding: 6px 0;
     text-transform: uppercase;
     color: #AD0000;
+    margin-left: 30px;
 }
 
-.list-profile{
+/* .list-profile{
     display: block;
     margin: 0 auto;
     overflow: hidden;
     width: 92%;
     max-width: 1100px;
-    
-}
+} */
 
-.body{
+.bodys{
     float: left;
-    width: 100%;
+    width: 93%;
     background: none repeat scroll 0 0 #FFFFFF;
     border-radius: 5px 5px 5px 5px;
     border-bottom: 1px solid #D7D7D7;
     margin-bottom: 2px;
     padding: 25px;
+    margin-left: 30px;
 }
 
 
-.profile-left{
-    float: left;
+.profile-lefts {
     width: 68%;
     margin-bottom: 15px;
     font-size: 9px;
+    
 }
 
-.profile-left .title a{
+.profile-lefts .title a{
     color: #AD0000;
     text-decoration: none;
     margin: 10px 0;font-size: 18px;
     font-weight: normal;
 }
 
-.profile-left p{
+.profile-lefts p{
     line-height: 20px;
     margin: 10px 0;
     font-size: 16px;
@@ -50,7 +51,7 @@
     width: 32%;
 }
 
-.body-content{
+.body-contents{
     border-top: 1px solid #D7D7D7;
     clear: both;
     display: flex;
@@ -64,14 +65,15 @@
     display: flex;
 }
 
-.picture {
+.pictures {
     width: 30%;
     padding: 20px 0;
     
 }
 
-.picture p{
+.pictures p{
     text-align: center;
+    font-size: 17px;
 }
 
 .content {
@@ -80,7 +82,13 @@
 }
 
 .content p{
-    margin-bottom: 16px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.title {
+    font-size: 16px;
+    color: black;
 }
 
 .contact p{
@@ -97,14 +105,23 @@
     display: flex;
     justify-content: space-between;
     padding-right: 30px;
+    padding-bottom: 15px;
 }
 
-.comment p{
-    padding: 15px;
+.comment h3{
+    font-size: 20px;
 }
 
+.titless {
+    font-size: 17px;
+}
+
+.comments{
+    font-size: 17;
+}
 .form-comment label{
     width: 10%;
+    font-size: 17px;
 }
 .form-comment textarea {
     width: 85%;
@@ -114,11 +131,20 @@
     display: flex;
     justify-content: space-between;
     padding-right: 30px;
+    padding-bottom: 15px;
+}
+
+.form-comment2 label{
+    font-size: 17px;
 }
 
 .form-comment2 textarea {
     width: 85%;
     height: 40px;
+}
+
+.save label{
+    font-size: 17px;
 }
 
 .submit {

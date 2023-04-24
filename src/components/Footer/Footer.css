@@ -4,6 +4,7 @@
     display: block;
     margin-top: 20px;
     overflow: hidden;
+    width: 100%;
 }
 .footer .fooFb {
 	text-align: center;

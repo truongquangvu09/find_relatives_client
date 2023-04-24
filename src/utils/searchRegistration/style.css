@@ -1,0 +1,327 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
+}
+
+.main {
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 92%;
+    max-width: 1100px;
+}
+
+.header {
+    margin: 0 auto 30px;
+    width: 92%;
+    max-width: 1100px;
+}
+
+.logo {
+    max-width: 418px;
+}
+
+.logo a,
+.logo img {
+    display: block;
+    width: 100%;
+}
+
+p {
+    line-height: 20px;
+    margin: 10px 0;
+}
+
+.submit {
+    cursor: pointer;
+}
+
+.main-sidebar {
+    padding-top: 35px;
+}
+
+.main-sidebar,
+.home-news {
+    float: right;
+    width: 31%;
+}
+
+.main-content {
+    float: left;
+    width: 68.5%;
+}
+
+.content-block {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 5px 5px 5px 5px;
+    overflow: hidden;
+    padding: 15px;
+    min-height: 250px;
+}
+
+.profile-content {
+    border-top: 1px solid #D7D7D7;
+    clear: both;
+    display: block;
+    overflow: hidden;
+}
+
+.block-title {
+    display: block;
+    font-size: 18px;
+    padding: 6px 0;
+    text-transform: uppercase;
+    color: #AD0000;
+}
+
+.content-block {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 5px 5px 5px 5px;
+    overflow: hidden;
+    padding: 15px;
+    min-height: 250px;
+}
+
+.content-block {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 5px 5px 5px 5px;
+    overflow: hidden;
+    padding: 15px;
+    min-height: 250px;
+}
+
+.submit-profile .full {
+    float: left;
+    width: 100%;
+}
+
+.submit-profile .full input {
+    width: 547px;
+}
+
+.submit-profile .full textarea {
+    width: 547px;
+    min-width: 547px;
+    max-width: 547px;
+}
+
+.submit-profile .half {
+    float: left;
+    width: 50%;
+}
+
+.submit-profile .half input {
+    width: 220px;
+}
+
+.submit-profile .quarter {
+    float: left;
+    width: 25%;
+}
+
+.submit-profile .quarter input {
+    width: 60px;
+}
+
+.submit-profile label {
+    display: inline-block;
+    width: 60px;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.submit-profile label.error {
+    color: #FF0000;
+    font-size: 85%;
+    margin-left: 65px;
+    text-align: left;
+    width: auto;
+}
+
+.submit-profile input {
+    padding: 4px;
+    vertical-align: middle;
+}
+
+.submit-profile option {
+    padding: 0 0.5%;
+}
+
+.submit-profile textarea {
+    height: 100px;
+    padding: 4px;
+    vertical-align: middle;
+}
+
+.submit-profile .form-radio input {
+    display: inline;
+    width: auto !important;
+}
+
+.submit-profile .form-radio label {
+    display: inline;
+}
+
+.submit-profile h2 {
+    margin: 20px 0;
+    color: #AD0000;
+}
+
+.submit-profile>div {
+    overflow: hidden;
+}
+
+.form-file label {
+    display: block;
+    float: left;
+    padding: 6px 0;
+}
+
+.form-file .profile_file {
+    width: 225px;
+}
+
+.form-file .profile_desc {
+    width: 314px;
+}
+
+.form-file p {
+    float: left;
+    margin: 0;
+    width: 574px;
+}
+
+.more_file {
+    cursor: pointer;
+    display: block;
+    margin: 5px;
+    padding-left: 20px;
+}
+
+.more_file:hover {
+    color: #ad0000;
+}
+
+.form-submit {
+    text-align: center;
+}
+
+.form-submit label {
+    margin: 5px !important;
+}
+
+.form-submit #submit_profile {
+    width: 200px !important;
+}
+
+.form-note {
+    font-size: 85%;
+}
+
+.large-button {
+    border-radius: 5px;
+    margin-bottom: 6px;
+    background-color: #a30000;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a30000), to(#cb0000));
+    background: -webkit-linear-gradient(top, #cb0000, #a30000);
+    background: -moz-linear-gradient(top, #cb0000, #a30000);
+    background: -ms-linear-gradient(top, #cb0000, #a30000);
+    background: -o-linear-gradient(top, #cb0000, #a30000);
+    border-top: 1px solid #a20d13;
+    box-shadow: 0 1px 0 0 #e49295 inset;
+    transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    display: block;
+}
+
+.large-button:hover {
+    background-color: #b50000;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b50000), to(#d90000));
+    background: -webkit-linear-gradient(top, #d90000, #b50000);
+    background: -moz-linear-gradient(top, #d90000, #b50000);
+    background: -ms-linear-gradient(top, #d90000, #b50000);
+    background: -o-linear-gradient(top, #d90000, #b50000);
+    transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+
+.large-button a {
+    color: #FFFFFF;
+    display: block;
+    text-align: center;
+    text-shadow: 1px 1px 1px #333333;
+    padding: 10px;
+}
+
+.large-button a:hover {
+    text-decoration: none;
+}
+
+.large-button.single-button {
+    margin: 50px auto;
+    width: 200px;
+    font-weight: bold;
+}
+
+.widget-block {
+    background: none repeat scroll 0 0 #EFEFEF;
+    border-radius: 0 5px 5px 0;
+    display: block;
+    margin-bottom: 6px;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.widget-title {
+    background: none repeat scroll 0 0 #AD0000;
+    color: #FFFFFF;
+    font-size: 14px;
+    margin: -10px -10px 10px 0;
+    padding: 10px;
+}
+
+.widget-block li {
+    list-style: disc inside none;
+    margin: 5px 0;
+    padding-left: 15px;
+}
+
+.widget-block .featured-contact {
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
+.advanced-search input {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #D6D6D6;
+    border-radius: 6px 6px 6px 6px;
+    display: block;
+    margin: 10px auto;
+    padding: 3.8%;
+    width: 92%;
+    transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+    color: #333;
+}
+
+.advanced-search input:hover,
+.advanced-search input:focus {
+    background: none repeat scroll 0 0 #EEE;
+    transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+}
+
+.advanced-search .submit {
+    width: 50%;
+}

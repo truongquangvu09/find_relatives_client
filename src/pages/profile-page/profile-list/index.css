@@ -1,0 +1,9 @@
+.block-title{
+    display: block;
+    font-size: 18px;
+    padding: 6px 0;
+    text-transform: uppercase;
+    color: #AD0000;
+    margin-left: 30px;
+}
+

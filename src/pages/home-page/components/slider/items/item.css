@@ -1,0 +1,17 @@
+.profiles {
+    width: 235px;
+    padding: 20px;
+}
+
+.profiles h4 {
+    color: #5F5F5F;
+    margin: 10px 0 0;
+}
+
+.profiles h3 {
+    margin-top: 0px;
+    color: red;
+    font-size: 18px;
+    font-weight: normal;
+    cursor: pointer;
+}

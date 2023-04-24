@@ -1,0 +1,14 @@
+.wrapper{
+    display: flex;
+}
+
+.profile-list{
+    width: 68.5%;
+    margin-left: 150px;
+}
+
+.sidebar{
+    float: right;
+    width: 31%;
+    margin-right: 170px;
+}

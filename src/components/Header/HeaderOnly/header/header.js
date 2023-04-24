@@ -1,4 +1,5 @@
 import './header.css';
+import { NavLink } from 'react-router-dom' ;
 import logo from '../images/logo.png';   
 // run first npm install --save-dev @fortawesome/fontawesome-free
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -13,10 +14,14 @@ function Header() {
                     </a>
                 </div>
                 <ul className="menu">
-                    <li>Trang chủ</li>
+                    <li><NavLink to="/">Trang chủ</NavLink></li>
+                    <li><NavLink to="/profile">Tìm người thân</NavLink></li>
+                    <li><NavLink to="/tvshow">Truyền hình</NavLink></li>
+                    <li><NavLink to="/news">Tin tức</NavLink></li>
+                    {/* <li>Trang chủ</li>
                     <li>Tìm người thân</li>
                     <li>Truyền hình</li>
-                    <li>Tin tức</li>
+                    <li>Tin tức</li> */}
                 </ul>
             </div>
             <div className='header-bottom'>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import "./profile.css"
-
+import './profile.css';
+import Sidebar from '../../utils/sidebar/index';
 
 export default function ProfilePage() {
   return (
@@ -10,7 +10,7 @@ export default function ProfilePage() {
         <Outlet />
       </div>
       <div className="sidebar">
-        <p>sidebar title</p>
+        <Sidebar></Sidebar>
       </div>
     </div>
   );

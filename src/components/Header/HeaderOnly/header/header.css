@@ -45,6 +45,10 @@ html,body{
     margin: 30px 28px;
 }
 
+.menu li a{
+    color: white;
+    text-decoration: none;
+}
 
 
 .header-bottom{

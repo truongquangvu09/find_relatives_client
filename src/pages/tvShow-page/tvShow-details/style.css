@@ -1,0 +1,79 @@
+.comments-area {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #ccc;
+}
+
+.comment-reply-title small {
+  display: none;
+}
+
+.commentlist {
+  list-style: none;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.commentlist .children {
+  list-style: none;
+  padding-left: 2.5rem;
+}
+
+.comment-form-comment label {
+  margin-right: 4px;
+}
+
+.comment-form-comment label,
+.comment-form-author label,
+.comment-form-email label,
+.comment-form-url label {
+  display: inline-block;
+  width: 60px;
+  vertical-align: top;
+}
+
+.comment-form-comment textarea,
+.comment-form-author input,
+.comment-form-email input,
+.comment-form-url input {
+  padding: 4px;
+  width: 598px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.comment-form-cookies-consent {
+  width: 598px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.comment-body {
+  padding-left: 2.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.comment-author .avatar {
+  margin-left: -2.5rem;
+}
+.comment-author .fn {
+  display: block;
+  margin-top: -2rem;
+}
+
+.comment-author .fn,
+.comment-author .fn a {
+  color: inherit;
+  font-style: normal;
+  font-weight: bolder;
+}
+.comment-author .says {
+  display: none;
+}
+.comment-meta a {
+  color: #999;
+  font-size: 85%;
+}
+
+.form-submit input {
+  padding: 4px;
+}

@@ -9,7 +9,7 @@ function Items() {
           <h1 className={style['title']}>
             <Link to="/profile/1" title="Chị Nguyễn Thị Phương Dung tìm chú Bùi Tiết sinh năm 1949, mất tin tức khoảng năm 1970, tại Nha Trang. Bố mẹ là hai cụ Bùi Năng, Bùi Thị Lạc mất sớm, ông Triết sống với anh trai là Bùi Thương, quê Ninh Thuận. Khoảng năm 1970, ông Tiết bị bắt đi lính tại […]">
               MS25810: Nguyễn Thi Phương Dung tìm chú Bùi Tiết
-            </Link>
+            </Link> 
           </h1>
           <p>Họ và tên: Bùi Tiết</p>
           <p>Năm sinh: 2000</p>

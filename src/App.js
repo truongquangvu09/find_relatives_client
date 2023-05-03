@@ -12,6 +12,7 @@ import TvShowDetails from './pages/tvShow-page/tvShow-details';
 import NewsList from './pages/news-page/news-list';
 import NewsDetails from './pages/news-page/news-details';
 import SearchRegistration from './utils/searchRegistration';
+import Admin from './admin';
 function App() {
   return (
     <div className="App">
@@ -32,6 +33,7 @@ function App() {
             <Route path="" element={<NewsList />} />
             <Route path=":id" element={<NewsDetails />} />
           </Route>
+          <Route path="/admin" element={<Admin />} />
         </Routes>
         <Footer />
       </Router>

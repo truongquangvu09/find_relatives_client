@@ -23,9 +23,16 @@
   color: #ad0000;
   font-size: 18px;
   font-weight: normal;
+  max-width: 330px;
 }
 .list-tvshow .list-title {
   margin-top: 5px;
+}
+.list-tvshow {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 30px;
+  list-style: none;
 }
 .list-thumb img {
   display: block;
@@ -126,7 +133,6 @@
     float: right;
     width: 31%;
   }
-
   .logo {
     float: left;
     margin: 10px 0 0 -27px;

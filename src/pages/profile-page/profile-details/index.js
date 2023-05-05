@@ -21,7 +21,7 @@ function ProfileDetails() {
               <p className={style["title"]}>Tên cha: Bùi năng</p>
               <p className={style["title"]}>Tên mẹ: Bùi Thị Lạc</p>
               <p className={style["title"]}>Tên anh chị em: Bùi Phương và Nguyễn Thị Minh Thư</p>
-              <p className={style["title"]}>Năm thất lạc: 1970</p>
+              <p className={style["title"]}>Năm thất lạc: 1970</p> 
             </div>
             <div className={style["profile-right"]}>
               <img src="https://vaithuhayho.com/wp-content/uploads/2021/03/anh-nen-dep-5.jpg" width="100%" height="200" />

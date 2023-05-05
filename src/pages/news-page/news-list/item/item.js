@@ -1,17 +1,19 @@
 import './item.css';
-import NewsDetails from '../../news-details/index';
+import { Link } from 'react-router-dom';
 
 function Item() {
   return (
     <div className="new">
       <h2 className="list-title">
-        <a href={NewsDetails}>Thông báo : Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700</a>
+        <Link to="/news/1">
+          Thông báo : Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700
+        </Link>
       </h2>
       <div className='sub-content'>
         <div class="content-new-left">
-          <a href={<NewsDetails></NewsDetails>} class="block-image">
+          <Link to="/news/1">
             <img className='img-item' src="https://haylentieng.vn/wp-content/uploads/2023/03/z4163339796552_4a45b51f7f238d548fac26faedd77c9b-300x200.jpg" alt="" />
-          </a>
+          </Link>
         </div>
         <div class="content-right">
           <p class="sub-title">(07/03/2023)</p>

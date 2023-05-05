@@ -1,5 +1,7 @@
 import React from 'react';
 import './newDetail.css';
+import Sidebar from '../../../utils/sidebar/index';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function NewsDetails() {
   return (

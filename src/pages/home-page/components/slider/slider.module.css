@@ -52,6 +52,8 @@
 .header-left input {
   width: 90%;
   height: 33px;
+  border-radius: 5px;
+  border: 1px solid #D6D6D6;
 }
 
 .header-right {
@@ -67,9 +69,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  background-color: lightgoldenrodyellow;
+  background-color: white;
   border-radius: 5px;
   margin-top: 10px;
+  padding: 20px 30px;
+  border-radius: 10px;
 }
 
 .view-all {
@@ -124,7 +128,8 @@
 
 .right-show {
   width: 40%;
-  padding: 0 20px;
+  padding-left: 20px;
+  /* border-radius: 100px; */
 }
 
 .right-show h2 a {
@@ -148,6 +153,10 @@
 .featured-new {
   padding: 15px;
   background-color: rgb(247, 245, 243);
+}
+
+.featured-new img {
+  border-radius: 20px;
 }
 
 .featured-news-bot {
@@ -183,3 +192,6 @@
   padding: 8px 32px;
   font-size: 20px;
 }
+
+
+

@@ -16,12 +16,18 @@ export default function ProfilePage() {
             Đăng ký tìm người thân
           </Link>
         </button>
-        {/* <div className={style["search-high"]}>
-          <h3 className={style["search"]}>Tìm kiếm nâng cao</h3>
-          <form className={style["advanced-search"]}>
-            <p className={style["title"]}>Có thể bạn đang được ai đó mong gặp lại, hoặc người bạn cần tìm đã đăng ký với NCHCCCL. Hãy kiểm tra!</p>
+        <div class="widget-block">
+          <h3 class="widget-title">Tìm kiếm nâng cao</h3>
+          <form class="advanced-search" action="/profiles">
+            <p>Có thể bạn đang được ai đó mong gặp lại, hoặc người bạn cần tìm đã đăng ký với NCHCCCL. Hãy kiểm tra!</p>
+            <input name="n" placeholder="Họ tên người cần tìm" value="" />
+            <input name="y" placeholder="Năm sinh" value="" />
+            <input name="a" placeholder="Quê quán" value="" />
+            <input name="s" placeholder="Tên cha, mẹ, anh, chị em" value="" />
+            <p>(*) Nhập thông tin bằng Tiếng Việt có dấu, nhập số cho năm sinh và năm thất lạc, quê quán, nhập tên địa danh cũ nếu nhớ</p>
+            <input class="submit" type="submit" value="Tìm kiếm" />
           </form>
-        </div> */}
+        </div>
         <Sidebar></Sidebar>
       </div>
     </div>

@@ -1,0 +1,22 @@
+.header{
+    text-align: center;
+    color: red;
+    margin-bottom: 10px;
+}
+.header-search{
+    display: flex;
+    justify-content: space-between;
+    input {
+        width: 300px;
+        height: 35px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #D6D6D6;
+    }
+}
+
+.header-detail{
+    color: red;
+    padding-bottom: 20px;
+}
+

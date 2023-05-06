@@ -17,7 +17,7 @@ function Slider() {
           <div className={style['featured-video']}>
             <iframe
               width="100%"
-              height="419"
+              height="420"
               src="https://www.youtube.com/embed/1QLjTEC89_I?autohide=1&amp;controls=1&amp;showinfo=0"
               frameborder="0"
               allowfullscreen=""

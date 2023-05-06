@@ -38,10 +38,12 @@
     float: left;
     list-style: none outside none;
     margin: 15px;
+    
 }
 .fooshow li a {
     color: #000000;
     font-size: 14px;
+    text-decoration: none;
 }
 .fooshow li.current-menu-item a {
     color: #AD0000;

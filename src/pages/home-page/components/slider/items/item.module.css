@@ -1,18 +1,26 @@
+
+
 .profiles {
     width: 235px;
     padding: 20px;
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.4);
+    margin-bottom: 30px;
+    border-radius: 10px;
 }
 
-.profiles h4 {
+.profiles a img{
+    border-radius: 10px;
+}
+
+.profiles span {
     
     margin: 10px 0 0;
-    font-size: 17px;
+    font-size: 16px;
 }
 
 .profiles h3 {
     margin-top: 0px;
-    color: red;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: normal;
     cursor: pointer;
 }

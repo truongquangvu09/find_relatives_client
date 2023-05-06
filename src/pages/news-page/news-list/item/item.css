@@ -6,18 +6,18 @@
     padding: 15px 0;
 }
 
-.list-title{
+.list-title-news{
     color: #AD0000;
     font-size: 18px;
     font-weight: normal;
 }
 
-.list-title a{
+.list-title-news a{
     color: #AD0000;
     text-decoration: none;
 }
 
-.sub-content{
+.sub-content-news{
     display: flex;
     padding: 10px 10px 0 0;
 }
@@ -31,7 +31,7 @@
     height: auto;
     width: 170px;
 }
-.sub-title{
+.sub-title-news{
     font-size: 10px;
     margin-top: 13px;
 }

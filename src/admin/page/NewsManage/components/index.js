@@ -192,9 +192,7 @@ const columns = [
         <Button
           variant="contained"
           startIcon={<DeleteIcon />}
-          onClick={(event) => {
-            handleClick(event, cellValues);
-          }}
+          onClick={(event) => {}}
         >
           Delete
         </Button>

@@ -42,7 +42,6 @@ function EditToolbar(props) {
   };
 
   const handleMouseDown = (event) => {
-    // Keep the focus in the cell
     event.preventDefault();
   };
 
@@ -85,7 +84,7 @@ EditToolbar.propTypes = {
   setCellModesModel: PropTypes.func.isRequired,
 };
 
-function NewsManageTable() {
+function TvShowManageTable() {
   const [selectedCellParams, setSelectedCellParams] = React.useState(null);
   const [cellModesModel, setCellModesModel] = React.useState({});
 
@@ -107,7 +106,6 @@ function NewsManageTable() {
   const handleCellKeyDown = React.useCallback(
     (params, event) => {
       if (cellMode === 'edit') {
-        // Prevents calling event.preventDefault() if Tab is pressed on a cell in edit mode
         event.defaultMuiPrevented = true;
       }
     },
@@ -160,42 +158,48 @@ function NewsManageTable() {
 const columns = [
   { field: 'id', headerName: 'ID', editable: true, width: 90 },
   {
-    field: 'image',
-    headerName: 'Image',
+    field: 'Video',
+    headerName: 'Video',
     width: 150,
     editable: true,
   },
   {
     field: 'title',
-    headerName: 'Title',
-    width: 420,
+    headerName: 'Nội dung',
+    width: 170,
     editable: true,
   },
   {
-    field: 'display',
-    headerName: 'Display',
-    width: 110,
+    field: 'DisplayMode',
+    headerName: 'Chế độ hiển thị',
+    width: 90,
     editable: true,
   },
   {
-    field: 'date',
-    headerName: 'Date Created',
-    width: 110,
+    field: 'UploadDate',
+    headerName: 'Ngày tải lên',
+    width: 100,
+    editable: true,
+  },
+  {
+    field: 'NumberOfViews',
+    headerName: 'Số lượt xem',
+    width: 90,
+    editable: true,
+  },
+  {
+    field: 'NumberOfComments',
+    headerName: 'Số bình luận',
+    width: 90,
     editable: true,
   },
   {
     field: '',
-    width: 150,
+    width: 110,
     editable: true,
     renderCell: (cellValues) => {
       return (
-        <Button
-          variant="contained"
-          startIcon={<DeleteIcon />}
-          onClick={(event) => {
-            handleClick(event, cellValues);
-          }}
-        >
+        <Button variant="outlined" startIcon={<DeleteIcon />}>
           Delete
         </Button>
       );
@@ -206,94 +210,104 @@ const columns = [
 const rows = [
   {
     id: 1,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
+    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
+    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
+    DisplayMode: 'Hiện',
+    UploadDate: '1/6/2022',
+    NumberOfViews: '0',
+    NumberOfComments: '0',
     status: '',
   },
   {
     id: 2,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
+    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
+    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
+    DisplayMode: 'Hiện',
+    UploadDate: '1/6/2022',
+    NumberOfViews: '0',
+    NumberOfComments: '0',
     status: '',
   },
   {
     id: 3,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
+    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
+    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
+    DisplayMode: 'Hiện',
+    UploadDate: '1/6/2022',
+    NumberOfViews: '0',
+    NumberOfComments: '0',
     status: '',
   },
   {
     id: 4,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
+    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
+    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
+    DisplayMode: 'Hiện',
+    UploadDate: '1/6/2022',
+    NumberOfViews: '0',
+    NumberOfComments: '0',
     status: '',
   },
   {
     id: 5,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
+    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
+    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
+    DisplayMode: 'Hiện',
+    UploadDate: '1/6/2022',
+    NumberOfViews: '0',
+    NumberOfComments: '0',
     status: '',
   },
   {
     id: 6,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
+    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
+    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
+    DisplayMode: 'Hiện',
+    UploadDate: '1/6/2022',
+    NumberOfViews: '0',
+    NumberOfComments: '0',
     status: '',
   },
   {
     id: 7,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
+    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
+    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
+    DisplayMode: 'Hiện',
+    UploadDate: '1/6/2022',
+    NumberOfViews: '0',
+    NumberOfComments: '0',
     status: '',
   },
   {
     id: 8,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
+    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
+    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
+    DisplayMode: 'Hiện',
+    UploadDate: '1/6/2022',
+    NumberOfViews: '0',
+    NumberOfComments: '0',
     status: '',
   },
   {
     id: 9,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
+    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
+    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
+    DisplayMode: 'Hiện',
+    UploadDate: '1/6/2022',
+    NumberOfViews: '0',
+    NumberOfComments: '0',
     status: '',
   },
   {
     id: 10,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
+    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
+    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
+    DisplayMode: 'Hiện',
+    UploadDate: '1/6/2022',
+    NumberOfViews: '0',
+    NumberOfComments: '0',
     status: '',
   },
 ];
 
-export default NewsManageTable;
+export default TvShowManageTable;

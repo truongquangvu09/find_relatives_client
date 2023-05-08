@@ -6,8 +6,8 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Stack from '@mui/material/Stack';
 
 //check-box
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
@@ -35,28 +35,22 @@ function AddNews() {
                                 Upload
                                 <input hidden accept="image/*" multiple type="file" />
                             </Button>
-                            
+
                         </Stack>
                     </div>
                 </div>
             </div>
             <div className={style['checkbox-area']}>
-                <FormControl component="fieldset">
-                    <FormLabel component="legend">Display</FormLabel>
-                    <FormGroup aria-label="position" column>
-                        <FormControlLabel
-                            value="show"
-                            control={<Checkbox />}
-                            label="Show"
-                            labelPlacement="show"
-                        />
-                        <FormControlLabel
-                            value="hire"
-                            control={<Checkbox />}
-                            label="Hire"
-                            labelPlacement="hire"
-                        />
-                    </FormGroup>
+                <FormControl>
+                    <FormLabel id="demo-radio-buttons-group-label">Display</FormLabel>
+                    <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="female"
+                        name="radio-buttons-group"
+                    >
+                        <FormControlLabel value="show" control={<Radio />} label="Show" />
+                        <FormControlLabel value="hire" control={<Radio />} label="Hire" />
+                    </RadioGroup>
                 </FormControl>
             </div>
             <div className={style['button-save']}>

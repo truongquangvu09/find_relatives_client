@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid, GridCellModes } from '@mui/x-data-grid';
+import style from './components.module.css';
 
 function EditToolbar(props) {
   const { selectedCellParams, cellMode, cellModesModel, setCellModesModel } =
@@ -60,7 +61,7 @@ function EditToolbar(props) {
         disabled={!selectedCellParams}
         variant="outlined"
       >
-        {cellMode === 'edit' ? 'Save' : 'Edit'}
+        {cellMode === 'edit' ? 'Lưu' : 'Sửa'}
       </Button>
       <Button
         onClick={handleCancel}
@@ -69,7 +70,7 @@ function EditToolbar(props) {
         variant="outlined"
         sx={{ ml: 1 }}
       >
-        Cancel
+        Hủy
       </Button>
     </Box>
   );
@@ -161,25 +162,30 @@ const columns = [
   { field: 'id', headerName: 'ID', editable: true, width: 90 },
   {
     field: 'image',
-    headerName: 'Image',
+    headerName: 'Ảnh',
     width: 150,
     editable: true,
+    renderCell: (cellValues) => {
+      return (
+        <img src='https://haylentieng.vn/wp-content/uploads/2023/03/z4163339796552_4a45b51f7f238d548fac26faedd77c9b-300x200.jpg' className={style['render-image']}/>
+      );
+    }
   },
   {
     field: 'title',
-    headerName: 'Title',
+    headerName: 'Tiêu Đề',
     width: 420,
     editable: true,
   },
   {
     field: 'display',
-    headerName: 'Display',
+    headerName: 'Hiển Thị',
     width: 110,
     editable: true,
   },
   {
     field: 'date',
-    headerName: 'Date Created',
+    headerName: 'Ngày Tạo',
     width: 110,
     editable: true,
   },
@@ -189,12 +195,9 @@ const columns = [
     editable: true,
     renderCell: (cellValues) => {
       return (
-        <Button
-          variant="contained"
-          startIcon={<DeleteIcon />}
-          onClick={(event) => {}}
+        <Button variant="contained" startIcon={<DeleteIcon />} 
         >
-          Delete
+          Xóa
         </Button>
       );
     },

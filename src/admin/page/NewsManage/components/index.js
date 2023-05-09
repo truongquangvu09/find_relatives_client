@@ -190,7 +190,7 @@ const columns = [
     renderCell: (cellValues) => {
       return (
         <Button variant="contained" startIcon={<DeleteIcon />} onClick={(event) => {
-          handleClick(event, cellValues);
+          this.handleClick(event, cellValues);
         }}>
           Delete
         </Button>

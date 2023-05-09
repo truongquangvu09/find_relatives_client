@@ -6,7 +6,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid, GridCellModes } from '@mui/x-data-grid';
 
 function EditToolbar(props) {
-  const { selectedCellParams, cellMode, cellModesModel, setCellModesModel } = props;
+  const { selectedCellParams, cellMode, cellModesModel, setCellModesModel } =
+    props;
 
   const handleSaveOrEdit = () => {
     if (!selectedCellParams) {
@@ -110,7 +111,7 @@ function NewsManageTable() {
         event.defaultMuiPrevented = true;
       }
     },
-    [cellMode],
+    [cellMode]
   );
 
   const handleCellEditStop = React.useCallback((params, event) => {
@@ -157,7 +158,7 @@ function NewsManageTable() {
 }
 
 const columns = [
-  { field: 'id', headerName: 'ID',editable: true, width: 90 },
+  { field: 'id', headerName: 'ID', editable: true, width: 90 },
   {
     field: 'image',
     headerName: 'Image',
@@ -183,35 +184,114 @@ const columns = [
     editable: true,
   },
   {
-
     field: '',
     width: 150,
     editable: true,
     renderCell: (cellValues) => {
       return (
-        <Button variant="contained" startIcon={<DeleteIcon />} onClick={(event) => {
-          handleClick(event, cellValues);
-        }}>
+        <Button
+          variant="contained"
+          startIcon={<DeleteIcon />}
+          onClick={(event) => {}}
+        >
           Delete
         </Button>
       );
-    }
+    },
   },
 ];
 
 const rows = [
-  { id: 1, image: '', title: 'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700', display: 'Show', date: '05/05/2023', status: '' },
-  { id: 2, image: '', title: 'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700', display: 'Show', date: '05/05/2023', status: '' },
-  { id: 3, image: '', title: 'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700', display: 'Show', date: '05/05/2023', status: '' },
-  { id: 4, image: '', title: 'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700', display: 'Show', date: '05/05/2023', status: '' },
-  { id: 5, image: '', title: 'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700', display: 'Show', date: '05/05/2023', status: '' },
-  { id: 6, image: '', title: 'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700', display: 'Show', date: '05/05/2023', status: '' },
-  { id: 7, image: '', title: 'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700', display: 'Show', date: '05/05/2023', status: '' },
-  { id: 8, image: '', title: 'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700', display: 'Show', date: '05/05/2023', status: '' },
-  { id: 9, image: '', title: 'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700', display: 'Show', date: '05/05/2023', status: '' },
-  { id: 10, image: '', title: 'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700', display: 'Show', date: '05/05/2023', status: '' },
+  {
+    id: 1,
+    image: '',
+    title:
+      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
+    display: 'Show',
+    date: '05/05/2023',
+    status: '',
+  },
+  {
+    id: 2,
+    image: '',
+    title:
+      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
+    display: 'Show',
+    date: '05/05/2023',
+    status: '',
+  },
+  {
+    id: 3,
+    image: '',
+    title:
+      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
+    display: 'Show',
+    date: '05/05/2023',
+    status: '',
+  },
+  {
+    id: 4,
+    image: '',
+    title:
+      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
+    display: 'Show',
+    date: '05/05/2023',
+    status: '',
+  },
+  {
+    id: 5,
+    image: '',
+    title:
+      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
+    display: 'Show',
+    date: '05/05/2023',
+    status: '',
+  },
+  {
+    id: 6,
+    image: '',
+    title:
+      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
+    display: 'Show',
+    date: '05/05/2023',
+    status: '',
+  },
+  {
+    id: 7,
+    image: '',
+    title:
+      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
+    display: 'Show',
+    date: '05/05/2023',
+    status: '',
+  },
+  {
+    id: 8,
+    image: '',
+    title:
+      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
+    display: 'Show',
+    date: '05/05/2023',
+    status: '',
+  },
+  {
+    id: 9,
+    image: '',
+    title:
+      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
+    display: 'Show',
+    date: '05/05/2023',
+    status: '',
+  },
+  {
+    id: 10,
+    image: '',
+    title:
+      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
+    display: 'Show',
+    date: '05/05/2023',
+    status: '',
+  },
 ];
-
-
 
 export default NewsManageTable;

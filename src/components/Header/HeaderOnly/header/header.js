@@ -26,10 +26,9 @@ function Header() {
           <li clasName="menu-li">
             <NavLink to="/news">Tin tức</NavLink>
           </li>
-          {/* <li>Trang chủ</li>
-                    <li>Tìm người thân</li>
-                    <li>Truyền hình</li>
-                    <li>Tin tức</li> */}
+          <li clasName="menu-li">
+            <NavLink to="">Đăng nhập</NavLink>
+          </li>
         </ul>
       </div>
       <div className="header-bottom">

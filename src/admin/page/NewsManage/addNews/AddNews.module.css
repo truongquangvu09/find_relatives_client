@@ -68,17 +68,9 @@
     height: 370px;
 }
 
-.title-image{
-    width: 100%;
-    border: 1px solid #cccccc;
-    height: 50%;
-    border-radius: 10px;
-    margin-top: 22%;
-}
-
 .button-image{
-    margin-top: 20px;
-    margin-left: 70px;
+    margin-top: 60px;
+    margin-left: 0px;
 }
 
 .checkbox-area{

@@ -2,8 +2,20 @@ import React from 'react';
 import style from './AddPosts.module.css';
 // upload-button
 import { Button } from '@mui/material';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import Stack from '@mui/material/Stack';
+//upload-button-image
+import UploadImage from '../uploadImg';
+
+function choosefile(fileInput){
+    if(fileInput.files && fileInput.files[0]){
+        var reader = new FileReader();
+
+        reader.onload = function(e){
+            ('image').attr('src',e.target.result);
+        }
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+
+}
 
 function AddPosts() {
     return (
@@ -25,21 +37,13 @@ function AddPosts() {
                     </div>
                 </div>
                 <div className={style['content-image']}>
-                    <p className={style['title']}>Ảnh</p>
-                    <img id='image' className={style['title-image']} src='' />
                     <div className={style['button-image']}>
-                        <Stack direction="row" alignItems="center" spacing={2}>
-                            <Button variant="contained" component="label" startIcon={<PhotoCamera />}>
-                                Upload Image
-                                <input hidden accept="image/*" multiple type="file" />
-                            </Button>
-
-                        </Stack>
+                        <UploadImage></UploadImage>
                     </div>
                 </div>
             </div>
             <div className={style['button-save']}>
-                <Button variant="contained">Create</Button>
+                <Button variant="contained">Tạo Mới</Button>
             </div>
         </div>
     );

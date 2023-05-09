@@ -15,7 +15,7 @@ function NewsManage() {
   return (
     <div className={style['newcontainer']}>
       <div className={style['new-header']}>
-        <Button variant="contained" startIcon={<AddIcon />} onClick={handleOpen}>Add</Button>
+        <Button variant="contained" startIcon={<AddIcon />} onClick={handleOpen}>Thêm</Button>
         <Modal
           open={open}
           onClose={handleClose}

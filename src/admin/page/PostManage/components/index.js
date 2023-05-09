@@ -6,7 +6,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid, GridCellModes } from '@mui/x-data-grid';
 
 function EditToolbar(props) {
-  const { selectedCellParams, cellMode, cellModesModel, setCellModesModel } = props;
+  const { selectedCellParams, cellMode, cellModesModel, setCellModesModel } =
+    props;
 
   const handleSaveOrEdit = () => {
     if (!selectedCellParams) {
@@ -59,7 +60,7 @@ function EditToolbar(props) {
         disabled={!selectedCellParams}
         variant="outlined"
       >
-        {cellMode === 'edit' ? 'Save' : 'Edit'}
+        {cellMode === 'edit' ? 'Lưu' : 'Sửa'}
       </Button>
       <Button
         onClick={handleCancel}
@@ -68,7 +69,7 @@ function EditToolbar(props) {
         variant="outlined"
         sx={{ ml: 1 }}
       >
-        Cancel
+        Hủy
       </Button>
     </Box>
   );
@@ -193,7 +194,7 @@ const columns = [
         <Button variant="contained" startIcon={<DeleteIcon />} onClick={(event) => {
           this.handleClick(event, cellValues);
         }}>
-          Delete
+          Xóa
         </Button>
       );
     }

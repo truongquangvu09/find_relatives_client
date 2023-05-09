@@ -6,8 +6,6 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 
-//npm install --save react-images-uploading
-//yarn add react-images-uploading
 
 
 function UploadImage() {

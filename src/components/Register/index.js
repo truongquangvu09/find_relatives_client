@@ -57,7 +57,7 @@ const validationSchema = Yup.object({
                         <div className="flex items-center flex-col">
                             <div className={cx('logo')}>
                                 <img
-                                    src={require('./../../assets/images/Logo-Offical-gadient.png')}
+                                    src={require('')}
                                     alt="logo"
                                 />
                             </div>

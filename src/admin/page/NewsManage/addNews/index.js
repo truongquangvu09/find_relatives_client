@@ -35,7 +35,6 @@ function AddNews() {
                                 Upload
                                 <input hidden accept="image/*" multiple type="file" />
                             </Button>
-
                         </Stack>
                     </div>
                 </div>

@@ -187,10 +187,10 @@ const columns = [
     field: '',
     width: 150,
     editable: true,
-    renderCell: (cellValues) => {
+    renderCell: () => {
       return (
         <Button variant="contained" startIcon={<DeleteIcon />} onClick={(event) => {
-          handleClick(event, cellValues);
+          // handleClick(event, cellValues);
         }}>
           Delete
         </Button>

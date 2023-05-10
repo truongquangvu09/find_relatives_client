@@ -17,7 +17,7 @@ function Item() {
         </div>
         <div class="content-right">
           <p class="sub-title-news">(07/03/2023)</p>
-          <p class="list-excerpt">Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN
+          <p class="list-excerpt-news">Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN
             tại Ngân hàng quân đội MBBank – số tài khoản 2700 2700 cũng là số cuộc đoàn tụ
             trên hành trình 16 năm Tìm kiếm và Kết nối. Và còn hơn 40.000 hồ sơ khác vẫn
             đang tiếp tục triển khai tìm […]</p>

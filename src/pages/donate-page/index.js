@@ -1,7 +1,10 @@
 import React from 'react';
+import DonatePage from './donate-detail';
 
 function Donate() {
-  return <div>Donate</div>;
+  return (
+    <DonatePage></DonatePage>
+  )
 }
 
 export default Donate;

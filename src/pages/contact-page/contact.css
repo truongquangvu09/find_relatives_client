@@ -1,0 +1,39 @@
+.contact__body {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.contact__inner {
+  background-color: #fff;
+  margin-left: 220px;
+  padding: 10px 0 10px 10px;
+  width: 50%;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.contact__title {
+  color: #ad0000;
+  margin: 10px 10px;
+  font-size: 20px;
+}
+
+.contact__heading {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.contact__list {
+  margin-left: 20px;
+}
+
+.contact__list li {
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.main-sidebar,
+.widget-block {
+  width: 330px;
+}

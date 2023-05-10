@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './AddTvShow.module.css';
 import Button from '@mui/material/Button';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -11,6 +10,9 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { TextField } from '@mui/material';
 
+import { useState } from 'react';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -18,6 +20,17 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
+
+// const Input = styled('input')({
+//   display: 'none',
+// });
+
+const StyledFileName = styled('div')({
+  whiteSpace: 'pre-wrap',
+  wordWrap: 'break-word',
+  wordBreak: 'break-all',
+  display: 'block',
+});
 
 function AddTvShow() {
   const [checked, setChecked] = React.useState([true, false]);
@@ -45,6 +58,22 @@ function AddTvShow() {
       />
     </Box>
   );
+
+  // const [file, setFile] = useState(null);
+  const [file, setFile] = useState([]);
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   console.log(file);
+  // };
+
+  const handleFileChange = (event) => {
+    // const selectedFile = event.target.files[0];
+    const selectedFile = Array.from(event.target.files);
+
+    setFile(selectedFile);
+  };
+
   return (
     <div className={style['container']}>
       <p className={style['top-tvshow']}>Add TvShow</p>
@@ -81,14 +110,38 @@ function AddTvShow() {
           <Grid item xs={4}>
             <Item>Mô tả</Item>
             <Stack direction="row" alignItems="center" spacing={2}>
-              <Button
+              {/* <Button
                 variant="contained"
                 component="label"
                 startIcon={<PhotoCamera />}
               >
                 Upload
                 <input hidden accept="image/*" multiple type="file" />
-              </Button>
+              </Button> */}
+              <input
+                accept="image/*"
+                onChange={handleFileChange}
+                id="contained-button-file"
+                type="file"
+                hidden
+                multiple
+              />
+              <label htmlFor="contained-button-file">
+                <Button
+                  variant="contained"
+                  component="span"
+                  startIcon={<CloudUploadIcon />}
+                >
+                  Upload ảnh
+                </Button>
+              </label>
+              {file.length > 0 && (
+                <StyledFileName>
+                  {file.map((file) => (
+                    <p key={file.name}>{file.name}</p>
+                  ))}
+                </StyledFileName>
+              )}
             </Stack>
           </Grid>
         </Grid>

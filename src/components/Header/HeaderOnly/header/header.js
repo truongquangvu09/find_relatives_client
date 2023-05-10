@@ -1,10 +1,29 @@
 import './header.css';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../images/logo.png';
 // run first npm install --save-dev @fortawesome/fontawesome-free
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Login from './Login/index'
+
 
 function Header() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    p: 13,
+    width: '55%',
+    height: '100%',
+
+  };
   return (
     <div className="header">
       <div className="header-top">
@@ -27,7 +46,21 @@ function Header() {
             <NavLink to="/news">Tin tức</NavLink>
           </li>
           <li clasName="menu-li">
-            <NavLink to="/login">Đăng nhập</NavLink>
+            <div>
+              <div className="login_all">
+                <Button onClick={handleOpen}>Đăng nhập</Button>
+              </div>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Login></Login>
+                </Box>
+              </Modal>
+            </div>
           </li>
         </ul>
       </div>

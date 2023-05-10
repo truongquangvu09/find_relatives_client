@@ -41,14 +41,14 @@ function Slider() {
 
         <div className={style['right-show']}>
           <div className={style['featured-video']}>
-            <ul>
-              <div className={style['featured-new']} href="#">
-                <img
-                  width="100%"
-                  height="225"
-                  src="https://haylentieng.vn/wp-content/uploads/2018/07/logo-300x200.jpg"
-                ></img>
-              </div>
+            <div className={style['featured-new']} href="#">
+              <img
+                width="100%"
+                height="225"
+                src="https://haylentieng.vn/wp-content/uploads/2018/07/logo-300x200.jpg"
+              ></img>
+            </div>
+            <div className={style['feature-info']}>
               <li className={style['featured-news-bot']}>
                 <a className={style['featured-title']} href="#">
                   Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại
@@ -77,7 +77,7 @@ function Slider() {
                 </a>
                 <span className={style['featured-news-date']}>07/03/23</span>
               </li>
-            </ul>
+            </div>
           </div>
         </div>
       </div>

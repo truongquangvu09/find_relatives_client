@@ -129,7 +129,7 @@
 .right-show {
   width: 40%;
   padding-left: 20px;
-  /* border-radius: 100px; */
+  border-radius: 20px;
 }
 
 .right-show h2 a {
@@ -176,9 +176,10 @@
   color: #ad0000;
 }
 
-.featured-video ul li {
+.featured-video li {
   list-style: none;
 }
+
 
 .sub-title {
   line-height: 20px;

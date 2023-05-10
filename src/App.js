@@ -13,6 +13,8 @@ import NewsList from './pages/news-page/news-list';
 import NewsDetails from './pages/news-page/news-details';
 import SearchRegistration from './utils/searchRegistration';
 import Admin from './admin';
+import Donate from './pages/donate-page';
+import Contact from './pages/contact-page';
 function App() {
   return (
     <div className="App">
@@ -34,6 +36,8 @@ function App() {
             <Route path=":id" element={<NewsDetails />} />
           </Route>
           <Route path="/admin" element={<Admin />} />
+          <Route path="/donate" element={<Donate />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
       </Router>

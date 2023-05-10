@@ -15,6 +15,7 @@ import SearchRegistration from './utils/searchRegistration';
 import Admin from './admin';
 import Donate from './pages/donate-page';
 import Contact from './pages/contact-page';
+import Register from './components/Register';
 function App() {
   return (
     <div className="App">
@@ -38,6 +39,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
         <Footer />
       </Router>

@@ -32,13 +32,13 @@
     width: 170px;
 }
 .sub-title-news{
-    font-size: 10px;
-    margin-top: 13px;
+    font-size: 14px;
+    margin-top: 12px;
 }
 
-.list-excerpt{
-    font-size: 13px;
-    margin-top: 5px;
+.list-excerpt-news{
+    font-size: 16px;
+    margin-top: 0px;
 }
 
 .img-item{

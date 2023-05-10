@@ -1,6 +1,7 @@
 import React from 'react';
 import './Footer.css';
 import { NavLink } from 'react-router-dom';
+
 export default function Footer() {
   return (
     <div className="footer">
@@ -28,6 +29,7 @@ export default function Footer() {
           </a>
         </li>
       </ul>
+
       <div className="fooshow">
         <ul className="foot-menu">
           <li
@@ -43,7 +45,7 @@ export default function Footer() {
             id="menu-item-67"
             className="menu-item menu-item-type-post_type menu-item-object-page menu-item-67"
           >
-            <NavLink to="/contact">
+            <NavLink to="/Contact">
               <a>LIÊN HỆ</a>
             </NavLink>
           </li>

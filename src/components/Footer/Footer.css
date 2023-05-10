@@ -1,71 +1,142 @@
 .footer {
-    background: none repeat scroll 0 0 #fff;
-    box-shadow: 0 3px 6px -5px inset;
-    display: block;
-    margin-top: 20px;
-    overflow: hidden;
-    width: 100%;
+  background: none repeat scroll 0 0 #fff;
+  box-shadow: 0 3px 6px -5px inset;
+  display: block;
+  margin-top: 20px;
+  overflow: hidden;
+  width: 100%;
 }
 .footer .fooFb {
-	text-align: center;
-	margin: 10px 0px;
+  text-align: center;
+  margin: 10px 0px;
 }
 .sponsor {
-    display: block;
-    margin: 20px auto;
-    overflow: hidden;
-    text-align: center;
-    max-width: 672px;
+  display: block;
+  margin: 20px auto;
+  overflow: hidden;
+  text-align: center;
+  max-width: 672px;
 }
 .sponsor li {
-    display: inline;
-    margin: 0 30px;
-    outline: medium none;
-    overflow: hidden;
+  display: inline;
+  margin: 0 30px;
+  outline: medium none;
+  overflow: hidden;
 }
 .fooshow {
-    background: none repeat scroll 0 0 #C0C0C0;
-    border-radius: 10px 10px 0 0;
-    box-shadow: 0 -2px 5px -2px #333333;
-    display: block;
-    margin: 0 auto;
-    overflow: hidden;
-    max-width: 1100px;
-    width: 92%;
+  background: none repeat scroll 0 0 #c0c0c0;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -2px 5px -2px #333333;
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 1100px;
+  width: 92%;
 }
 .fooshow li {
-    display: block;
-    float: left;
-    list-style: none outside none;
-    margin: 15px;
-    
+  display: block;
+  float: left;
+  list-style: none outside none;
+  margin: 15px;
 }
 .fooshow li a {
-    color: #000000;
-    font-size: 14px;
-    text-decoration: none;
+  color: #000000;
+  font-size: 14px;
+  text-decoration: none;
 }
 .fooshow li.current-menu-item a {
-    color: #AD0000;
+  color: #ad0000;
 }
 .foot-menu {
-    float: left;
+  float: left;
 }
 .social-menu {
-    float: right;
+  float: right;
 }
 .copyright {
-    border-top: 1px solid #a7a7a7;
-    clear: both;
-    display: block;
-    line-height: 20px;
-    margin: 0 15px;
-    overflow: hidden;
-    padding: 10px 0 0;
+  border-top: 1px solid #a7a7a7;
+  clear: both;
+  display: block;
+  line-height: 20px;
+  margin: 0 15px;
+  overflow: hidden;
+  padding: 10px 0 0;
 }
 .copyright p {
-    margin: 0;
+  margin: 0;
 }
 .copyright a {
-    font-weight: bold;
+  font-weight: bold;
+}
+
+.comments-area {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #ccc;
+}
+
+.commentlist {
+  list-style: none;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.commentlist .children {
+  list-style: none;
+  padding-left: 2.5rem;
+}
+
+.comment-form-comment label,
+.comment-form-author label,
+.comment-form-email label,
+.comment-form-url label {
+  display: inline-block;
+  width: 60px;
+  vertical-align: top;
+}
+
+.comment-form-comment textarea,
+.comment-form-author input,
+.comment-form-email input,
+.comment-form-url input {
+  padding: 4px;
+  width: 598px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.comment-form-cookies-consent {
+  width: 598px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.comment-body {
+  padding-left: 2.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.comment-author .avatar {
+  margin-left: -2.5rem;
+}
+.comment-author .fn {
+  display: block;
+  margin-top: -2rem;
+}
+
+.comment-author .fn,
+.comment-author .fn a {
+  color: inherit;
+  font-style: normal;
+  font-weight: bolder;
+}
+.comment-author .says {
+  display: none;
+}
+.comment-meta a {
+  color: #999;
+  font-size: 85%;
+}
+
+.form-submit input {
+  padding: 4px;
 }

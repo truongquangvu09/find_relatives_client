@@ -16,7 +16,6 @@ import Admin from './admin';
 import Donate from './pages/donate-page';
 import Contact from './pages/contact-page';
 
-
 function App() {
   return (
     <div className="App">

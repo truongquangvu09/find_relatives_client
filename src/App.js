@@ -16,7 +16,7 @@ import Admin from './admin';
 import Donate from './pages/donate-page';
 import Contact from './pages/contact-page';
 import Login from './components/Login';
-
+import Register from './components/Register';
 
 function App() {
   return (
@@ -42,6 +42,7 @@ function App() {
           <Route path="/donate" element={<Donate />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
         <Footer />
       </Router>

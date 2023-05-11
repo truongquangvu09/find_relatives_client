@@ -42,13 +42,19 @@ body {
   font-size: 18px;
   font-weight: bold;
   list-style: none outside none;
-  margin: 40px 17px;
+  margin: 40px 15px;
 }
 
 .menu li a {
   color: white;
   text-decoration: none;
 }
+
+.login_all button {
+  background-color: beige;
+  margin-top: -8px;
+}
+
 
 .header-bottom {
   display: flex;

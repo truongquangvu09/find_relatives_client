@@ -42,7 +42,7 @@ function Contact() {
         </ol>
       </div>
       <div className="main-sidebar">
-        <div className="widget-block">
+        <div className="widget-block-1">
           <h3 className="widget-title">Chuyên mục</h3>
           <ul className="right-menu">
             <li

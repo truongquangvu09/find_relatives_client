@@ -23,7 +23,7 @@ function Login() {
                     <input type="checkbox"></input>
                     <label>Remember password</label>
                   </div>
-                  <a href="#">Register</a>
+                  <a href="#">Forgot password</a>
                 </div>
                 <button type="submit" className={styles['butn']}>Login</button>
                 <div className={styles['login-register']}>

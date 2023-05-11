@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styles from './Register.module.scss';
-import { Link } from 'react-router-dom';
+
 function Register() {
   return (
+
     <div className={styles['register']}>
+      
       <div className={styles['register-form']}>
         <div className={styles['Form-title']}>Đăng kí tài khoản</div>
         <form action="#">
@@ -44,7 +46,7 @@ function Register() {
             <label className={styles['Label']}>Confirm password</label>
           </div>
           <button type="submit" className={styles['button']}>
-            Đăng kí
+            Register
           </button>
         </form>
       </div>

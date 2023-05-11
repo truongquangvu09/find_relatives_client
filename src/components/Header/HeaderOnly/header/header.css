@@ -97,63 +97,10 @@ body {
   font-size: 20px;
   margin-top: 2px;
 }
-/*
-.logo{
-    float: left;
-    margin: 10px 0 0 -35px;
-    max-width: 418px;
-}
 
-ul.menu{
-    background: url(../images/menu.png) no-repeat scroll 0 0 transparent;
-    float: right;
-    height: 110px;
-    margin-right: 0px;
-    width: 617px;
+.close-modal{
+  position: absolute;
+  left: 575px;
+  top: 15%;
+  z-index: 1;
 }
-
-ul.menu li{
-    float: left;
-    list-style: none outside none;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    margin: 0 30px;
-    margin-top: 30px;
-}
-
-.tagline{
-    clear: both;
-    color: white;
-    display: block;
-    float: left;
-    font-size: 17px;
-    margin-left: -10px;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px #111111;
-    padding-top: 23px;
-}
-
-.search-news{
-    background: none no-repeat scroll 0 0 #ffffff;
-    border-radius: 5px;
-    box-shadow: 1px 1px 4px 0 #828282 inset;
-    float: right;
-    margin-top: 20px;
-    padding: 5px;
-    position: relative;
-}
-
-.search-news input{
-    background: none repeat scroll 0 0 transparent;
-    border: medium none;
-    padding: 5px;
-    width: 250px;
-}
-
-.search-news .search{
-    position: absolute;
-    top: 9px;
-    right: 10px;
-    font-size: 20px;
-} */

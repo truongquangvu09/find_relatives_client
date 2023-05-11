@@ -57,6 +57,9 @@ function Header() {
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={style}>
+                  <div className="close-modal">
+                    <Button onClick={handleClose}>X</Button>
+                  </div>
                   <Login></Login>
                 </Box>
               </Modal>

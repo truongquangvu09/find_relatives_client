@@ -1,5 +1,5 @@
 import './header.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../images/logo.png';
 // run first npm install --save-dev @fortawesome/fontawesome-free
@@ -8,6 +8,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Login from './Login/index';
+import Profile from '../../../Profile/Profile';
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -24,7 +25,11 @@ function Header() {
   };
 
   const [loggedIn, setLoggedIn] = useState(false);
-
+  console.log('logged in', loggedIn);
+  useEffect(() => {
+    console.log(`The value of loggedIn has changed to ${loggedIn}`);
+    // thực hiện các hành động cần thiết khi giá trị của loggedIn thay đổi
+  }, [loggedIn]);
   return (
     <div className="header">
       <div className="header-top">
@@ -48,7 +53,7 @@ function Header() {
           </li>
           {loggedIn ? (
             <li className="menu-li">
-              <NavLink to="/profile">Profile</NavLink>
+              <NavLink to="/profiles">Profile</NavLink>
             </li>
           ) : (
             <li className="menu-li">

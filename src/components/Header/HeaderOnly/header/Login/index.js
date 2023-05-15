@@ -4,10 +4,12 @@ import Register from './Register/index';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { Navigate } from 'react-router-dom';
 
 import * as reportServices from '../../../../../api/report';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Profile from '../../../../Profile/Profile';
 
 function Login(props) {
   const { handleCloseLogin, setLoggedIn } = props;
@@ -33,6 +35,9 @@ function Login(props) {
     password: '',
   });
 
+  const [userData, setUserData] = useState([]);
+  const [shouldDisplayProfile, setShouldDisplayProfile] = useState(false);
+
   const handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;
@@ -51,18 +56,20 @@ function Login(props) {
         userInfo.password
       );
       if (authenticatedUser) {
-        const type = authenticatedUser.userType;
+        const type = authenticatedUser.user.type;
+        setUserData(authenticatedUser.user);
         if (type === 'admin') {
           toast.success('Đăng nhập thành công');
           setTimeout(() => {
-            window.location.href = '/admin';
+            <Navigate to="/admin" replace />;
+
             setLoggedIn(true);
           }, 2000);
         } else if (type === 'user') {
           toast.success('Đăng nhập thành công');
           setTimeout(() => {
-            window.location.href = '/';
             setLoggedIn(true);
+            <Navigate to="/" replace />;
           }, 2000);
         }
       } else {
@@ -138,6 +145,14 @@ function Login(props) {
           </form>
         </div>
       </div>
+      {shouldDisplayProfile && (
+        <Profile
+          name={userData.name}
+          email={userData.email}
+          type={userData.type}
+          createdAt={userData.createdAt}
+        />
+      )}
     </>
   );
 }

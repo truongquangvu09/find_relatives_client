@@ -1,8 +1,10 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import style from './profile.module.css'
-import Sidebar from '../../utils/sidebar/index';
 import { Link } from 'react-router-dom';
+import Sidebar from '../../utils/sidebar/index';
+import SearchCircumstances from '../../utils/searchcircumstances';
+
 
 export default function ProfilePage() {
   return (
@@ -12,12 +14,12 @@ export default function ProfilePage() {
       </div>
       <div className={style["sidebar"]}>
         <button className={style["large-button"]}>
-          <Link to="" >
+          <Link to="http://localhost:3000/searchRegistration" >
             Đăng ký tìm người thân
           </Link>
         </button>
         <div class="widget-block">
-          <h3 class="widget-title">Tìm kiếm nâng cao</h3>
+          <h1 class="widget-title">Tìm kiếm nâng cao</h1>
           <form class="advanced-search" action="/profiles">
             <p>Có thể bạn đang được ai đó mong gặp lại, hoặc người bạn cần tìm đã đăng ký với NCHCCCL. Hãy kiểm tra!</p>
             <input name="n" placeholder="Họ tên người cần tìm" value="" />
@@ -28,6 +30,7 @@ export default function ProfilePage() {
             <input class="submit" type="submit" value="Tìm kiếm" />
           </form>
         </div>
+        <SearchCircumstances></SearchCircumstances>
         <Sidebar></Sidebar>
       </div>
     </div>

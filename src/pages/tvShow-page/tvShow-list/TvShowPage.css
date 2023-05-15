@@ -83,6 +83,7 @@
 }
 .featured-contact li.contact-mail {
   background-position: 0 -95px;
+  font-size: 20px;
 }
 .featured-contact li.contact-email {
   background-position: 0 -195px;

@@ -6,7 +6,7 @@ function ProfileList() {
   return (
       
       <div className="information">
-        <h1 class="block-title">Tìm người thân</h1>
+        <h1 class="block-title-info">Tìm người thân</h1>
                 <Items></Items>
                 <Items></Items>
                 <Items></Items>

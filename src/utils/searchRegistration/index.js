@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.css';
 
+
 function SearchRegistration() {
   return <div>
     <div class="main">
@@ -96,19 +97,17 @@ function SearchRegistration() {
           <h2>C. Hoàn cảnh thất lạc</h2>
           <div>
             <p class="half">
-              <label for="losing_year">Năm:</label>
-              <input name="losing_year" id="losing_year" />
+              <label for="seeker_father">Năm:</label>
+              <input name="seeker_father" id="seeker_father" />
             </p>
-          </div>
-          <div>
             <p class="half">
-              <label for="losing_place">Địa điểm:</label>
-              <input name="losing_place" id="losing_place" />
+              <label for="seeker_mother">Địa điểm:</label>
+              <input name="seeker_mother" id="seeker_mother" />
             </p>
           </div>
           <div>
             <p class="full">
-              <label for="losing_reason">Địa điểm:</label>
+              <label for="losing_reason">Lý do thất lạc:</label>
               <textarea name="losing_reason" id="losing_reason"></textarea>
             </p>
           </div>
@@ -120,7 +119,7 @@ function SearchRegistration() {
             </p>
           </div>
           <h2>E. Ảnh/tài liệu kèm theo</h2>
-          <div class="from-file">
+          <div class="form-file">
             <label for="profile_file_1">Chọn file:</label>
             <p class="from_file_list">
               <input class="profile_file" name="profile_file_1" for="1" type="file" size="20" />
@@ -147,20 +146,23 @@ function SearchRegistration() {
         </form>
       </div>
       <div class="main-sidebar">
-	<h3 class="large-button"><a href="http://localhost:3000/searchRegistration">Đăng ký tìm người thân</a></h3>
-      <div class="widget-block">
-        <h3 class="widget-title">Tìm kiếm nâng cao</h3>
-        <form class="advanced-search" action="/profiles">
-          <p>Có thể bạn đang được ai đó mong gặp lại, hoặc người bạn cần tìm đã đăng ký với NCHCCCL. Hãy kiểm tra!</p>
-          <input name="n" placeholder="Họ tên người cần tìm" value="" />
-          <input name="y" placeholder="Năm sinh" value="" />
-          <input name="a" placeholder="Quê quán" value="" />
-          <input name="s" placeholder="Tên cha, mẹ, anh, chị em" value="" />
-          <p>(*) Nhập thông tin bằng Tiếng Việt có dấu, nhập số cho năm sinh và năm thất lạc, quê quán, nhập tên địa danh cũ nếu nhớ</p>
-          <input class="submit" type="submit" value="Tìm kiếm" />
-        </form>
+        <h2 class="large-button"><a href="http://localhost:3000/searchRegistration">Đăng ký tìm người thân</a></h2>
+        <div class="widget-block">
+          <h3 class="widget-title">Tìm kiếm nâng cao</h3>
+          <form class="advanced-search" action="/profiles">
+            <p>Có thể bạn đang được ai đó mong gặp lại, hoặc người bạn cần tìm đã đăng ký với NCHCCCL. Hãy kiểm tra!</p>
+            <input name="n" placeholder="Họ tên người cần tìm" value="" />
+            <input name="y" placeholder="Năm sinh" value="" />
+            <input name="a" placeholder="Quê quán" value="" />
+            <input name="s" placeholder="Tên cha, mẹ, anh, chị em" value="" />
+            <p>(*) Nhập thông tin bằng Tiếng Việt có dấu, nhập số cho năm sinh và năm thất lạc, quê quán, nhập tên địa danh cũ nếu nhớ</p>
+            <input class="submit" type="submit" value="Tìm kiếm" />
+          </form>
+        </div>
       </div>
-    </div>
+      <div className="search-cir">
+        
+      </div>
     </div>
   </div>;
 }

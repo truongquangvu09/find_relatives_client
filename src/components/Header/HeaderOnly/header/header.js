@@ -1,5 +1,5 @@
 import './header.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../images/logo.png';
 // run first npm install --save-dev @fortawesome/fontawesome-free
@@ -7,13 +7,12 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Login from './Login/index'
-
+import Login from './Login/index';
 
 function Header() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleCloseLogin = () => setOpen(false);
   const style = {
     position: 'absolute',
     top: '50%',
@@ -22,8 +21,10 @@ function Header() {
     p: 13,
     width: '55%',
     height: '100%',
-
   };
+
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
     <div className="header">
       <div className="header-top">
@@ -33,38 +34,47 @@ function Header() {
           </a>
         </div>
         <ul className="menu">
-          <li clasName="menu-li">
+          <li className="menu-li">
             <NavLink to="/">Trang chủ</NavLink>
           </li>
-          <li clasName="menu-li">
+          <li className="menu-li">
             <NavLink to="/profile">Tìm người thân</NavLink>
           </li>
-          <li clasName="menu-li">
+          <li className="menu-li">
             <NavLink to="/tvshow">Truyền hình</NavLink>
           </li>
-          <li clasName="menu-li">
+          <li className="menu-li">
             <NavLink to="/news">Tin tức</NavLink>
           </li>
-          <li clasName="menu-li">
-            <div>
-              <div className="login_all">
-                <Button onClick={handleOpen}>Đăng nhập</Button>
+          {loggedIn ? (
+            <li className="menu-li">
+              <NavLink to="/profile">Profile</NavLink>
+            </li>
+          ) : (
+            <li className="menu-li">
+              <div>
+                <div className="login_all">
+                  <Button onClick={handleOpen}>Đăng nhập</Button>
+                </div>
+                <Modal
+                  open={open}
+                  onClose={handleCloseLogin}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <div className="close-modal">
+                      <Button onClick={handleCloseLogin}>X</Button>
+                    </div>
+                    <Login
+                      handleCloseLogin={handleCloseLogin}
+                      setLoggedIn={setLoggedIn}
+                    ></Login>
+                  </Box>
+                </Modal>
               </div>
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-              >
-                <Box sx={style}>
-                  <div className="close-modal">
-                    <Button onClick={handleClose}>X</Button>
-                  </div>
-                  <Login></Login>
-                </Box>
-              </Modal>
-            </div>
-          </li>
+            </li>
+          )}
         </ul>
       </div>
       <div className="header-bottom">

@@ -4,19 +4,20 @@ import Register from './Register/index';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import * as reportServices from '../../../../../api/report';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Profile from '../../../../Profile/Profile';
+
+import { useDispatch } from 'react-redux';
+import { setUserData } from '../../../../../redux/Slice/userSlice';
 
 function Login(props) {
-  const { handleCloseLogin, setLoggedIn } = props;
+  const { setLoggedIn } = props;
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const handleRegisterModalOpen = () => {
     // Hàm xử lí khi bấm vào Register
-    handleCloseLogin();
     setRegisterModalOpen(true);
   };
   const handleRegisterModalClose = () => setRegisterModalOpen(false); // Hàm xử lí khi đóng Modal đăng ký
@@ -30,13 +31,14 @@ function Login(props) {
     height: '100%',
   };
 
+  const dispatch = useDispatch();
+
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
   });
 
-  const [userData, setUserData] = useState([]);
-  const [shouldDisplayProfile, setShouldDisplayProfile] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const target = event.target;
@@ -57,19 +59,18 @@ function Login(props) {
       );
       if (authenticatedUser) {
         const type = authenticatedUser.user.type;
-        setUserData(authenticatedUser.user);
+        dispatch(setUserData(authenticatedUser.user));
         if (type === 'admin') {
           toast.success('Đăng nhập thành công');
           setTimeout(() => {
-            <Navigate to="/admin" replace />;
-
             setLoggedIn(true);
+            navigate('/admin');
           }, 2000);
         } else if (type === 'user') {
           toast.success('Đăng nhập thành công');
           setTimeout(() => {
             setLoggedIn(true);
-            <Navigate to="/" replace />;
+            navigate('/');
           }, 2000);
         }
       } else {
@@ -123,36 +124,28 @@ function Login(props) {
             <button type="submit" className={styles['butn']}>
               Login
             </button>
-            <div className={styles['login-register']}>
-              <p className={styles['dont-account']}>Dont have an account?</p>
-              <div className={styles['register-all']}>
-                <Button onClick={handleRegisterModalOpen}>Register</Button>
-              </div>
-              <Modal
-                open={registerModalOpen}
-                onClose={handleRegisterModalClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-              >
-                <Box sx={style}>
-                  <div className={styles['close-modal']}>
-                    <Button onClick={handleRegisterModalClose}>X</Button>
-                  </div>
-                  <Register></Register>
-                </Box>
-              </Modal>
-            </div>
           </form>
+          <div className={styles['login-register']}>
+            <p className={styles['dont-account']}>Dont have an account?</p>
+            <div className={styles['register-all']}>
+              <Button onClick={handleRegisterModalOpen}>Register</Button>
+            </div>
+            <Modal
+              open={registerModalOpen}
+              onClose={handleRegisterModalClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <div className={styles['close-modal']}>
+                  <Button onClick={handleRegisterModalClose}>X</Button>
+                </div>
+                <Register></Register>
+              </Box>
+            </Modal>
+          </div>
         </div>
       </div>
-      {shouldDisplayProfile && (
-        <Profile
-          name={userData.name}
-          email={userData.email}
-          type={userData.type}
-          createdAt={userData.createdAt}
-        />
-      )}
     </>
   );
 }

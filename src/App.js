@@ -15,6 +15,7 @@ import SearchRegistration from './utils/searchRegistration';
 import Admin from './admin';
 import Donate from './pages/donate-page';
 import Contact from './pages/contact-page';
+import Profile from './components/Profile/Profile';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/profiles" element={<Profile />} />
         </Routes>
         <Footer />
       </Router>

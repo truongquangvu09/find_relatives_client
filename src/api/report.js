@@ -25,8 +25,8 @@ export const create = async (report_name, email, password) => {
 export const signIn = async (email, password) => {
   try {
     const res = await request.post('report/login', {
-      email: email,
-      password: password,
+      email,
+      password,
     });
     return res;
   } catch (error) {

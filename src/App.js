@@ -16,6 +16,11 @@ import Admin from './admin';
 import Donate from './pages/donate-page';
 import Contact from './pages/contact-page';
 import Profile from './components/Profile/Profile';
+import Login from './components/Header/HeaderOnly/header/Login';
+import ProtectedRouter from './routes/protectedRouter';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -24,11 +29,19 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/tvshow" element={<TvShowPage />}>
             <Route path="" element={<TvShowList />} />
             <Route path=":id" element={<TvShowDetails />} />
           </Route>
-          <Route path="/searchRegistration" element={<SearchRegistration />} />
+          <Route
+            path="/searchRegistration"
+            element={
+              <ProtectedRouter>
+                <SearchRegistration />
+              </ProtectedRouter>
+            }
+          />
           <Route path="/profile" element={<ProfilePage />}>
             <Route path="" element={<ProfileList />} />
             <Route path=":id" element={<ProfileDetails />} />
@@ -44,6 +57,7 @@ function App() {
         </Routes>
         <Footer />
       </Router>
+      <ToastContainer autoClose={1500} />
     </div>
   );
 }

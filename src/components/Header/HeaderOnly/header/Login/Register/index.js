@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Register.module.scss';
 import * as reportServices from '../../../../../../api/report';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Register() {
@@ -55,7 +55,6 @@ function Register() {
 
   return (
     <>
-      <ToastContainer autoClose={1500} />
       <div className={styles['register']}>
         <div className={styles['register-form']}>
           <div className={styles['Form-title']}>Đăng kí tài khoản</div>

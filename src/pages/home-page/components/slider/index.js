@@ -1,5 +1,6 @@
 import Item from './items/item';
 import style from './slider.module.css';
+import Zalo from '../../../Zalo';
 
 function Slider() {
   return (
@@ -112,6 +113,7 @@ function Slider() {
       <div className={style['view-all']}>
         <a href="#">Xem toàn bộ</a>
       </div>
+      <Zalo></Zalo>
     </div>
   );
 }

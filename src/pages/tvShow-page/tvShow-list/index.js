@@ -1,6 +1,7 @@
 import React from 'react';
 import './TvShowPage.css';
 import { Link } from 'react-router-dom';
+import Zalo from '../../Zalo';
 
 function TvShowList() {
   return (
@@ -193,6 +194,7 @@ function TvShowList() {
           </div>
         </div>
       </div>
+      <Zalo></Zalo>
     </div>
   );
 }

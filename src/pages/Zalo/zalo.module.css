@@ -1,0 +1,23 @@
+.social-button {
+    display: inline-grid;
+    position: fixed;
+    bottom: 15px;
+    right: 45px;
+    min-width: 45px;
+    text-align: center;
+    z-index: 99999;
+}
+
+.social-button-content {
+    display: inline-grid;
+}
+
+.social-button .zalo {
+    padding: 8px 0;
+    cursor: pointer;
+    position: relative;
+}
+
+.image{
+    width: 60px;
+}

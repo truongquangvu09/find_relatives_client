@@ -1,16 +1,71 @@
 import './item.module.css';
 import style from './item.module.css';
+import * as postServices from '../../../../../api/post';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPostData } from '../../../../../redux/Slice/postSlice';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Item() {
-    return ( 
-        <div className={style["profiles"]}>
-            <a href='' title='Chị Nguyễn Thị Phương Dung tìm chú Bùi Tiết sinh năm 1949, mất tin tức khoảng năm 1970, tại Nha Trang. Bố mẹ là hai cụ Bùi Năng, Bùi Thị Lạc mất sớm, ông Triết sống với anh trai là Bùi Thương, quê Ninh Thuận. Khoảng năm 1970, ông Tiết bị bắt đi lính tại […]'>
-                <img src="https://vaithuhayho.com/wp-content/uploads/2021/03/anh-nen-dep-5.jpg" width="100%" height="180"/>
-            </a>
-            <span> <b>Mã số hồ sơ:</b>  MS327462</span>
-            <h3>Nguyễn Thị Dung tìm chú bùi tuyết</h3>
-        </div>  
-     );
+  const [data, setData] = useState([]);
+  const postData = useSelector((state) => state.postData);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  console.log({ data });
+
+  useEffect(() => {
+    const listPost = async () => {
+      const result = await postServices.listPost();
+      setData(result);
+    };
+    listPost();
+  }, []);
+
+  useEffect(() => {
+    if (postData && postData.id) {
+      navigate(`/profile/${postData.id}`);
+      window.scrollTo(0, 0);
+    }
+  }, [postData]);
+
+  const handleClick = async (postId) => {
+    try {
+      const result = await postServices.detailPost(postId);
+      dispatch(setPostData(result));
+      // navigate(`/profile/${postData.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <>
+      {data.map((item, index) => {
+        return (
+          <div className={style['profiles']} key={index}>
+            <Link to="/profile/{item.id}" onClick={() => handleClick(item.id)}>
+              <a
+                href=""
+                title={item.Search_registration.brief_biography}
+                onClick={() => handleClick(item.id)}
+              >
+                <img
+                  src={item.Search_registration.people_image}
+                  width="100%"
+                  height="180"
+                />
+              </a>
+            </Link>
+            <span>
+              {' '}
+              <b>Mã số hồ sơ:</b> MS{item.id}
+            </span>
+            <h3>{item.post_title}</h3>
+          </div>
+        );
+      })}
+    </>
+  );
 }
 
 export default Item;

@@ -10,6 +10,11 @@ export const get = async (path) => {
   return response.data;
 };
 
+export const getDetail = async (path, id) => {
+  const response = await request.get(path, id);
+  return response.data;
+};
+
 export const post = async (path, object = {}) => {
   const response = await request.post(path, object);
   return response.data;

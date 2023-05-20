@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import Item from './items/item';
 import style from './slider.module.css';
 
@@ -101,16 +102,11 @@ function Slider() {
       </div>
       <div className={style['imagess']}>
         <Item></Item>
-        <Item></Item>
-        <Item></Item>
-        <Item></Item>
-        <Item></Item>
-        <Item></Item>
-        <Item></Item>
-        <Item></Item>
       </div>
       <div className={style['view-all']}>
-        <a href="#">Xem toàn bộ</a>
+        <NavLink to="/profile">
+          <a href="#">Xem toàn bộ</a>
+        </NavLink>
       </div>
     </div>
   );

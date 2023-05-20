@@ -1,31 +1,81 @@
 import { Link } from 'react-router-dom';
 import style from './items.module.css';
+import * as postServices from '../../../../api/post';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPostData } from '../../../../redux/Slice/postSlice';
+import { useNavigate } from 'react-router-dom';
 
 function Items() {
+  const [data, setData] = useState([]);
+  const postData = useSelector((state) => state.postData);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  console.log({ data });
+
+  useEffect(() => {
+    const listPost = async () => {
+      const result = await postServices.listPost();
+      setData(result);
+    };
+    listPost();
+  }, []);
+
+  useEffect(() => {
+    if (postData && postData.id) {
+      navigate(`/profile/${postData.id}`);
+      window.scrollTo(0, 0);
+    }
+  }, [postData]);
+
+  const handleClick = async (postId) => {
+    try {
+      const result = await postServices.detailPost(postId);
+      dispatch(setPostData(result));
+      // navigate(`/profile/${postData.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={style['list-profile']}>
-      <div className={style['profile']}>
-        <div className={style['profile-left']}>
-          <h1 className={style['title']}>
-            <Link to="/profile/1" title="Chị Nguyễn Thị Phương Dung tìm chú Bùi Tiết sinh năm 1949, mất tin tức khoảng năm 1970, tại Nha Trang. Bố mẹ là hai cụ Bùi Năng, Bùi Thị Lạc mất sớm, ông Triết sống với anh trai là Bùi Thương, quê Ninh Thuận. Khoảng năm 1970, ông Tiết bị bắt đi lính tại […]">
-              MS25810: Nguyễn Thi Phương Dung tìm chú Bùi Tiết
-            </Link> 
-          </h1>
-          <p>Họ và tên: Bùi Tiết</p>
-          <p>Năm sinh: 2000</p>
-          <p>Tên cha: Bùi năng</p>
-          <p>Tên mẹ: Bùi Thị Lạc</p>
-          <p>Tên anh chị em: Bùi Phương và Nguyễn Thị Minh Thư</p>
-          <p>Năm thất lạc: 1970</p>
-        </div>
-        <div className={style['profile-right']}>
-          <img
-            src="https://vaithuhayho.com/wp-content/uploads/2021/03/anh-nen-dep-5.jpg"
-            width="100%"
-            height="200"
-          />
-        </div>
-      </div>
+      {data.map((item, index) => {
+        return (
+          <div className={style['profile']} key={index}>
+            <div className={style['profile-left']}>
+              <h1 className={style['title']}>
+                <Link
+                  to="/profile/{item.id}"
+                  title={item.Search_registration.brief_biography}
+                  onClick={() => handleClick(item.id)}
+                >
+                  MS{item.id}: {item.post_title}
+                </Link>
+              </h1>
+              <p>Họ và tên: {item.Search_registration.people_name}</p>
+              <p>
+                Năm sinh:{' '}
+                {item.Search_registration.people_birthday.substring(0, 4)}
+              </p>
+              <p>Tên cha: {item.Search_registration.dad_name}</p>
+              <p>Tên mẹ: {item.Search_registration.mom_name}</p>
+              <p>Tên anh chị em:{item.Search_registration.coal_people_name}</p>
+              <p>
+                Năm thất lạc:{' '}
+                {item.Search_registration.date_missing.substring(0, 4)}
+              </p>
+            </div>
+            <div className={style['profile-right']}>
+              <img
+                src={item.Search_registration.people_image}
+                width="100%"
+                height="200"
+              />
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

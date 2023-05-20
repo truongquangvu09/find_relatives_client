@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 
 const Profile = () => {
   const userData = useSelector((state) => state.user.userData);
-  const { report_name, email, type, createdAt } = userData;
-
+  const { report_name, email, type, createdAt } = userData.user;
+  console.log(userData.message);
   const handleLogout = () => {
     toast.success('Đăng xuất thành công');
     setTimeout(() => {

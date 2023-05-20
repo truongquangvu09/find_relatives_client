@@ -1,101 +1,102 @@
-.container{
-    margin: 0 auto;
-    width: 100%;
+.container {
+  margin: 0 auto;
+  width: 100%;
 }
 
-.NewDetail-content{
-    width: 100%;
+.NewDetail-content {
+  width: 100%;
 }
-.newsDetail{
-    margin:  0 auto;
-    width: 73%;
-}
-
-.title-block{
-    display: block;
-    font-size: 19px;
-    padding: 6px 0;
-    text-transform: uppercase;
+.newsDetail {
+  margin: 0 auto;
+  width: 73%;
 }
 
-.title-block a{
-    text-decoration: none;
-    color: #AD0000;
+.title-block {
+  display: block;
+  font-size: 19px;
+  padding: 6px 0;
+  text-transform: uppercase;
 }
 
-.main-container-newdetail{
-    display: flex;
-    width: 100%;
+.title-block a {
+  text-decoration: none;
+  color: #ad0000;
 }
 
-.sidebar-newdetail{
-    width: 30%;
+.main-container-newdetail {
+  display: flex;
+  width: 100%;
 }
 
-.content-block-newdetail{
-    width: 70%;
-    background: none repeat scroll 0 0 #ffffff;
-    border-radius: 5px;
-    overflow: hidden;
-    padding: 15px;
-    min-height: 250px;
-    margin-right: 15px;
-    margin-bottom: 2%;
+.sidebar-newdetail {
+  width: 30%;
 }
 
-.title-content{
-    font-size: 25px;
-    color: #AD0000;
-    margin: 10px 0;
+.content-block-newdetail {
+  width: 70%;
+  background: none repeat scroll 0 0 #ffffff;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 15px;
+  min-height: 250px;
+  margin-right: 15px;
+  margin-bottom: 2%;
 }
 
-.sub-title{
-    color: #606060;
-    line-height: 20px;
-    margin: 10px 0;
+.title-content {
+  font-size: 25px;
+  color: #ad0000;
+  margin: 10px 0;
 }
 
-.newdetail-block-image{
-    margin-left: auto;
-    margin-right: auto;
+.sub-title {
+  color: #606060;
+  line-height: 20px;
+  margin: 10px 0;
 }
 
-.newdetail-block-image img{
-    margin-left: 15%;
-    max-width: 100%;
+.newdetail-block-image {
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.newDetail-p{
-    line-height: 20px;
-    margin: 10px 0;
-    font-size: 18px;
+.newdetail-block-image img {
+  margin-left: 15%;
+  max-width: 100%;
 }
 
-.comment-block{
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid #ccc;
+.newDetail-p {
+  line-height: 20px;
+  margin: 10px 0;
+  font-size: 18px;
 }
 
-form p .title-comment{
-    display: inline-block;
-    width: 60px;
-    vertical-align: top;
+.comment-block {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #ccc;
 }
 
-form p textarea,form p .text{
-    padding: 4px;
-    width: 598px;
-    max-width: 100%;
-    box-sizing: border-box;
+form p .title-comment {
+  display: inline-block;
+  width: 80px;
+  vertical-align: top;
 }
 
-form .comment-form-save{
-    width: 598px;
-    max-width: 100%;
-    margin: 0 auto;
+form p textarea,
+form p .text {
+  padding: 4px;
+  width: 598px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-.form-submit{
-    text-align: center;
+form .comment-form-save {
+  width: 598px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.form-submit {
+  text-align: center;
 }

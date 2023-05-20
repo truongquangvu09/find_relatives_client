@@ -15,8 +15,8 @@ export const getDetail = async (path, id) => {
   return response.data;
 };
 
-export const post = async (path, object = {}) => {
-  const response = await request.post(path, object);
+export const post = async (path, object = {}, token) => {
+  const response = await request.post(path, object, { headers: { token } });
   return response.data;
 };
 

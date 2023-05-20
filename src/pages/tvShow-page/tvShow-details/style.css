@@ -36,7 +36,7 @@
 .comment-form-email input,
 .comment-form-url input {
   padding: 4px;
-  width: 598px;
+  width: 610px;
   max-width: 100%;
   box-sizing: border-box;
 }
@@ -75,5 +75,16 @@
 }
 
 .form-submit input {
-  padding: 4px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #f2f2f2;
+  color: #333;
+  transition: all 0.3s ease;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.form-submit input:hover {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }

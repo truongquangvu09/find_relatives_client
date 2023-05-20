@@ -1,10 +1,10 @@
 .head-title {
-    display: block;
-    font-size: 18px;
-    padding: 6px 0;
-    text-transform: uppercase;
-    color: #AD0000;
-    margin-left: 30px;
+  display: block;
+  font-size: 18px;
+  padding: 6px 0;
+  text-transform: uppercase;
+  color: #ad0000;
+  margin-left: 30px;
 }
 
 /* .list-profile{
@@ -15,144 +15,153 @@
     max-width: 1100px;
 } */
 
-.bodys{
-    float: left;
-    width: 93%;
-    background: none repeat scroll 0 0 #FFFFFF;
-    border-radius: 5px 5px 5px 5px;
-    border-bottom: 1px solid #D7D7D7;
-    margin-bottom: 2px;
-    padding: 25px;
-    margin-left: 30px;
+.bodys {
+  float: left;
+  width: 93%;
+  background: none repeat scroll 0 0 #ffffff;
+  border-radius: 5px 5px 5px 5px;
+  border-bottom: 1px solid #d7d7d7;
+  margin-bottom: 2px;
+  padding: 25px;
+  margin-left: 30px;
 }
-
 
 .profile-lefts {
-    width: 68%;
-    margin-bottom: 15px;
-    font-size: 9px;
-    
+  width: 68%;
+  margin-bottom: 15px;
+  font-size: 9px;
 }
 
-.profile-lefts .title a{
-    color: #AD0000;
-    text-decoration: none;
-    margin: 10px 0;font-size: 18px;
-    font-weight: normal;
+.profile-lefts .title a {
+  color: #ad0000;
+  text-decoration: none;
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: normal;
 }
 
-.profile-lefts p{
-    line-height: 20px;
-    margin: 10px 0;
-    font-size: 16px;
+.profile-lefts p {
+  line-height: 20px;
+  margin: 10px 0;
+  font-size: 16px;
 }
 
-.profile-right{
-    width: 32%;
+.profile-right {
+  width: 32%;
 }
 
-.body-contents{
-    border-top: 1px solid #D7D7D7;
-    clear: both;
-    display: flex;
-    overflow: hidden;
-    flex-wrap: wrap;
-    margin: 0 -20px;
-    padding: 20px;
+.body-contents {
+  border-top: 1px solid #d7d7d7;
+  clear: both;
+  display: flex;
+  overflow: hidden;
+  flex-wrap: wrap;
+  margin: 0 -20px;
+  padding: 20px;
 }
 
 .header-body {
-    display: flex;
+  display: flex;
 }
 
 .pictures {
-    width: 30%;
-    padding: 20px 0;
-    
+  width: 30%;
+  padding: 20px 0;
 }
 
-.pictures p{
-    text-align: center;
-    font-size: 17px;
+.pictures p {
+  text-align: center;
+  font-size: 17px;
 }
 
 .content {
-    padding: 20px;
-    width: 70%;
+  padding: 20px;
+  width: 70%;
 }
 
-.content p{
-    margin-bottom: 10px;
-    font-size: 16px;
+.content p {
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 .title {
-    font-size: 16px;
-    color: black;
+  font-size: 16px;
+  color: black;
 }
 
-.contact p{
-    margin-bottom: 16px;
+.contact p {
+  margin-bottom: 16px;
 }
 
 .bottom {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid #CCC;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #ccc;
 }
 
 .form-comment {
-    display: flex;
-    justify-content: space-between;
-    padding-right: 30px;
-    padding-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 30px;
+  padding-bottom: 15px;
 }
 
-.comment h3{
-    font-size: 20px;
+.comment h3 {
+  font-size: 20px;
 }
 
 .titless {
-    font-size: 17px;
+  font-size: 17px;
 }
 
-.comments{
-    font-size: 17;
+.comments {
+  font-size: 17;
 }
-.form-comment label{
-    width: 10%;
-    font-size: 17px;
+.form-comment label {
+  width: 10%;
+  font-size: 17px;
 }
 .form-comment textarea {
-    width: 85%;
+  width: 85%;
 }
 
-.form-comment2{
-    display: flex;
-    justify-content: space-between;
-    padding-right: 30px;
-    padding-bottom: 15px;
+.form-comment2 {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 30px;
+  padding-bottom: 15px;
 }
 
-.form-comment2 label{
-    font-size: 17px;
+.form-comment2 label {
+  font-size: 17px;
 }
 
 .form-comment2 textarea {
-    width: 85%;
-    height: 40px;
+  width: 85%;
+  height: 40px;
 }
 
-.save label{
-    font-size: 17px;
+.save label {
+  font-size: 17px;
 }
 
 .submit {
-    text-align: center;
-    
+  text-align: center;
 }
 
-.submit input{
-    height: 35px;
-    width: 110px;
+.submit input {
+  height: 35px;
+  width: 110px;
+}
+.comment-area {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #ccc;
+  width: 590px;
+}
+.comment-list {
+  list-style: none;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  border-top: 1px solid #ccc;
 }

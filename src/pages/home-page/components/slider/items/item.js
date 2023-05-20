@@ -33,6 +33,7 @@ function Item() {
       const result = await postServices.detailPost(postId);
       dispatch(setPostData(result));
       // navigate(`/profile/${postData.id}`);
+      window.scrollTo(0, 0);
     } catch (error) {
       console.log(error);
     }

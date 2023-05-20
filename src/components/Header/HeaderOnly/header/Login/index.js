@@ -57,9 +57,10 @@ function Login(props) {
         userInfo.email,
         userInfo.password
       );
+      console.log({ authenticatedUser });
       if (authenticatedUser) {
         const type = authenticatedUser.user.type;
-        dispatch(setUserData(authenticatedUser.user));
+        dispatch(setUserData(authenticatedUser));
         if (type === 'admin') {
           toast.success('Đăng nhập thành công');
           setTimeout(() => {

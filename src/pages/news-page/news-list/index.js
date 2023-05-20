@@ -2,6 +2,7 @@ import React from 'react';
 import './news-list.css';
 import Item from './item/item';
 import Sidebar from '../../../utils/sidebar/index';
+import Zalo from '../../Zalo';
 
 function NewsList() {
   return (
@@ -33,6 +34,7 @@ function NewsList() {
           </div>
         </div>
       </div>
+      <Zalo></Zalo>
     </div>
   );
 }

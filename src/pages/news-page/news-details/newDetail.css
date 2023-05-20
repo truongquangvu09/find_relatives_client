@@ -1,12 +1,14 @@
 .container{
     margin: 0 auto;
     width: 100%;
-    margin-left: 13%;
 }
 
-.newsDetail{
-    float: left;
+.NewDetail-content{
     width: 100%;
+}
+.newsDetail{
+    margin:  0 auto;
+    width: 73%;
 }
 
 .title-block{
@@ -27,11 +29,11 @@
 }
 
 .sidebar-newdetail{
-    width: 25%;
+    width: 30%;
 }
 
 .content-block-newdetail{
-    width: 48%;
+    width: 70%;
     background: none repeat scroll 0 0 #ffffff;
     border-radius: 5px;
     overflow: hidden;

@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import Item from './items/item';
 import style from './slider.module.css';
+import Zalo from '../../../Zalo';
 
 function Slider() {
   return (
@@ -108,6 +109,7 @@ function Slider() {
           <a href="#">Xem toàn bộ</a>
         </NavLink>
       </div>
+      <Zalo></Zalo>
     </div>
   );
 }

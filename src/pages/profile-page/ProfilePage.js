@@ -4,6 +4,7 @@ import style from './profile.module.css';
 import { Link } from 'react-router-dom';
 import Sidebar from '../../utils/sidebar/index';
 import SearchCircumstances from '../../utils/searchcircumstances';
+import Zalo from '../Zalo';
 
 export default function ProfilePage() {
   return (
@@ -38,6 +39,7 @@ export default function ProfilePage() {
         <SearchCircumstances></SearchCircumstances>
         <Sidebar></Sidebar>
       </div>
+      <Zalo></Zalo>
     </div>
   );
 }

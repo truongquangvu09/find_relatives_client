@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.css';
+import Zalo from '../../Zalo';
 function TvShowDetails() {
   return (
     <div className="main">
@@ -175,6 +176,7 @@ function TvShowDetails() {
           {}
         </div>
       </div>
+      <Zalo></Zalo>
     </div>
   );
 }

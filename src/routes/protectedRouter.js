@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ProtectedRouter = ({ children }) => {
-  const { id } = useSelector((state) => state.user.userData);
+  const userData = useSelector((state) => state.user.userData);
+  const id = userData.user?.id;
   const navigate = useNavigate();
   const [isToastDisplayed, setIsToastDisplayed] = useState(false);
   useEffect(() => {

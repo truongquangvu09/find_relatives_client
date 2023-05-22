@@ -5,8 +5,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPostData } from '../../../../redux/Slice/postSlice';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { setPostSearchData } from '../../../../redux/Slice/postSearchSlice';
 
 function Items() {
   const [data, setData] = useState([]);

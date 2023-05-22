@@ -63,7 +63,6 @@ export default function ProfilePage() {
       if (result) {
         dispatch(setPostSearchData(result.data));
       } else {
-        toast.error('không tìm thầy thông tin người này');
       }
     } catch (error) {}
   };

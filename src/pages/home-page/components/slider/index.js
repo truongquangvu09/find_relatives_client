@@ -1,7 +1,13 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 import Item from './items/item';
 import style from './slider.module.css';
 import Zalo from '../../../Zalo';
+import { setPostSearchData } from '../../../../redux/Slice/postSearchSlice';
 
 function Slider() {
   const navigate = useNavigate();
@@ -9,6 +15,47 @@ function Slider() {
     navigate('/profile');
     window.scroll(0, 0);
   };
+
+  const handleRegister = () => {
+    navigate('/searchRegistration');
+    window.scroll(0, 0);
+  };
+
+  const [infoSearch, setInfoSearch] = useState({
+    people_name: '',
+  });
+
+  const handleChange = (event) => {
+    const { target } = event;
+    const { name, value } = target;
+    setInfoSearch((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const dispatch = useDispatch();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const params = {};
+    if (infoSearch.people_name) {
+      params.people_name = infoSearch.people_name;
+    }
+    try {
+      const result = await axios.get(
+        'http://localhost:8080/api/v1/people/people-advancedSearch',
+        {
+          params,
+        }
+      );
+      if (result) {
+        dispatch(setPostSearchData(result.data));
+        navigate('/profile');
+        window.scrollTo(0, 0);
+      }
+    } catch (error) {}
+  };
+
   return (
     <div className={style['slider']}>
       <div className={style['click-title']}>
@@ -95,15 +142,24 @@ function Slider() {
           tôi...
         </p>
         <div className={style['header-mid']}>
-          <div className={style['header-left']}>
-            <input placeholder=" Nhập người thân cần tìm"></input>
-          </div>
-          <div className={style['header-right']}>
-            <input type="submit" value="Tìm kiếm"></input>
-          </div>
+          <form className={style['form-search']} onSubmit={handleSubmit}>
+            <div className={style['header-left']}>
+              <input
+                name="people_name"
+                value={infoSearch.people_name}
+                onChange={handleChange}
+                placeholder=" Nhập người thân cần tìm"
+              ></input>
+            </div>
+            <div className={style['header-right']}>
+              <input type="submit" value="Tìm kiếm"></input>
+            </div>
+          </form>
         </div>
         <div className={style['right']}>
-          <button>Đăng kí tìm người thân</button>
+          <button className={style['btn-register']} onClick={handleRegister}>
+            Đăng kí tìm người thân
+          </button>
         </div>
       </div>
       <div className={style['imagess']}>

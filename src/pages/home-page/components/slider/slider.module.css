@@ -25,6 +25,9 @@
 .right {
   width: 30%;
 }
+.btn-register {
+  cursor: pointer;
+}
 
 .right button {
   background: none repeat scroll 0 0 #8d0000;
@@ -53,7 +56,10 @@
   width: 90%;
   height: 33px;
   border-radius: 5px;
-  border: 1px solid #D6D6D6;
+  border: 1px solid #d6d6d6;
+}
+.form-search {
+  display: contents;
 }
 
 .header-right {
@@ -63,6 +69,7 @@
 .header-right input {
   width: 100%;
   height: 33px;
+  cursor: pointer;
 }
 
 .imagess {
@@ -180,7 +187,6 @@
   list-style: none;
 }
 
-
 .sub-title {
   line-height: 20px;
   padding: 10px 15px;
@@ -193,6 +199,3 @@
   padding: 8px 32px;
   font-size: 20px;
 }
-
-
-

@@ -1,9 +1,14 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Item from './items/item';
 import style from './slider.module.css';
 import Zalo from '../../../Zalo';
 
 function Slider() {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/profile');
+    window.scroll(0, 0);
+  };
   return (
     <div className={style['slider']}>
       <div className={style['click-title']}>
@@ -105,9 +110,9 @@ function Slider() {
         <Item></Item>
       </div>
       <div className={style['view-all']}>
-        <NavLink to="/profile">
-          <a href="#">Xem toàn bộ</a>
-        </NavLink>
+        <a href="#" onClick={handleClick}>
+          Xem toàn bộ
+        </a>
       </div>
       <Zalo></Zalo>
     </div>

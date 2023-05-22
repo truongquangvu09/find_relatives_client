@@ -5,21 +5,38 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPostData } from '../../../../redux/Slice/postSlice';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { setPostSearchData } from '../../../../redux/Slice/postSearchSlice';
 
 function Items() {
   const [data, setData] = useState([]);
   const postData = useSelector((state) => state.postData);
+  const postSearchData = useSelector(
+    (state) => state.postSearch.postSearchData
+  );
+  console.log({ postSearchData });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   console.log({ data });
 
   useEffect(() => {
-    const listPost = async () => {
+    const fetchData = async () => {
       const result = await postServices.listPost();
-      setData(result);
+      let filteredPostData = [];
+      if (postSearchData && postSearchData.length > 0) {
+        filteredPostData = result.filter((post) => {
+          for (let i = 0; i < postSearchData.length; i++) {
+            if (post.id === postSearchData[i].id) {
+              return true;
+            }
+          }
+          return false;
+        });
+      }
+      setData(filteredPostData.length > 0 ? filteredPostData : result);
     };
-    listPost();
-  }, []);
+    fetchData();
+  }, [postSearchData]);
 
   useEffect(() => {
     if (postData && postData.id) {

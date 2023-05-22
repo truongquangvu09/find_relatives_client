@@ -51,6 +51,7 @@ function ProfileDetails() {
       window.scrollTo(0, 0);
     } catch (error) {
       toast.error('bạn chưa đăng nhập');
+      window.scrollTo(0, 0);
     }
   };
 

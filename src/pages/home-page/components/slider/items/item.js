@@ -9,6 +9,8 @@ import { Link, useNavigate } from 'react-router-dom';
 function Item() {
   const [data, setData] = useState([]);
   const postData = useSelector((state) => state.postData);
+  const postSearchData = useSelector((state) => state.postSearchData);
+  console.log({ postSearchData });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   console.log({ data });

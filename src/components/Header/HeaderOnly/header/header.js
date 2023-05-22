@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Login from './Login/index';
 import Profile from '../../../Profile/Profile';
+import { setPostSearchData } from '../../../../redux/Slice/postSearchSlice';
+import { useDispatch } from 'react-redux';
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -30,6 +32,12 @@ function Header() {
     console.log(`The value of loggedIn has changed to ${loggedIn}`);
     // thực hiện các hành động cần thiết khi giá trị của loggedIn thay đổi
   }, [loggedIn]);
+
+  const dispatch = useDispatch();
+  const handleClick = (event) => {
+    dispatch(setPostSearchData({}));
+  };
+
   return (
     <div className="header">
       <div className="header-top">
@@ -39,24 +47,24 @@ function Header() {
           </a>
         </div>
         <ul className="menu">
-          <li className="menu-li">
+          <li className="menu-li" onClick={handleClick}>
             <NavLink to="/">Trang chủ</NavLink>
           </li>
-          <li className="menu-li">
+          <li className="menu-li" onClick={handleClick}>
             <NavLink to="/profile">Tìm người thân</NavLink>
           </li>
-          <li className="menu-li">
+          <li className="menu-li" onClick={handleClick}>
             <NavLink to="/tvshow">Truyền hình</NavLink>
           </li>
-          <li className="menu-li">
+          <li className="menu-li" onClick={handleClick}>
             <NavLink to="/news">Tin tức</NavLink>
           </li>
           {loggedIn ? (
-            <li className="menu-li">
+            <li className="menu-li" onClick={handleClick}>
               <NavLink to="/profiles">Profile</NavLink>
             </li>
           ) : (
-            <li className="menu-li">
+            <li className="menu-li" onClick={handleClick}>
               <div>
                 <div className="login_all">
                   <Button onClick={handleOpen}>Đăng nhập</Button>

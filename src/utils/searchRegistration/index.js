@@ -7,7 +7,8 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 function SearchRegistration() {
-  const { id } = useSelector((state) => state.user.userData);
+  const userData = useSelector((state) => state.user.userData);
+  const { id } = userData.user;
   console.log('id', id);
 
   const [infoSearch, setInfoSearch] = useState({

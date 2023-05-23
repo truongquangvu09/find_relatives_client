@@ -24,6 +24,7 @@
   font-size: 18px;
   font-weight: normal;
   max-width: 330px;
+  text-decoration: none;
 }
 .list-tvshow .list-title {
   margin-top: 5px;
@@ -96,6 +97,9 @@
 .menu a:hover,
 .menu li.current-menu-item a {
   color: #dfb872;
+}
+.link-title {
+  text-decoration: none;
 }
 .large-button:hover {
   background-color: #b50000;

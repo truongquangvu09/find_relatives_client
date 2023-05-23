@@ -22,6 +22,33 @@ export default function ProfilePage() {
     coalpeople_name: '',
   });
 
+  const [imagePath, setImagePath] = useState({
+    uploadedImagePath: '',
+  });
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setImagePath((prevState) => ({
+      ...prevState,
+      uploadedImagePath: file,
+    }));
+  };
+
+  const handleSubmitImageSearch = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('uploadedImagePath', imagePath.uploadedImagePath);
+    try {
+      const imageSearch = await axios.post(
+        'http://localhost:8080/api/v1/people/people-imageSearch',
+        formData
+      );
+      const resultArray = [imageSearch.data];
+      dispatch(setPostSearchData(resultArray));
+      console.log({ imageSearch });
+    } catch (error) {}
+  };
+
   const handleChange = (event) => {
     const { target } = event;
     const { name, value } = target;
@@ -74,10 +101,19 @@ export default function ProfilePage() {
       </div>
       <div className={style['sidebar']}>
         <button className={style['large-button']}>
-          <Link to="http://localhost:3000/searchRegistration">
-            Đăng ký tìm người thân
-          </Link>
+          <Link to="/searchRegistration">Đăng ký tìm người thân</Link>
         </button>
+        <div class="widget-block">
+          <h1 class="widget-title">Tìm kiếm bằng hình ảnh</h1>
+          <form class="advanced-search" onSubmit={handleSubmitImageSearch}>
+            <input
+              name="uploadedImagePath"
+              type="file"
+              onChange={handleFileChange}
+            ></input>
+            <input class="submit" type="submit" value="Tìm kiếm" />
+          </form>
+        </div>
         <div class="widget-block">
           <h1 class="widget-title">Tìm kiếm nâng cao</h1>
           <form class="advanced-search" onSubmit={handleSubmit}>

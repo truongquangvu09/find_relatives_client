@@ -1,5 +1,6 @@
 import React from 'react';
 import './contact.css';
+import { NavLink } from 'react-router-dom';
 function Contact() {
   return (
     <div className="contact__body">
@@ -42,20 +43,24 @@ function Contact() {
         </ol>
       </div>
       <div className="main-sidebar">
-        <div className="widget-block-1">
+        <div className="widget-block">
           <h3 className="widget-title">Chuyên mục</h3>
           <ul className="right-menu">
             <li
               id="menu-item-66"
               className="menu-item menu-item-type-post_type menu-item-object-page menu-item-66"
             >
-              <a>ỦNG HỘ NHƯ CHƯA HỀ CÓ CUỘC CHIA LY</a>
+              <NavLink to={'/donate'}>
+                <a>ỦNG HỘ NHƯ CHƯA HỀ CÓ CUỘC CHIA LY</a>
+              </NavLink>
             </li>
             <li
               id="menu-item-67"
               className="menu-item menu-item-type-post_type menu-item-object-page menu-item-67"
             >
-              <a>LIÊN HỆ</a>
+              <NavLink to={'/contact'}>
+                <a>LIÊN HỆ</a>
+              </NavLink>
             </li>
           </ul>
         </div>

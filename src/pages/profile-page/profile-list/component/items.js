@@ -12,10 +12,29 @@ function Items() {
   const postSearchData = useSelector(
     (state) => state.postSearch.postSearchData
   );
-  console.log({ postSearchData });
+  console.log(postSearchData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   console.log({ data });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await postServices.listPost();
+      let filteredPostData = [];
+      if (postSearchData && postSearchData.length > 0) {
+        filteredPostData = result.filter((post) => {
+          for (let i = 0; i < postSearchData.length; i++) {
+            if (post.id === postSearchData[i].id) {
+              return true;
+            }
+          }
+          return false;
+        });
+      }
+      setData(filteredPostData.length > 0 ? filteredPostData : result);
+    };
+    fetchData();
+  }, [postSearchData]);
 
   useEffect(() => {
     const fetchData = async () => {

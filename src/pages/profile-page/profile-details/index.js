@@ -10,7 +10,8 @@ import style from './index.module.css';
 function ProfileDetails() {
   const postData = useSelector((state) => state.post.postData);
   const userData = useSelector((state) => state.user.userData);
-  console.log(userData);
+
+  console.log({ postData });
 
   const [comment, setComment] = useState({
     comment_text: '',
@@ -43,11 +44,17 @@ function ProfileDetails() {
         null,
         userData.token
       );
+
       setComment((prevState) => ({
         ...prevState,
         comment_text: '',
       }));
-      setCommentList([...commentList, newComment]);
+
+      const result = await commentServices.getComment();
+      const filteredComments = result.filter(
+        (item) => item.post_id === postData.id
+      );
+      setCommentList(filteredComments);
       window.scrollTo(0, 0);
     } catch (error) {
       toast.error('bạn chưa đăng nhập');
@@ -58,9 +65,9 @@ function ProfileDetails() {
   useEffect(() => {
     const get = async () => {
       try {
-        const commentList = await commentServices.getComment();
-        const filteredComments = commentList.filter(
-          (item) => item.Post.id === postData.id
+        const result = await commentServices.getComment();
+        const filteredComments = result.filter(
+          (item) => item.post_id === postData.id
         );
         setCommentList(filteredComments);
       } catch (error) {
@@ -166,13 +173,13 @@ function ProfileDetails() {
             </div>
 
             <div className={style['comment-area']}>
-              <h2 className="comment-title">responses</h2>
-              {commentList.map((item, index) => {
+              <h2 className="comment-title">{commentList.length} responses</h2>
+              {commentList.map((item) => {
                 return (
                   <>
-                    <ul className={style['comment-list']} key={index}>
+                    <ul className={style['comment-list']}>
                       <li className="comment">
-                        <div className="comment-body">
+                        <div className="comment-body" key={item.id}>
                           <div className="comment-author">
                             <img
                               alt=""

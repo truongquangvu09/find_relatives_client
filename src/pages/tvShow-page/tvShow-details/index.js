@@ -1,7 +1,79 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 import Zalo from '../../Zalo';
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { format } from 'date-fns';
+import * as commentServices from '../../../api/comments';
+
 function TvShowDetails() {
+  const tvShowData = useSelector((state) => state.tvShow.tvShowData);
+  const userData = useSelector((state) => state.user.userData);
+
+  const [comment, setComment] = useState({
+    comment_text: '',
+    report_id: '',
+    post_id: '',
+    tvShow_id: tvShowData.id,
+    news_id: '',
+  });
+
+  const [commentList, setCommentList] = useState([]);
+
+  const handleChange = (event) => {
+    const { target } = event;
+    const { name, value } = target;
+    setComment((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const newComment = await commentServices.createComment(
+        comment.comment_text,
+        userData.user.id,
+        null,
+        comment.tvShow_id,
+        null,
+        userData.token
+      );
+
+      setComment((prevState) => ({
+        ...prevState,
+        comment_text: '',
+      }));
+
+      const result = await commentServices.getComment();
+      const filteredComments = result.filter(
+        (item) => item.tvShow_id === tvShowData.id
+      );
+      setCommentList(filteredComments);
+      window.scrollTo(0, 0);
+    } catch (error) {
+      toast.error('bạn chưa đăng nhập');
+      window.scrollTo(0, 0);
+    }
+  };
+  useEffect(() => {
+    const get = async () => {
+      try {
+        const result = await commentServices.getComment();
+        const filteredComments = result.filter(
+          (item) => item.tvShow_id === tvShowData.id
+        );
+        setCommentList(filteredComments);
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    };
+    get();
+  }, [tvShowData]);
+
   return (
     <div className="main">
       <div className="main-content">
@@ -15,77 +87,74 @@ function TvShowDetails() {
             frameborder="0"
             allowfullscreen
           ></iframe>
-          <h1 className="single-title">
-            NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM
-          </h1>
-          <p className="sub-title">Ngày phát sóng: 6/3/2023</p>
-
+          <h1 className="single-title">{tvShowData.content_text}</h1>
+          <p className="sub-title">
+            Ngày phát sóng: {tvShowData.createdAt.substring(0, 10)}
+          </p>
+          <div className="comment-area">
+            <h2 className="comment-title"> {commentList.length}responses</h2>
+            {commentList.map((item) => {
+              return (
+                <>
+                  <ul className="comment-list">
+                    <li className="comment">
+                      <div className="comment-body" key={item.id}>
+                        <div className="comment-author">
+                          <img
+                            alt=""
+                            src="https://secure.gravatar.com/avatar/89fddf5283bc9e36341fc460763329f0?s=32&amp;d=mm&amp;r=g"
+                            srcset="https://secure.gravatar.com/avatar/89fddf5283bc9e36341fc460763329f0?s=64&amp;d=mm&amp;r=g 2x"
+                            class="avatar avatar-32 photo"
+                            height="32"
+                            width="32"
+                            loading="lazy"
+                          />
+                          <cite class="fn">{item.Report?.report_name}</cite>
+                        </div>
+                        <div className="comment-meta">
+                          {format(
+                            new Date(item.createdAt),
+                            'yyyy-MM-dd HH:mm:ss'
+                          )}
+                        </div>
+                        <p>{item.comment_text}</p>
+                      </div>
+                    </li>
+                  </ul>
+                </>
+              );
+            })}
+          </div>
           <div id="comments" className="comments-area">
             <div id="respond" className="comment-respond">
               <h3 id="reply-title" className="comment-reply-title">
-                Leave a Reply{' '}
+                Để lại một câu trả lời
                 <small>
                   <a>Cancel reply</a>
                 </small>
               </h3>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <p className="comment-notes">
                   <span id="email-notes">
-                    Your email address will not be published.
+                    Địa chỉ email của bạn sẽ không được công bố.Các trường bắt
+                    buộc được đánh dấu*
                   </span>{' '}
-                  Required fields are marked <span className="required">*</span>
                 </p>
                 <p className="comment-form-comment">
-                  <label for="comment">Comment</label>
+                  <label for="comment">Comment *</label>
+
                   <textarea
                     id="comment"
-                    name="comment"
+                    name="comment_text"
                     cols="45"
                     rows="8"
                     maxlength="65525"
                     required="required"
+                    value={comment.comment_text}
+                    onChange={handleChange}
                   ></textarea>
                 </p>
-                <p className="comment-form-author">
-                  <label for="author">
-                    Name <span className="required">*</span>
-                  </label>{' '}
-                  <input
-                    id="author"
-                    name="author"
-                    type="text"
-                    value=""
-                    size="30"
-                    maxlength="245"
-                    required="required"
-                  ></input>
-                </p>
-                <p className="comment-form-email">
-                  <label for="email">
-                    Email <span className="required">*</span>
-                  </label>{' '}
-                  <input
-                    id="email"
-                    name="email"
-                    type="text"
-                    value=""
-                    size="30"
-                    maxlength="100"
-                    aria-describedby="email-notes"
-                    required="required"
-                  ></input>
-                </p>
-                <p className="comment-form-url">
-                  <label for="url">Website</label>{' '}
-                  <input
-                    id="url"
-                    name="url"
-                    type="text"
-                    value=""
-                    size="30"
-                    maxlength="200"
-                  />
-                </p>
+
                 <p className="comment-form-cookies-consent">
                   <input
                     id="wp-comment-cookies-consent"
@@ -94,8 +163,8 @@ function TvShowDetails() {
                     value="yes"
                   />{' '}
                   <label for="wp-comment-cookies-consent">
-                    Save my name, email, and website in this browser for the
-                    next time I comment.
+                    Lưu tên, email và trang web của tôi trong trình duyệt này để
+                    lần sau tôi bình luận.
                   </label>
                 </p>
                 <p className="form-submit">
@@ -106,18 +175,6 @@ function TvShowDetails() {
                     className="submit"
                     value="Post Comment"
                   />{' '}
-                  <input
-                    type="hidden"
-                    name="comment_post_ID"
-                    value="70440"
-                    id="comment_post_ID"
-                  />
-                  <input
-                    type="hidden"
-                    name="comment_parent"
-                    id="comment_parent"
-                    value="0"
-                  />
                 </p>
               </form>{' '}
             </div>
@@ -133,15 +190,17 @@ function TvShowDetails() {
               id="menu-item-66"
               className="menu-item menu-item-type-post_type menu-item-object-page menu-item-66"
             >
-              <a href="https://haylentieng.vn/ungho/">
-                ỦNG HỘ NHƯ CHƯA HỀ CÓ CUỘC CHIA LY
-              </a>
+              <NavLink to={'/donate'}>
+                <a>ỦNG HỘ NHƯ CHƯA HỀ CÓ CUỘC CHIA LY</a>
+              </NavLink>
             </li>
             <li
               id="menu-item-67"
               className="menu-item menu-item-type-post_type menu-item-object-page menu-item-67"
             >
-              <a href="https://haylentieng.vn/lien-he/">LIÊN HỆ</a>
+              <NavLink to={'/contact'}>
+                <a>LIÊN HỆ</a>
+              </NavLink>
             </li>
           </ul>
         </div>

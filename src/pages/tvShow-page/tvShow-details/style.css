@@ -73,6 +73,21 @@
   color: #999;
   font-size: 85%;
 }
+a {
+  text-decoration: none;
+}
+.comment-area {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #ccc;
+  width: 590px;
+}
+.comment-list {
+  list-style: none;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  border-top: 1px solid #ccc;
+}
 
 .form-submit input {
   padding: 10px;

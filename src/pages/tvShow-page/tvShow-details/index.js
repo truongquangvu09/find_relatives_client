@@ -11,7 +11,7 @@ import * as commentServices from '../../../api/comments';
 function TvShowDetails() {
   const tvShowData = useSelector((state) => state.tvShow.tvShowData);
   const userData = useSelector((state) => state.user.userData);
-
+  console.log({ tvShowData });
   const [comment, setComment] = useState({
     comment_text: '',
     report_id: '',
@@ -87,10 +87,8 @@ function TvShowDetails() {
             frameborder="0"
             allowfullscreen
           ></iframe>
-          <h1 className="single-title">{tvShowData.content_text}</h1>
-          <p className="sub-title">
-            Ngày phát sóng: {tvShowData.createdAt.substring(0, 10)}
-          </p>
+          <h1 className="single-title">{tvShowData?.content_text}</h1>
+          <p className="sub-title">Ngày phát sóng: {tvShowData?.createdAt}</p>
           <div className="comment-area">
             <h2 className="comment-title"> {commentList.length}responses</h2>
             {commentList.map((item) => {
@@ -113,11 +111,11 @@ function TvShowDetails() {
                         </div>
                         <div className="comment-meta">
                           {format(
-                            new Date(item.createdAt),
+                            new Date(item?.createdAt),
                             'yyyy-MM-dd HH:mm:ss'
                           )}
                         </div>
-                        <p>{item.comment_text}</p>
+                        <p>{item?.comment_text}</p>
                       </div>
                     </li>
                   </ul>

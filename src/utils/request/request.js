@@ -20,6 +20,11 @@ export const post = async (path, object = {}, token) => {
   return response.data;
 };
 
+export const update = async (path, id, object = {}) => {
+  const response = await request.put(path, id, (object = {}));
+  return response.data;
+};
+
 export const deleted = async (path, id) => {
   await request.delete(path, id);
   return 'deleted';

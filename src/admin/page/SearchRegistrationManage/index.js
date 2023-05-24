@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridToolbar, GridActionsCellItem } from '@mui/x-data-grid';
 import styles from './Registration.module.scss';
 import classNames from 'classnames/bind';
 import Detail_Search from './detail_search/detail';
 import Modal from '@mui/material/Modal';
-import { Button } from '@mui/material';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import CancelIcon from '@mui/icons-material/Cancel';
+import CheckIcon from '@mui/icons-material/Check';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import * as searchRegistrationServices from '../../../api/searchRegistration';
+import { useDispatch } from 'react-redux';
+import { setSearchRegistrationData } from '../../../redux/Slice/searchRegistrationSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const cx = classNames.bind(styles);
 
@@ -14,9 +20,61 @@ function SearchRegistrationManage() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  function detail() {
-    setOpen(true);
-  }
+  const dispatch = useDispatch();
+
+  const handleClick = async (searchID) => {
+    try {
+      const result = await searchRegistrationServices.getDetail(searchID);
+      dispatch(setSearchRegistrationData(result));
+      console.log({ result });
+      setOpen(true);
+    } catch (error) {}
+  };
+
+  const handleAcceptClick = async (id) => {
+    try {
+      const updateRegistrations =
+        await searchRegistrationServices.updateRegistrations(id, {
+          status: 'đã xác nhận',
+        });
+      if (updateRegistrations) {
+        toast.success('xác nhận thành công');
+      }
+      const result = await searchRegistrationServices.getList();
+      setData(result);
+    } catch (error) {
+      toast.error('xác nhận không thành công');
+    }
+  };
+
+  const handleCancelClick = async (id) => {
+    try {
+      const deleteRegistration =
+        await searchRegistrationServices.deleteRegistrations(id);
+      if (deleteRegistration) {
+        toast.success('xác nhận hủy thành công');
+      }
+      const result = await searchRegistrationServices.getList();
+      setData(result);
+    } catch (error) {
+      toast.error('xác nhận hủy không thành công');
+    }
+  };
+
+  const [data, setData] = useState([]);
+  console.log({ data });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await searchRegistrationServices.getList();
+        setData(result);
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    };
+    fetchData();
+  }, []);
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -32,40 +90,85 @@ function SearchRegistrationManage() {
   const columns = [
     { field: 'id', headerName: 'MS', width: 100 },
     {
-      field: 'title',
-      headerName: 'Tiêu đề',
-      width: 300,
+      field: 'report_name',
+      headerName: 'report_name',
+      width: 130,
       editable: true,
+    },
+    {
+      field: 'report_address',
+      headerName: 'report_address',
+      width: 130,
+      editable: true,
+    },
+    {
+      field: 'people_name',
+      headerName: 'people_name',
+      width: 130,
+      editable: true,
+    },
+    {
+      field: 'people_address',
+      headerName: 'people_address',
+      width: 130,
+      editable: true,
+    },
+    {
+      field: 'date_missing',
+      headerName: 'date_missing',
+      width: 130,
+      editable: true,
+    },
+    {
+      field: 'view',
+      type: 'actions',
+      headerName: 'Xem chi tiết',
+      width: 100,
+      editable: true,
+      getActions: (params) => [
+        <GridActionsCellItem
+          onClick={() => {
+            handleClick(params.row.id);
+          }}
+          fontSize="large"
+          icon={<VisibilityIcon sx={{ fontSize: 20 }} color="primary" />}
+          label="views"
+        />,
+      ],
     },
     {
       field: 'status',
       headerName: 'Trạng thái',
-      width: 300,
+      width: 130,
       editable: true,
+      cellClassName: (params) =>
+        params.value === 'đã xác nhận' ? 'confirmed' : 'disconfirmed',
     },
     {
       field: 'button',
-      headerName: '',
-      width: 100,
+      headerName: 'xác nhận',
+      width: 150,
       editable: true,
-      renderCell: (cellValues) => {
-        return (
-          <Button variant="contained" color="primary">
-            <DeleteForeverIcon></DeleteForeverIcon>
-          </Button>
-        );
-      },
+      type: 'actions',
+      getActions: (params) => [
+        <GridActionsCellItem
+          onClick={() => {
+            handleAcceptClick(params.row.id);
+          }}
+          fontSize="large"
+          icon={<CheckIcon sx={{ fontSize: 20 }} color="primary" />}
+          label="views"
+        />,
+        <GridActionsCellItem
+          onClick={() => {
+            handleCancelClick(params.row.id);
+          }}
+          fontSize="large"
+          icon={<CancelIcon sx={{ fontSize: 20 }} color="primary" />}
+          label="views"
+        />,
+      ],
     },
-  ];
-
-  const rows = [
-    { id: 1, title: 'Đơn đăng kí 1', status: null },
-    { id: 2, title: 'Đơn đăng kí 2', status: null },
-    { id: 3, title: 'Đơn đăng kí 3', status: null },
-    { id: 4, title: 'Đơn đăng kí 4', status: null },
-    { id: 5, title: 'Đơn đăng kí 5', status: null },
-    { id: 6, title: 'Đơn đăng kí 6', status: null },
-    { id: 7, title: 'Đơn đăng kí 7', status: null },
   ];
 
   return (
@@ -76,9 +179,22 @@ function SearchRegistrationManage() {
       </div>
       <Box sx={{ height: 420, width: '100%' }}>
         <DataGrid
-          rows={rows}
+          sx={{
+            boxShadow: 2,
+            border: 2,
+            borderColor: 'primary.light',
+            '& .MuiDataGrid-cell:hover': {
+              color: 'primary.main',
+            },
+            '& .confirmed': {
+              color: 'green',
+            },
+            '& .disconfirmed': {
+              color: 'red',
+            },
+          }}
+          rows={data}
           columns={columns}
-          onRowClick={detail}
           components={{
             Toolbar: GridToolbar,
           }}
@@ -104,7 +220,7 @@ function SearchRegistrationManage() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <h1 className={cx('header-detail')}>Đơn đăng kí 1</h1>
+          <h1 className={cx('header-detail')}>Đơn đăng kí </h1>
           <Detail_Search />
         </Box>
       </Modal>

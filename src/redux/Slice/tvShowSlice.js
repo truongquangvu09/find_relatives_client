@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const tvShow = createSlice({
+export const tvShowSlice = createSlice({
   name: 'tvShow',
   initialState: {
     tvShowData: {},
@@ -12,6 +12,6 @@ export const tvShow = createSlice({
   },
 });
 
-export const { setTvShowData } = tvShow.actions;
+export const { setTvShowData } = tvShowSlice.actions;
 
-export default tvShow.reducer;
+export default tvShowSlice.reducer;

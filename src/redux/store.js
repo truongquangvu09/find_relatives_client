@@ -4,6 +4,8 @@ import postSlice from './Slice/postSlice';
 import postSearchSlice from './Slice/postSearchSlice';
 import tvShowSlice from './Slice/tvShowSlice';
 import newsSlice from './Slice/newsSlice';
+import searchRegistrationSlice from './Slice/searchRegistrationSlice';
+
 const store = configureStore({
   reducer: {
     user: userSlice,
@@ -11,6 +13,7 @@ const store = configureStore({
     postSearch: postSearchSlice,
     tvShow: tvShowSlice,
     news: newsSlice,
+    searchRegistration: searchRegistrationSlice,
   },
 });
 export default store;

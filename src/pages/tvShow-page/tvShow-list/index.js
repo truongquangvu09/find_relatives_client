@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './TvShowPage.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Zalo from '../../Zalo';
 import * as tvShowServices from '../../../api/tvshow';
 import { useDispatch } from 'react-redux';
 import { setTvShowData } from '../../../redux/Slice/tvShowSlice';
+import { useSelector } from 'react-redux';
 
 function TvShowList() {
   const [data, setData] = useState([]);
+  const tvShowData = useSelector((state) => state.tvShow.tvShowData);
+  console.log({ tvShowData });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const listTvShow = async () => {
@@ -23,8 +27,8 @@ function TvShowList() {
   const handleClick = async (tvShowId) => {
     try {
       const result = await tvShowServices.getDetail(tvShowId);
-      console.log({ result });
       dispatch(setTvShowData(result));
+      console.log({ result });
       window.scrollTo(0, 0);
     } catch (error) {
       throw new Error(error.message);
@@ -41,7 +45,7 @@ function TvShowList() {
               return (
                 <li>
                   <a className="list-thumb">
-                    <img src={item.media} />
+                    <img src={item?.media} />
                   </a>
 
                   <h2 className="list-title">
@@ -50,12 +54,14 @@ function TvShowList() {
                       to="/tvshow/{item.id}"
                       onClick={() => handleClick(item.id)}
                     >
-                      {item.content_text}
+                      {item?.content_text}
                     </Link>
                   </h2>
-                  <p className="sub-title">
-                    Ngày phát sóng:{item.createdAt.substring(0, 10)}{' '}
-                  </p>
+                  {item?.createdAt && (
+                    <p className="sub-title">
+                      Ngày phát sóng:{item?.createdAt.substring(0, 10)}
+                    </p>
+                  )}
                 </li>
               );
             })}

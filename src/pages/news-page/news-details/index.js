@@ -86,8 +86,7 @@ function NewsDetails() {
             <div className="content-block-newdetail">
               <h1 className="title-content">{newsData?.content_text}</h1>
               <p className="sub-title">
-                Ngày đăng: {newsData?.createdAt.substring(0, 10)} | Lượt xem:
-                424
+                Ngày đăng: {newsData?.createdAt} | Lượt xem: 424
               </p>
               <div className="newdetail-block-image">
                 <img clasName="img-newsdetail" src={newsData?.image} alt="" />

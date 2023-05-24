@@ -59,3 +59,48 @@ export const createSearchRegistration = async (
     throw new Error(error.message);
   }
 };
+
+export const getList = async () => {
+  try {
+    const res = await request.get(
+      'searchRegistrations/searchRegistrations-list'
+    );
+    return res;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const getDetail = async (id) => {
+  try {
+    const res = await request.getDetail(
+      `searchRegistrations/searchRegistrations-detail/${id}`
+    );
+    return res;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const updateRegistrations = async (id, status) => {
+  try {
+    const res = await request.update(
+      `searchRegistrations/searchRegistrations-update/${id}`,
+      status
+    );
+    return res;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const deleteRegistrations = async (id) => {
+  try {
+    const res = await request.deleted(
+      `searchRegistrations/searchRegistrations-delete/${id}`
+    );
+    return res;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

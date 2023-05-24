@@ -8,18 +8,15 @@ function NewsList() {
   return (
     <div className="container-newlist">
       <div className="newsList">
-        <div className='box-content-news'>
+        <div className="box-content-news">
           <h3 className="title-block">
             <a href="#">Tin Tức</a>
           </h3>
-          <div className='main-container-newlist'>
-            <div className='content-block-newlist'>
-              <Item></Item>
-              <Item></Item>
-              <Item></Item>
+          <div className="main-container-newlist">
+            <div className="content-block-newlist">
               <Item></Item>
             </div>
-            <div className='sidebar-newlist'>
+            <div className="sidebar-newlist">
               <div class="widget-block">
                 <h3 class="widget-title">Các tin đọc nhiều nhất</h3>
                 <ul class="featured-contact">

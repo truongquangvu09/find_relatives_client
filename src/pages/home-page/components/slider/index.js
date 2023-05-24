@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -8,6 +8,8 @@ import Item from './items/item';
 import style from './slider.module.css';
 import Zalo from '../../../Zalo';
 import { setPostSearchData } from '../../../../redux/Slice/postSearchSlice';
+import * as newsServices from '../../../../api/news';
+import { setNewsData } from '../../../../redux/Slice/newsSlice';
 
 function Slider() {
   const navigate = useNavigate();
@@ -56,6 +58,28 @@ function Slider() {
     } catch (error) {}
   };
 
+  const [news, setNews] = useState([]);
+  useEffect(() => {
+    const fetchApi = async () => {
+      try {
+        const result = await newsServices.getlist();
+        setNews(result.slice(0, 4));
+      } catch (error) {}
+    };
+    fetchApi();
+  }, []);
+
+  const handleClickNews = async (newsId) => {
+    try {
+      const result = await newsServices.getDetail(newsId);
+      console.log({ result });
+      dispatch(setNewsData(result));
+      window.scrollTo(0, 0);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+
   return (
     <div className={style['slider']}>
       <div className={style['click-title']}>
@@ -85,10 +109,14 @@ function Slider() {
           </p>
           <ul className={style['link-sub']}>
             <li>
-              <a href="#">Xem những chương trình đã phát</a>
+              <NavLink to={'/tvshow'}>
+                <a>Xem những chương trình đã phát</a>
+              </NavLink>
             </li>
             <li>
-              <a href="#">Xem các thông báo đã phát</a>
+              <NavLink to={'/news'}>
+                <a>Xem các thông báo đã phát</a>
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -99,11 +127,29 @@ function Slider() {
               <img
                 width="100%"
                 height="225"
-                src="https://haylentieng.vn/wp-content/uploads/2018/07/logo-300x200.jpg"
+                src="http://localhost:8080/public\images\image\1684895132453_pgm00050600315306still013-16781196787691941199945.jpg"
               ></img>
             </div>
             <div className={style['feature-info']}>
-              <li className={style['featured-news-bot']}>
+              {news.map((item) => {
+                return (
+                  <li className={style['featured-news-bot']}>
+                    <NavLink
+                      to="/news/{item.id}"
+                      onClick={() => handleClickNews(item.id)}
+                    >
+                      <a className={style['featured-title']}>
+                        {item.content_text}
+                      </a>
+                    </NavLink>
+                    <span className={style['featured-news-date']}>
+                      {item.createdAt.substring(0, 10)}
+                    </span>
+                  </li>
+                );
+              })}
+
+              {/* <li className={style['featured-news-bot']}>
                 <a className={style['featured-title']} href="#">
                   Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại
                   Ngân hàng quân đội MBBank – số tài khoản 2700
@@ -123,14 +169,7 @@ function Slider() {
                   Ngân hàng quân đội MBBank – số tài khoản 2700
                 </a>
                 <span className={style['featured-news-date']}>07/03/23</span>
-              </li>
-              <li className={style['featured-news-bot']}>
-                <a className={style['featured-title']} href="#">
-                  Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại
-                  Ngân hàng quân đội MBBank – số tài khoản 2700
-                </a>
-                <span className={style['featured-news-date']}>07/03/23</span>
-              </li>
+              </li> */}
             </div>
           </div>
         </div>

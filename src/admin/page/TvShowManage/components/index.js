@@ -1,313 +1,142 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { DataGrid, GridCellModes } from '@mui/x-data-grid';
-
-function EditToolbar(props) {
-  const { selectedCellParams, cellMode, cellModesModel, setCellModesModel } =
-    props;
-
-  const handleSaveOrEdit = () => {
-    if (!selectedCellParams) {
-      return;
-    }
-    const { id, field } = selectedCellParams;
-    if (cellMode === 'edit') {
-      setCellModesModel({
-        ...cellModesModel,
-        [id]: { ...cellModesModel[id], [field]: { mode: GridCellModes.View } },
-      });
-    } else {
-      setCellModesModel({
-        ...cellModesModel,
-        [id]: { ...cellModesModel[id], [field]: { mode: GridCellModes.Edit } },
-      });
-    }
-  };
-
-  const handleCancel = () => {
-    if (!selectedCellParams) {
-      return;
-    }
-    const { id, field } = selectedCellParams;
-    setCellModesModel({
-      ...cellModesModel,
-      [id]: {
-        ...cellModesModel[id],
-        [field]: { mode: GridCellModes.View, ignoreModifications: true },
-      },
-    });
-  };
-
-  const handleMouseDown = (event) => {
-    event.preventDefault();
-  };
-
-  return (
-    <Box
-      sx={{
-        borderBottom: 1,
-        borderColor: 'divider',
-        p: 1,
-      }}
-    >
-      <Button
-        onClick={handleSaveOrEdit}
-        onMouseDown={handleMouseDown}
-        disabled={!selectedCellParams}
-        variant="outlined"
-      >
-        {cellMode === 'edit' ? 'Save' : 'Edit'}
-      </Button>
-      <Button
-        onClick={handleCancel}
-        onMouseDown={handleMouseDown}
-        disabled={cellMode === 'view'}
-        variant="outlined"
-        sx={{ ml: 1 }}
-      >
-        Cancel
-      </Button>
-    </Box>
-  );
-}
-
-EditToolbar.propTypes = {
-  cellMode: PropTypes.oneOf(['edit', 'view']).isRequired,
-  cellModesModel: PropTypes.object.isRequired,
-  selectedCellParams: PropTypes.shape({
-    field: PropTypes.string.isRequired,
-    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  }),
-  setCellModesModel: PropTypes.func.isRequired,
-};
+import { Avatar } from '@mui/material';
+import {
+  DataGrid,
+  GridCellModes,
+  GridActionsCellItem,
+  GridToolbar,
+} from '@mui/x-data-grid';
+import styles from '../../SearchRegistrationManage/Registration.module.scss';
+import classNames from 'classnames/bind';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import * as tvShowServices from '../../../../api/tvshow';
+const cx = classNames.bind(styles);
 
 function TvShowManageTable() {
-  const [selectedCellParams, setSelectedCellParams] = React.useState(null);
-  const [cellModesModel, setCellModesModel] = React.useState({});
+  const [data, setData] = useState([]);
 
-  const handleCellFocus = React.useCallback((event) => {
-    const row = event.currentTarget.parentElement;
-    const id = row.dataset.id;
-    const field = event.currentTarget.dataset.field;
-    setSelectedCellParams({ id, field });
-  }, []);
-
-  const cellMode = React.useMemo(() => {
-    if (!selectedCellParams) {
-      return 'view';
-    }
-    const { id, field } = selectedCellParams;
-    return cellModesModel[id]?.[field]?.mode || 'view';
-  }, [cellModesModel, selectedCellParams]);
-
-  const handleCellKeyDown = React.useCallback(
-    (params, event) => {
-      if (cellMode === 'edit') {
-        event.defaultMuiPrevented = true;
+  const handleCancelClick = async (id) => {
+    try {
+      const deleteTvshow = await tvShowServices.deletedTvshow(id);
+      if (deleteTvshow) {
+        toast.success('xác nhận xóa thành công');
       }
-    },
-    [cellMode]
-  );
+      const result = await tvShowServices.getTvShow();
+      setData(result.data);
+    } catch (error) {
+      toast.error('xác nhận xóa không thành công');
+    }
+  };
 
-  const handleCellEditStop = React.useCallback((params, event) => {
-    event.defaultMuiPrevented = true;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await tvShowServices.getTvShow();
+        console.log({ result });
+        setData(result.data);
+      } catch (error) {
+        throw new error(error.message);
+      }
+    };
+    fetchData();
   }, []);
+
+  const columns = [
+    { field: 'id', headerName: 'ID', editable: true, width: 90 },
+    {
+      field: 'content_text',
+      headerName: 'content_text',
+      width: 500,
+      editable: true,
+    },
+    {
+      field: 'media',
+      headerName: 'media',
+      width: 170,
+      editable: true,
+      renderCell: (params) => (
+        <div>
+          <Avatar
+            sx={{ width: 60, height: 60 }}
+            variant="square"
+            src={params.row.media}
+            alt=""
+          />
+        </div>
+      ),
+    },
+    {
+      field: 'createdAt',
+      headerName: 'createdAt',
+      width: 110,
+      editable: true,
+    },
+    {
+      field: 'button',
+      headerName: 'xóa bài viết',
+      width: 150,
+      editable: true,
+      type: 'actions',
+      getActions: (params) => [
+        <GridActionsCellItem
+          onClick={() => {
+            handleCancelClick(params.row.id);
+          }}
+          fontSize="large"
+          icon={<DeleteIcon sx={{ fontSize: 20, color: 'red' }} />}
+          label="views"
+        />,
+      ],
+    },
+  ];
 
   return (
-    <div style={{ height: 425, width: 1100 }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        onCellKeyDown={handleCellKeyDown}
-        cellModesModel={cellModesModel}
-        onCellEditStop={handleCellEditStop}
-        onCellModesModelChange={(model) => setCellModesModel(model)}
-        slots={{
-          toolbar: EditToolbar,
-        }}
-        slotProps={{
-          toolbar: {
-            cellMode,
-            selectedCellParams,
-            setSelectedCellParams,
-            cellModesModel,
-            setCellModesModel,
-          },
-          cell: {
-            onFocus: handleCellFocus,
-          },
-        }}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
-            },
-          },
-        }}
-        pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
-    </div>
+    <>
+      <h1 className={cx('header')}>Quản lý bài đăng</h1>
+      <div className={cx('header-search')}>
+        <h3 className={cx('left')}>Tất cả bài đăng</h3>
+      </div>
+      <div style={{ height: 425, width: 1100 }}>
+        <Box>
+          <DataGrid
+            sx={{
+              boxShadow: 2,
+              border: 2,
+              borderColor: 'primary.light',
+              '& .MuiDataGrid-cell:hover': {
+                color: 'primary.main',
+              },
+            }}
+            rows={data}
+            columns={columns}
+            components={{
+              Toolbar: GridToolbar,
+            }}
+            componentsProps={{
+              toolbar: {
+                showQuickFilter: true,
+                quickFilterProps: { debounceMs: 500 },
+              },
+            }}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 5,
+                },
+              },
+            }}
+            pageSizeOptions={[5]}
+            checkboxSelection
+          />
+        </Box>
+      </div>
+    </>
   );
 }
-
-const columns = [
-  { field: 'id', headerName: 'ID', editable: true, width: 90 },
-  {
-    field: 'Video',
-    headerName: 'Video',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'title',
-    headerName: 'Nội dung',
-    width: 170,
-    editable: true,
-  },
-  {
-    field: 'DisplayMode',
-    headerName: 'Chế độ hiển thị',
-    width: 90,
-    editable: true,
-  },
-  {
-    field: 'UploadDate',
-    headerName: 'Ngày tải lên',
-    width: 100,
-    editable: true,
-  },
-  {
-    field: 'NumberOfViews',
-    headerName: 'Số lượt xem',
-    width: 90,
-    editable: true,
-  },
-  {
-    field: 'NumberOfComments',
-    headerName: 'Số bình luận',
-    width: 90,
-    editable: true,
-  },
-  {
-    field: '',
-    width: 110,
-    editable: true,
-    renderCell: (cellValues) => {
-      return (
-        <Button variant="outlined" startIcon={<DeleteIcon />}>
-          Delete
-        </Button>
-      );
-    },
-  },
-];
-
-const rows = [
-  {
-    id: 1,
-    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
-    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
-    DisplayMode: 'Hiện',
-    UploadDate: '1/6/2022',
-    NumberOfViews: '0',
-    NumberOfComments: '0',
-    status: '',
-  },
-  {
-    id: 2,
-    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
-    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
-    DisplayMode: 'Hiện',
-    UploadDate: '1/6/2022',
-    NumberOfViews: '0',
-    NumberOfComments: '0',
-    status: '',
-  },
-  {
-    id: 3,
-    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
-    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
-    DisplayMode: 'Hiện',
-    UploadDate: '1/6/2022',
-    NumberOfViews: '0',
-    NumberOfComments: '0',
-    status: '',
-  },
-  {
-    id: 4,
-    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
-    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
-    DisplayMode: 'Hiện',
-    UploadDate: '1/6/2022',
-    NumberOfViews: '0',
-    NumberOfComments: '0',
-    status: '',
-  },
-  {
-    id: 5,
-    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
-    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
-    DisplayMode: 'Hiện',
-    UploadDate: '1/6/2022',
-    NumberOfViews: '0',
-    NumberOfComments: '0',
-    status: '',
-  },
-  {
-    id: 6,
-    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
-    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
-    DisplayMode: 'Hiện',
-    UploadDate: '1/6/2022',
-    NumberOfViews: '0',
-    NumberOfComments: '0',
-    status: '',
-  },
-  {
-    id: 7,
-    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
-    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
-    DisplayMode: 'Hiện',
-    UploadDate: '1/6/2022',
-    NumberOfViews: '0',
-    NumberOfComments: '0',
-    status: '',
-  },
-  {
-    id: 8,
-    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
-    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
-    DisplayMode: 'Hiện',
-    UploadDate: '1/6/2022',
-    NumberOfViews: '0',
-    NumberOfComments: '0',
-    status: '',
-  },
-  {
-    id: 9,
-    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
-    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
-    DisplayMode: 'Hiện',
-    UploadDate: '1/6/2022',
-    NumberOfViews: '0',
-    NumberOfComments: '0',
-    status: '',
-  },
-  {
-    id: 10,
-    Video: 'https://www.youtube.com/watch?v=1QLjTEC89_I',
-    title: 'NCHCCCL 162: CON TRỐN ĐÂY SAO CHẲNG THẤY AI TÌM',
-    DisplayMode: 'Hiện',
-    UploadDate: '1/6/2022',
-    NumberOfViews: '0',
-    NumberOfComments: '0',
-    status: '',
-  },
-];
 
 export default TvShowManageTable;

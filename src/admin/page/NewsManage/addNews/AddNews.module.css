@@ -1,85 +1,85 @@
-.container{
-    width: 60%;
-    height: 84%;
-    background-color: white;
-    position: absolute;
-    top: 8%;
-    left: 20%;
-    border-radius: 10px;
+.container {
+  width: 60%;
+  height: 84%;
+  background-color: white;
+  position: absolute;
+  top: 8%;
+  left: 20%;
+  border-radius: 10px;
 }
 
-.top-news{
-    font-family: Arial, Helvetica, sans-serif;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    width: 100%;
-    height: 11%;
-    background-color: #ccc;
-    margin: 0;
-    font-size: 25px;
-    font-weight: 700;
-    color: white;
-    text-align: center;
-    padding: 18px;
+.top-news {
+  font-family: Arial, Helvetica, sans-serif;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+  height: 11%;
+  background-color: #ccc;
+  margin: 0;
+  font-size: 25px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  padding: 18px;
 }
 
-.bottom-news{
-    display: flex;
-    width: 100%;
-    height: max-content;
+.bottom-news {
+  display: flex;
+  width: 100%;
+  height: max-content;
 }
 
-.title-box{
-    width: 100%;
-    height: 80px;
-    padding: 0 50px;
+.title-box {
+  width: 100%;
+  height: 80px;
+  padding: 0 50px;
 }
 
-.content{
-    width: 65%;
-    height: max-content;
+.content {
+  width: 65%;
+  height: max-content;
 }
 
-.title-box  .title{
-    font-size: 26px;
-    font-weight: 600;
-    margin-top: 30px;
+.title-box .title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: 30px;
 }
 
-.title-box .input-title{
-    padding: 0 20px;
-    width: 100%;
-    height: 60px;
-    border: 2px solid #cccccc;
-    border-radius: 6px;
+.title-box .input-title {
+  padding: 0 20px;
+  width: 100%;
+  height: 60px;
+  border: 2px solid #cccccc;
+  border-radius: 6px;
 }
 
-.title-box .input-textare{
-    padding: 0 20px;
-    width: 100%;
-    border: 2px solid #cccccc;
-    border-radius: 6px;
-    height: 200px;
-    padding: 10px;
+.title-box .input-textare {
+  padding: 0 20px;
+  width: 100%;
+  border: 2px solid #cccccc;
+  border-radius: 6px;
+  height: 200px;
+  padding: 10px;
 }
 
-.content-image{
-    width: 30%;
-    height: 370px;
+.content-image {
+  width: 30%;
+  height: 370px;
 }
 
-.button-image{
-    margin-top: 60px;
-    margin-left: 0px;
+.button-image {
+  margin-top: 60px;
+  margin-left: 0px;
 }
 
-.checkbox-area{
-    width: 100%;
-    height: max-content;
-    padding: 10px 50px 0px 50px;
+.checkbox-area {
+  width: 100%;
+  height: max-content;
+  padding: 10px 50px 0px 50px;
 }
 
-.button-save{
-    float: right;
-    padding: 0px 50px;
+.button-save {
+  float: right;
+  padding: 0px 50px;
 }

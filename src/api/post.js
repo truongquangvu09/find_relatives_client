@@ -17,3 +17,12 @@ export const detailPost = async (id) => {
     throw new Error(error.message);
   }
 };
+
+export const deletedPost = async (id) => {
+  try {
+    const res = await request.deleted(`post/post-delete/${id}`);
+    return res;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

@@ -44,8 +44,8 @@ function Detail_Search() {
         <div className={styles['header_Title2']}>
           <h3 className={styles['header_img']}>Ảnh/tài liệu kèm theo</h3>
           <img
-            width="60%"
-            height="130px"
+            width="205px"
+            height="200px"
             src={searchRegistration.people_image}
           ></img>
         </div>

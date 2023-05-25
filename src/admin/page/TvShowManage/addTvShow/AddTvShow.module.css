@@ -2,9 +2,10 @@
   width: 60%;
   height: 84%;
   background-color: white;
-  position: absolute;
-  top: 8%;
-  left: 30%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 10px;
   padding: 10px 30px;
 }
@@ -19,7 +20,7 @@
   margin: 0;
   font-size: 25px;
   font-weight: 700;
-  color: white;
+  color: red;
   text-align: center;
   padding: 18px;
 }

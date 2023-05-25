@@ -1,83 +1,83 @@
-.container{
-    width: 30%;
-    height: 84%;
-    background-color: white;
-    position: absolute;
-    top: 8%;
-    left: 30%;
-    border-radius: 10px;
+.container {
+  width: 60%;
+  height: 84%;
+  margin: auto;
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
 }
 
-.top-posts{
-    font-family: 'Times New Roman', Times, serif;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    width: 100%;
-    height: 11%;
-    background-color: #ccc;
-    margin: 0;
-    font-size: 25px;
-    font-weight: 700;
-    color: red;
-    text-align: center;
-    padding: 18px;
+.top-posts {
+  font-family: 'Times New Roman', Times, serif;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+  height: 11%;
+  background-color: #ccc;
+  margin: 0;
+  font-size: 25px;
+  font-weight: 700;
+  color: red;
+  text-align: center;
+  padding: 18px;
 }
 
-.bottom-posts{
-    display: flex;
-    width: 100%;
-    height: max-content;
+.bottom-posts {
+  display: flex;
+  width: 100%;
+  height: max-content;
 }
 
-.title-box{
-    width: 100%;
-    height: 80px;
-    padding: 0 50px;
+.title-box {
+  width: 100%;
+  height: 80px;
+  padding: 0 50px;
 }
 
-.content{
-    width: 65%;
-    height: max-content;
+.content {
+  width: 65%;
+  height: max-content;
 }
 
-.title-box  .title{
-    font-size: 26px;
-    font-weight: 600;
-    margin-top: 30px;
+.title-box .title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: 30px;
 }
 
-
-.title-box .input-title{
-    padding: 0 20px;
-    width: 100%;
-    height: 40px;
-    border: 2px solid #cccccc;
-    border-radius: 6px;
+.title-box .input-title {
+  padding: 0 20px;
+  width: 100%;
+  height: 40px;
+  border: 2px solid #cccccc;
+  border-radius: 6px;
 }
 
-.title-box .input-textare{
-    width: 100%;
+.title-box .input-textare {
+  width: 100%;
 }
 
-.content-image{
-    width: 50%;
-    height: 370px;
+.content-image {
+  width: 50%;
+  height: 370px;
 }
 
-.content-image .title-image{
-    width: 100%;
-    height: 50%;
-    margin-top: 22%;
+.content-image .title-image {
+  width: 100%;
+  height: 50%;
+  margin-top: 22%;
 }
 
-.button-image{
-    margin-top: 20px;
-    margin-left: 70px;
-    height: 50%;
+.button-image {
+  margin-top: 20px;
+  margin-left: 70px;
+  height: 50%;
 }
 
-
-.button-save{
-    float: right;
-    padding: 0px 50px;
+.button-save {
+  float: right;
+  padding: 0px 50px;
 }

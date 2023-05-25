@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Post.module.scss';
-import PostsManageTable from './components/index'
+import PostsManageTable from './components/index';
 import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
@@ -14,7 +14,7 @@ function PostManage() {
   return (
     <div className={style['postcontainer']}>
       <div className={style['post-header']}>
-        <Button variant="contained" startIcon={<AddIcon />} onClick={handleOpen}>Add</Button>
+        {/* <Button variant="contained" startIcon={<AddIcon />} onClick={handleOpen}>Add</Button> */}
         <Modal
           open={open}
           onClose={handleClose}

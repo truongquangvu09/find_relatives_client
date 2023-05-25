@@ -1,0 +1,36 @@
+.contents {
+  width: 100%;
+  background-color: white;
+  height: 100%;
+  font-size: 19px;
+  border-spacing: 0px;
+}
+
+.header_content {
+  display: flex;
+}
+
+.header_Title {
+  margin: 0 20px;
+  margin-bottom: 5px;
+}
+
+.header_Title1 {
+  width: 60%;
+  margin: 0 20px;
+  margin-bottom: 1px;
+  font-weight: 100;
+}
+
+.header_Title2 {
+  width: 40%;
+}
+
+.mid_Title {
+  margin: 0 20px;
+  margin-bottom: 1px;
+  font-weight: 100;
+}
+.bold-title {
+  font-weight: bold;
+}

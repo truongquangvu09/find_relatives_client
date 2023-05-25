@@ -164,7 +164,7 @@ function SearchRegistrationManage() {
             handleCancelClick(params.row.id);
           }}
           fontSize="large"
-          icon={<CancelIcon sx={{ fontSize: 20 }} color="primary" />}
+          icon={<CancelIcon sx={{ fontSize: 20, color: 'red' }} />}
           label="views"
         />,
       ],

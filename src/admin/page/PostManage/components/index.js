@@ -1,219 +1,198 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { DataGrid, GridCellModes } from '@mui/x-data-grid';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function EditToolbar(props) {
-  const { selectedCellParams, cellMode, cellModesModel, setCellModesModel } =
-    props;
+import {
+  DataGrid,
+  GridCellModes,
+  GridToolbar,
+  GridActionsCellItem,
+} from '@mui/x-data-grid';
+import Modal from '@mui/material/Modal';
+import styles from '../../SearchRegistrationManage/Registration.module.scss';
+import * as postServices from '../../../../api/post';
+import Detail_Post from '../detail_post';
+import { useDispatch } from 'react-redux';
+import { setPostData } from '../../../../redux/Slice/postSlice';
+import classNames from 'classnames/bind';
 
-  const handleSaveOrEdit = () => {
-    if (!selectedCellParams) {
-      return;
-    }
-    const { id, field } = selectedCellParams;
-    if (cellMode === 'edit') {
-      setCellModesModel({
-        ...cellModesModel,
-        [id]: { ...cellModesModel[id], [field]: { mode: GridCellModes.View } },
-      });
-    } else {
-      setCellModesModel({
-        ...cellModesModel,
-        [id]: { ...cellModesModel[id], [field]: { mode: GridCellModes.Edit } },
-      });
-    }
-  };
-
-  const handleCancel = () => {
-    if (!selectedCellParams) {
-      return;
-    }
-    const { id, field } = selectedCellParams;
-    setCellModesModel({
-      ...cellModesModel,
-      [id]: {
-        ...cellModesModel[id],
-        [field]: { mode: GridCellModes.View, ignoreModifications: true },
-      },
-    });
-  };
-
-  const handleMouseDown = (event) => {
-    // Keep the focus in the cell
-    event.preventDefault();
-  };
-
-  return (
-    <Box
-      sx={{
-        borderBottom: 1,
-        borderColor: 'divider',
-        p: 1,
-      }}
-    >
-      <Button
-        onClick={handleSaveOrEdit}
-        onMouseDown={handleMouseDown}
-        disabled={!selectedCellParams}
-        variant="outlined"
-      >
-        {cellMode === 'edit' ? 'Lưu' : 'Sửa'}
-      </Button>
-      <Button
-        onClick={handleCancel}
-        onMouseDown={handleMouseDown}
-        disabled={cellMode === 'view'}
-        variant="outlined"
-        sx={{ ml: 1 }}
-      >
-        Hủy
-      </Button>
-    </Box>
-  );
-}
-
-EditToolbar.propTypes = {
-  cellMode: PropTypes.oneOf(['edit', 'view']).isRequired,
-  cellModesModel: PropTypes.object.isRequired,
-  selectedCellParams: PropTypes.shape({
-    field: PropTypes.string.isRequired,
-    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  }),
-  setCellModesModel: PropTypes.func.isRequired,
-};
+const cx = classNames.bind(styles);
 
 function PostsManage() {
-  const [selectedCellParams, setSelectedCellParams] = React.useState(null);
-  const [cellModesModel, setCellModesModel] = React.useState({});
+  const [data, setData] = useState([]);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const dispatch = useDispatch();
+  console.log({ data });
 
-  const handleCellFocus = React.useCallback((event) => {
-    const row = event.currentTarget.parentElement;
-    const id = row.dataset.id;
-    const field = event.currentTarget.dataset.field;
-    setSelectedCellParams({ id, field });
-  }, []);
+  const handleClick = async (searchID) => {
+    try {
+      const result = await postServices.detailPost(searchID);
+      dispatch(setPostData(result));
+      console.log({ result });
+      setOpen(true);
+    } catch (error) {}
+  };
 
-  const cellMode = React.useMemo(() => {
-    if (!selectedCellParams) {
-      return 'view';
-    }
-    const { id, field } = selectedCellParams;
-    return cellModesModel[id]?.[field]?.mode || 'view';
-  }, [cellModesModel, selectedCellParams]);
-
-  const handleCellKeyDown = React.useCallback(
-    (params, event) => {
-      if (cellMode === 'edit') {
-        // Prevents calling event.preventDefault() if Tab is pressed on a cell in edit mode
-        event.defaultMuiPrevented = true;
+  const handleCancelClick = async (id) => {
+    try {
+      const deleteRegistration = await postServices.deletedPost(id);
+      if (deleteRegistration) {
+        toast.success('xác nhận xóa thành công');
       }
-    },
-    [cellMode],
-  );
+      const result = await postServices.listPost();
+      setData(result);
+    } catch (error) {
+      toast.error('xác nhận xóa không thành công');
+    }
+  };
 
-  const handleCellEditStop = React.useCallback((params, event) => {
-    event.defaultMuiPrevented = true;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await postServices.listPost();
+        setData(result);
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    };
+    fetchData();
   }, []);
 
-  return (
-    <div style={{ height: 425, width: 1100 }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        onCellKeyDown={handleCellKeyDown}
-        cellModesModel={cellModesModel}
-        onCellEditStop={handleCellEditStop}
-        onCellModesModelChange={(model) => setCellModesModel(model)}
-        slots={{
-          toolbar: EditToolbar,
-        }}
-        slotProps={{
-          toolbar: {
-            cellMode,
-            selectedCellParams,
-            setSelectedCellParams,
-            cellModesModel,
-            setCellModesModel,
-          },
-          cell: {
-            onFocus: handleCellFocus,
-          },
-        }}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
-            },
-          },
-        }}
-        pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
-    </div>
-  );
-}
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    width: '55%',
+    height: '100%',
+    borderRadius: '20px',
+  };
 
-const columns = [
-  { field: 'id', headerName: 'ID',editable: true, width: 90 },
-  {
-    field: 'img',
-    headerName: 'Ảnh',
-    width: 90,
-    editable: true,
-  },
-  {
-    field: 'title',
-    headerName: 'Tiêu đề',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'information',
-    headerName: 'Thông tin',
-    width: 270,
-    editable: true,
-  },
-  {
-    field: 'story',
-    headerName: 'Câu chuyện',
-    editable: true,
-    width: 300,
-
-  },
-  {
-
-    field: '',
-    width: 150,
-    editable: true,
-    renderCell: (cellValues) => {
-      return (
-        <Button variant="contained" startIcon={<DeleteIcon />} onClick={(event) => {
-          this.handleClick(event, cellValues);
-        }}>
-          Xóa
-        </Button>
-      );
-    }
-  },
-];
-
-const rows = [
-    { id: 1, img: 'anh1', title: 'Nguyễn Thi Phương Dung tìm chú Bùi Tiết', information:
-      'Họ và tên: Bùi Tiết Năm sinh: 1949 Quê quán: Ninh ThuậnTên cha: Bùi Năng Tên mẹ: Bùi Thị Lạc Tên anh-chị-em: Bùi Thương và chị dâu Nguyễn Thị Minh Thư (Giác) Năm thất lạc: 1970', story: 'Chị Nguyễn Thị Phương Dung tìm chú Bùi Tiết sinh năm 1949, mất tin tức khoảng năm 1970, tại Nha Trang.Bố mẹ là hai cụ Bùi Năng, Bùi Thị Lạc mất sớm, ông Triết sống với anh trai là Bùi Thương, quê Ninh Thuận.Khoảng năm 1970, ông Tiết bị bắt đi lính tại Phan Rang. Tại đây, chị dâu là bà Giác có đến thăm ông 1 lần. Lần 2 khi bà Giác đến thăm thì được kể: ông Tiết theo đơn vị chuyển đi nơi khác. Trên đường đi, qua 1 khu rừng đến Nha Trang, ông Tiết nhảy xuống xe, từ đó không ai nghe tin gì về ông Tiết nữa.' },
-      { id: 2, img: 'anh1', title: 'Nguyễn Thi Phương Dung tìm chú Bùi Tiết', information:
-      'Họ và tên: Bùi Tiết Năm sinh: 1949 Quê quán: Ninh ThuậnTên cha: Bùi Năng Tên mẹ: Bùi Thị Lạc Tên anh-chị-em: Bùi Thương và chị dâu Nguyễn Thị Minh Thư (Giác) Năm thất lạc: 1970', story: 'Chị Nguyễn Thị Phương Dung tìm chú Bùi Tiết sinh năm 1949, mất tin tức khoảng năm 1970, tại Nha Trang.Bố mẹ là hai cụ Bùi Năng, Bùi Thị Lạc mất sớm, ông Triết sống với anh trai là Bùi Thương, quê Ninh Thuận.Khoảng năm 1970, ông Tiết bị bắt đi lính tại Phan Rang. Tại đây, chị dâu là bà Giác có đến thăm ông 1 lần. Lần 2 khi bà Giác đến thăm thì được kể: ông Tiết theo đơn vị chuyển đi nơi khác. Trên đường đi, qua 1 khu rừng đến Nha Trang, ông Tiết nhảy xuống xe, từ đó không ai nghe tin gì về ông Tiết nữa.' },
-      { id: 3, img: 'anh1', title: 'Nguyễn Thi Phương Dung tìm chú Bùi Tiết', information:
-      'Họ và tên: Bùi Tiết Năm sinh: 1949 Quê quán: Ninh ThuậnTên cha: Bùi Năng Tên mẹ: Bùi Thị Lạc Tên anh-chị-em: Bùi Thương và chị dâu Nguyễn Thị Minh Thư (Giác) Năm thất lạc: 1970', story: 'Chị Nguyễn Thị Phương Dung tìm chú Bùi Tiết sinh năm 1949, mất tin tức khoảng năm 1970, tại Nha Trang.Bố mẹ là hai cụ Bùi Năng, Bùi Thị Lạc mất sớm, ông Triết sống với anh trai là Bùi Thương, quê Ninh Thuận.Khoảng năm 1970, ông Tiết bị bắt đi lính tại Phan Rang. Tại đây, chị dâu là bà Giác có đến thăm ông 1 lần. Lần 2 khi bà Giác đến thăm thì được kể: ông Tiết theo đơn vị chuyển đi nơi khác. Trên đường đi, qua 1 khu rừng đến Nha Trang, ông Tiết nhảy xuống xe, từ đó không ai nghe tin gì về ông Tiết nữa.' },
-      { id: 4, img: 'anh1', title: 'Nguyễn Thi Phương Dung tìm chú Bùi Tiết', information:
-      'Họ và tên: Bùi Tiết Năm sinh: 1949 Quê quán: Ninh ThuậnTên cha: Bùi Năng Tên mẹ: Bùi Thị Lạc Tên anh-chị-em: Bùi Thương và chị dâu Nguyễn Thị Minh Thư (Giác) Năm thất lạc: 1970', story: 'Chị Nguyễn Thị Phương Dung tìm chú Bùi Tiết sinh năm 1949, mất tin tức khoảng năm 1970, tại Nha Trang.Bố mẹ là hai cụ Bùi Năng, Bùi Thị Lạc mất sớm, ông Triết sống với anh trai là Bùi Thương, quê Ninh Thuận.Khoảng năm 1970, ông Tiết bị bắt đi lính tại Phan Rang. Tại đây, chị dâu là bà Giác có đến thăm ông 1 lần. Lần 2 khi bà Giác đến thăm thì được kể: ông Tiết theo đơn vị chuyển đi nơi khác. Trên đường đi, qua 1 khu rừng đến Nha Trang, ông Tiết nhảy xuống xe, từ đó không ai nghe tin gì về ông Tiết nữa.' },
-      { id: 5, img: 'anh1', title: 'Nguyễn Thi Phương Dung tìm chú Bùi Tiết', information:
-      'Họ và tên: Bùi Tiết Năm sinh: 1949 Quê quán: Ninh ThuậnTên cha: Bùi Năng Tên mẹ: Bùi Thị Lạc Tên anh-chị-em: Bùi Thương và chị dâu Nguyễn Thị Minh Thư (Giác) Năm thất lạc: 1970', story: 'Chị Nguyễn Thị Phương Dung tìm chú Bùi Tiết sinh năm 1949, mất tin tức khoảng năm 1970, tại Nha Trang.Bố mẹ là hai cụ Bùi Năng, Bùi Thị Lạc mất sớm, ông Triết sống với anh trai là Bùi Thương, quê Ninh Thuận.Khoảng năm 1970, ông Tiết bị bắt đi lính tại Phan Rang. Tại đây, chị dâu là bà Giác có đến thăm ông 1 lần. Lần 2 khi bà Giác đến thăm thì được kể: ông Tiết theo đơn vị chuyển đi nơi khác. Trên đường đi, qua 1 khu rừng đến Nha Trang, ông Tiết nhảy xuống xe, từ đó không ai nghe tin gì về ông Tiết nữa.' },
+  const columns = [
+    { field: 'id', headerName: 'ID', editable: true, width: 80 },
+    {
+      field: 'post_title',
+      headerName: 'post_title',
+      width: 240,
+      editable: true,
+    },
+    {
+      field: 'searchRegistrations_id',
+      headerName: 'searchRegistrations_id',
+      width: 190,
+      editable: true,
+    },
+    {
+      field: 'people_id',
+      headerName: 'people_id ',
+      width: 130,
+      editable: true,
+    },
+    {
+      field: 'lostSituation_id',
+      headerName: 'lostSituation_id',
+      editable: true,
+      width: 130,
+    },
+    {
+      field: 'view',
+      type: 'actions',
+      headerName: 'Xem chi tiết',
+      width: 110,
+      editable: true,
+      getActions: (params) => [
+        <GridActionsCellItem
+          onClick={() => {
+            handleClick(params.row.id);
+          }}
+          fontSize="large"
+          icon={<VisibilityIcon sx={{ fontSize: 20 }} color="primary" />}
+          label="views"
+        />,
+      ],
+    },
+    {
+      field: 'button',
+      headerName: 'xóa bài viết',
+      width: 150,
+      editable: true,
+      type: 'actions',
+      getActions: (params) => [
+        <GridActionsCellItem
+          onClick={() => {
+            handleCancelClick(params.row.id);
+          }}
+          fontSize="large"
+          icon={<DeleteIcon sx={{ fontSize: 20, color: 'red' }} />}
+          label="views"
+        />,
+      ],
+    },
   ];
 
-
+  return (
+    <>
+      <h1 className={cx('header')}>Quản lý bài đăng</h1>
+      <div className={cx('header-search')}>
+        <h3 className={cx('left')}>Tất cả bài đăng</h3>
+      </div>
+      <div style={{ height: 425, width: 1100 }}>
+        <Box sx={{ height: 420, width: '100%' }}>
+          <DataGrid
+            sx={{
+              boxShadow: 2,
+              border: 2,
+              borderColor: 'primary.light',
+              '& .MuiDataGrid-cell:hover': {
+                color: 'primary.main',
+              },
+            }}
+            rows={data}
+            columns={columns}
+            components={{
+              Toolbar: GridToolbar,
+            }}
+            componentsProps={{
+              toolbar: {
+                showQuickFilter: true,
+                quickFilterProps: { debounceMs: 500 },
+              },
+            }}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 6,
+                },
+              },
+            }}
+            pageSizeOptions={[5]}
+            checkboxSelection
+          />
+        </Box>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <h1 className={cx('header-detail')}>Bài đăng </h1>
+            <Detail_Post />
+          </Box>
+        </Modal>
+      </div>
+    </>
+  );
+}
 
 export default PostsManage;

@@ -17,3 +17,24 @@ export const getDetail = async (id) => {
     throw new Error(error.message);
   }
 };
+
+export const createTvshow = async (content_text, media) => {
+  try {
+    const res = await requests.post('tvShow/tvshow-create', {
+      content_text,
+      media,
+    });
+    return res;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const deletedTvshow = async (id) => {
+  try {
+    const res = await requests.deleted(`tvShow/tvshow-delete/${id}`);
+    return res;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

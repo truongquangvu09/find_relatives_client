@@ -5,6 +5,7 @@ import postSearchSlice from './Slice/postSearchSlice';
 import tvShowSlice from './Slice/tvShowSlice';
 import newsSlice from './Slice/newsSlice';
 import searchRegistrationSlice from './Slice/searchRegistrationSlice';
+import addSlice from './Slice/addSlice';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     tvShow: tvShowSlice,
     news: newsSlice,
     searchRegistration: searchRegistrationSlice,
+    add: addSlice,
   },
 });
 export default store;

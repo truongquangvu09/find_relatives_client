@@ -18,7 +18,7 @@
   margin: 0;
   font-size: 25px;
   font-weight: 700;
-  color: white;
+  color: red;
   text-align: center;
   padding: 18px;
 }
@@ -43,7 +43,8 @@
 .title-box .title {
   font-size: 26px;
   font-weight: 600;
-  margin-top: 30px;
+  margin-top: 65px;
+  margin-bottom: 30px;
 }
 
 .title-box .input-title {
@@ -81,5 +82,5 @@
 
 .button-save {
   float: right;
-  padding: 0px 50px;
+  padding: 80px 50px;
 }

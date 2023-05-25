@@ -13,7 +13,12 @@ function TvShowManage() {
   return (
     <div>
       <div>
-        <Button variant="outlined" startIcon={<AddIcon />} onClick={handleOpen}>
+        <Button
+          style={{ backgroundColor: '#1E90FF', color: 'white' }}
+          variant="outlined"
+          startIcon={<AddIcon />}
+          onClick={handleOpen}
+        >
           Add
         </Button>
         <Modal

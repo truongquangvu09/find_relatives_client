@@ -1,302 +1,303 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { DataGrid, GridCellModes } from '@mui/x-data-grid';
-import style from './components.module.css';
+import { DataGrid, GridToolbar, GridActionsCellItem } from '@mui/x-data-grid';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import * as newsServices from '../../../../api/news';
+import styles from '../../SearchRegistrationManage/Registration.module.scss';
+import classNames from 'classnames/bind';
+import { useSelector } from 'react-redux';
+import Paper from '@mui/material/Paper';
+import Modal from '@mui/material/Modal';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import Grid from '@mui/material/Grid';
+import { TextField } from '@mui/material';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
+import axios from 'axios';
+import { Avatar } from '@mui/material';
+const cx = classNames.bind(styles);
 
-function EditToolbar(props) {
-  const { selectedCellParams, cellMode, cellModesModel, setCellModesModel } =
-    props;
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
-  const handleSaveOrEdit = () => {
-    if (!selectedCellParams) {
-      return;
-    }
-    const { id, field } = selectedCellParams;
-    if (cellMode === 'edit') {
-      setCellModesModel({
-        ...cellModesModel,
-        [id]: { ...cellModesModel[id], [field]: { mode: GridCellModes.View } },
-      });
-    } else {
-      setCellModesModel({
-        ...cellModesModel,
-        [id]: { ...cellModesModel[id], [field]: { mode: GridCellModes.Edit } },
-      });
-    }
-  };
-
-  const handleCancel = () => {
-    if (!selectedCellParams) {
-      return;
-    }
-    const { id, field } = selectedCellParams;
-    setCellModesModel({
-      ...cellModesModel,
-      [id]: {
-        ...cellModesModel[id],
-        [field]: { mode: GridCellModes.View, ignoreModifications: true },
-      },
-    });
-  };
-
-  const handleMouseDown = (event) => {
-    // Keep the focus in the cell
-    event.preventDefault();
-  };
-
-  return (
-    <Box
-      sx={{
-        borderBottom: 1,
-        borderColor: 'divider',
-        p: 1,
-      }}
-    >
-      <Button
-        onClick={handleSaveOrEdit}
-        onMouseDown={handleMouseDown}
-        disabled={!selectedCellParams}
-        variant="outlined"
-      >
-        {cellMode === 'edit' ? 'Lưu' : 'Sửa'}
-      </Button>
-      <Button
-        onClick={handleCancel}
-        onMouseDown={handleMouseDown}
-        disabled={cellMode === 'view'}
-        variant="outlined"
-        sx={{ ml: 1 }}
-      >
-        Hủy
-      </Button>
-    </Box>
-  );
-}
-
-EditToolbar.propTypes = {
-  cellMode: PropTypes.oneOf(['edit', 'view']).isRequired,
-  cellModesModel: PropTypes.object.isRequired,
-  selectedCellParams: PropTypes.shape({
-    field: PropTypes.string.isRequired,
-    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  }),
-  setCellModesModel: PropTypes.func.isRequired,
-};
+const StyledFileName = styled('div')({
+  whiteSpace: 'pre-wrap',
+  wordWrap: 'break-word',
+  wordBreak: 'break-all',
+  display: 'block',
+});
 
 function NewsManageTable() {
-  const [selectedCellParams, setSelectedCellParams] = React.useState(null);
-  const [cellModesModel, setCellModesModel] = React.useState({});
+  const [data, setData] = useState([]);
+  const [open, setOpen] = React.useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const handleUpdateClick = (params) => {
+    setSelectedRow(params.row);
+    handleOpen();
+  };
 
-  const handleCellFocus = React.useCallback((event) => {
-    const row = event.currentTarget.parentElement;
-    const id = row.dataset.id;
-    const field = event.currentTarget.dataset.field;
-    setSelectedCellParams({ id, field });
-  }, []);
-
-  const cellMode = React.useMemo(() => {
-    if (!selectedCellParams) {
-      return 'view';
-    }
-    const { id, field } = selectedCellParams;
-    return cellModesModel[id]?.[field]?.mode || 'view';
-  }, [cellModesModel, selectedCellParams]);
-
-  const handleCellKeyDown = React.useCallback(
-    (params, event) => {
-      if (cellMode === 'edit') {
-        // Prevents calling event.preventDefault() if Tab is pressed on a cell in edit mode
-        event.defaultMuiPrevented = true;
+  const addNews = useSelector((state) => state.add.addData);
+  console.log({ addNews });
+  const handleCancelClick = async (id) => {
+    try {
+      const deleteTvshow = await newsServices.deletedNews(id);
+      if (deleteTvshow) {
+        toast.success('xác nhận xóa thành công');
       }
-    },
-    [cellMode]
-  );
+      const result = await newsServices.getlist();
+      setData(result);
+    } catch (error) {
+      toast.error('xác nhận xóa không thành công');
+    }
+  };
 
-  const handleCellEditStop = React.useCallback((params, event) => {
-    event.defaultMuiPrevented = true;
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('content_text', selectedRow.content_text);
+    formData.append('image', selectedRow.image);
+    try {
+      const result = await axios.put(
+        `http://localhost:8080/api/v1/news/news-update/${selectedRow.id}`,
+        formData
+      );
+      if (result.status === 200) {
+        toast.success('update thành công');
+        const result = await newsServices.getlist();
+        setData(result);
+      } else {
+        toast.error('update không thành công');
+      }
+    } catch (error) {
+      toast.error('update không thành công');
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await newsServices.getlist();
+        setData(result);
+      } catch (error) {
+        throw new error(error.message);
+      }
+    };
+    fetchData();
   }, []);
+
+  useEffect(() => {
+    if (Object.keys(addNews).length !== 0) {
+      setData((prevState) => [...prevState, addNews]);
+    }
+  }, [addNews]);
+
+  const columns = [
+    { field: 'id', headerName: 'ID', editable: true, width: 60 },
+    {
+      field: 'content_text',
+      headerName: ' content_text',
+      width: 510,
+      editable: true,
+    },
+    {
+      field: 'image',
+      headerName: 'image',
+      width: 130,
+      editable: true,
+      renderCell: (params) => (
+        <div>
+          <Avatar
+            sx={{ width: 60, height: 60 }}
+            variant="square"
+            src={params.row.image}
+            alt=""
+          />
+        </div>
+      ),
+    },
+    {
+      field: 'createdAt',
+      headerName: ' createdAt',
+      width: 120,
+      editable: true,
+    },
+    {
+      field: 'update',
+      headerName: 'update',
+      width: 80,
+      editable: true,
+      type: 'actions',
+      getActions: (params) => [
+        <GridActionsCellItem
+          onClick={() => handleUpdateClick(params)}
+          fontSize="large"
+          icon={<AutorenewIcon sx={{ fontSize: 25 }} />}
+          label="views"
+        />,
+      ],
+    },
+    {
+      field: 'button',
+      headerName: 'delete',
+      width: 150,
+      editable: true,
+      type: 'actions',
+      getActions: (params) => [
+        <GridActionsCellItem
+          onClick={() => {
+            handleCancelClick(params.row.id);
+          }}
+          fontSize="large"
+          icon={<DeleteIcon sx={{ fontSize: 20, color: 'red' }} />}
+          label="views"
+        />,
+      ],
+    },
+  ];
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 900,
+    height: 500,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    borderRadius: '10px',
+    borderColor: 'white',
+    p: 4,
+  };
 
   return (
-    <div style={{ height: 425, width: 1100 }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        onCellKeyDown={handleCellKeyDown}
-        cellModesModel={cellModesModel}
-        onCellEditStop={handleCellEditStop}
-        onCellModesModelChange={(model) => setCellModesModel(model)}
-        slots={{
-          toolbar: EditToolbar,
-        }}
-        slotProps={{
-          toolbar: {
-            cellMode,
-            selectedCellParams,
-            setSelectedCellParams,
-            cellModesModel,
-            setCellModesModel,
-          },
-          cell: {
-            onFocus: handleCellFocus,
-          },
-        }}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
+    <>
+      <h1 className={cx('header')}>Quản lý tin tức</h1>
+      <div className={cx('header-search')}>
+        <h3 className={cx('left')}>Tất cả tin tức</h3>
+      </div>
+      <div style={{ height: 425, width: 1100 }}>
+        <DataGrid
+          sx={{
+            boxShadow: 2,
+            border: 2,
+            borderColor: 'primary.light',
+            '& .MuiDataGrid-cell:hover': {
+              color: 'primary.main',
             },
-          },
-        }}
-        pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
-    </div>
+          }}
+          rows={data}
+          columns={columns}
+          components={{
+            Toolbar: GridToolbar,
+          }}
+          componentsProps={{
+            toolbar: {
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 500 },
+            },
+          }}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
+            },
+          }}
+          pageSizeOptions={[5]}
+          checkboxSelection
+          disableRowSelectionOnClick
+        />
+      </div>
+      <div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Item
+              sx={{ backgroundColor: '#bdbdbd', color: 'red', fontSize: 40 }}
+            >
+              update tin tức
+            </Item>
+            <Grid container spacing={2}>
+              <Grid item xs={8}>
+                <Box>
+                  <Item>content_text</Item>
+                  <TextField
+                    name="content_text"
+                    value={selectedRow?.content_text}
+                    onChange={(e) =>
+                      setSelectedRow((prevState) => ({
+                        ...prevState,
+                        content_text: e.target.value,
+                      }))
+                    }
+                    sx={{ width: '100%', margin: '5px 0px' }}
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={4}>
+                <Item>image</Item>
+                <Stack direction="row" alignItems="center" spacing={2}>
+                  <input
+                    accept="image/*"
+                    name="image"
+                    onChange={(e) =>
+                      setSelectedRow((prevState) => ({
+                        ...prevState,
+                        image: e.target.files[0],
+                      }))
+                    }
+                    id="contained-button-file"
+                    type="file"
+                    hidden
+                    multiple
+                  />
+                  <label htmlFor="contained-button-file">
+                    <Button
+                      variant="contained"
+                      component="span"
+                      startIcon={<CloudUploadIcon />}
+                    >
+                      Upload ảnh
+                    </Button>
+                  </label>
+                  {selectedRow?.image && (
+                    <StyledFileName>{selectedRow.image.name}</StyledFileName>
+                  )}
+                </Stack>
+              </Grid>
+            </Grid>
+            <div>
+              <Button
+                type="submit"
+                variant="contained"
+                component="label"
+                sx={{ position: 'absolute', bottom: '50px', right: '10px' }}
+                onClick={handleSubmit}
+              >
+                Cập nhật
+              </Button>
+            </div>
+          </Box>
+        </Modal>
+      </div>
+    </>
   );
 }
-
-const columns = [
-  { field: 'id', headerName: 'ID', editable: true, width: 90 },
-  {
-    field: 'image',
-    headerName: 'Ảnh',
-    width: 150,
-    editable: true,
-    renderCell: (cellValues) => {
-      return (
-        <img src='https://haylentieng.vn/wp-content/uploads/2023/03/z4163339796552_4a45b51f7f238d548fac26faedd77c9b-300x200.jpg' className={style['render-image']}/>
-      );
-    }
-  },
-  {
-    field: 'title',
-    headerName: 'Tiêu Đề',
-    width: 420,
-    editable: true,
-  },
-  {
-    field: 'display',
-    headerName: 'Hiển Thị',
-    width: 110,
-    editable: true,
-  },
-  {
-    field: 'date',
-    headerName: 'Ngày Tạo',
-    width: 110,
-    editable: true,
-  },
-  {
-    field: '',
-    width: 150,
-    editable: true,
-    renderCell: () => {
-      return (
-
-        <Button variant="contained" startIcon={<DeleteIcon />} 
-        >
-          Xóa
-
-        </Button>
-      );
-    },
-  },
-];
-
-const rows = [
-  {
-    id: 1,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
-    status: '',
-  },
-  {
-    id: 2,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
-    status: '',
-  },
-  {
-    id: 3,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
-    status: '',
-  },
-  {
-    id: 4,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
-    status: '',
-  },
-  {
-    id: 5,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
-    status: '',
-  },
-  {
-    id: 6,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
-    status: '',
-  },
-  {
-    id: 7,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
-    status: '',
-  },
-  {
-    id: 8,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
-    status: '',
-  },
-  {
-    id: 9,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
-    status: '',
-  },
-  {
-    id: 10,
-    image: '',
-    title:
-      'Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại Ngân hàng quân đội MBBank – số tài khoản 2700',
-    display: 'Show',
-    date: '05/05/2023',
-    status: '',
-  },
-];
 
 export default NewsManageTable;

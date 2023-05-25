@@ -13,6 +13,8 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { setAddData } from '../../../../redux/Slice/addSlice';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -52,6 +54,7 @@ function AddTvShow() {
     }));
   };
 
+  const dispatch = useDispatch();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -63,6 +66,7 @@ function AddTvShow() {
         formData
       );
       if (result.status === 200) {
+        dispatch(setAddData(result.data));
         toast.success('thêm truyền hình thành công');
       } else {
         toast.error('thêm không thành công');
@@ -131,7 +135,7 @@ function AddTvShow() {
             sx={{ position: 'absolute', bottom: '50px', right: '10px' }}
             onClick={handleSubmit}
           >
-            Tiếp
+            Tạo mới
           </Button>
         </div>
       </Box>

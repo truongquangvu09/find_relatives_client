@@ -10,13 +10,12 @@ import style from './index.module.css';
 function ProfileDetails() {
   const postData = useSelector((state) => state.post.postData);
   const userData = useSelector((state) => state.user.userData);
-
-  console.log({ postData });
+  console.log(postData.id);
 
   const [comment, setComment] = useState({
     comment_text: '',
     report_id: '',
-    post_id: postData.id,
+    post_id: '',
     tvShow_id: '',
     news_id: '',
   });
@@ -75,6 +74,15 @@ function ProfileDetails() {
       }
     };
     get();
+  }, [postData]);
+
+  useEffect(() => {
+    if (postData) {
+      setComment((prevState) => ({
+        ...prevState,
+        post_id: postData.id,
+      }));
+    }
   }, [postData]);
 
   return (

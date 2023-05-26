@@ -31,7 +31,11 @@ function SearchRegistrationManage() {
     } catch (error) {}
   };
 
-  const handleAcceptClick = async (id) => {
+  const handleAcceptClick = async (id, status) => {
+    if (status === 'đã xác nhận') {
+      toast.error('Không thể xác nhận lại đơn đã được xác nhận');
+      return;
+    }
     try {
       const updateRegistrations =
         await searchRegistrationServices.updateRegistrations(id, {
@@ -153,7 +157,7 @@ function SearchRegistrationManage() {
       getActions: (params) => [
         <GridActionsCellItem
           onClick={() => {
-            handleAcceptClick(params.row.id);
+            handleAcceptClick(params.row.id, params.row.status);
           }}
           fontSize="large"
           icon={<CheckIcon sx={{ fontSize: 20 }} color="primary" />}

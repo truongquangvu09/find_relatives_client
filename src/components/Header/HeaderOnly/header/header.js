@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Login from './Login/index';
 import Profile from '../../../Profile/Profile';
 import { setPostSearchData } from '../../../../redux/Slice/postSearchSlice';
+import { setPostData } from '../../../../redux/Slice/postSlice';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
@@ -72,6 +73,7 @@ function Header() {
   const dispatch = useDispatch();
   const handleClick = (event) => {
     dispatch(setPostSearchData({}));
+    dispatch(setPostData({}));
   };
 
   return (

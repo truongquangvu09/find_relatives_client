@@ -119,13 +119,6 @@ function Admin() {
           label="Tài khoản"
           {...a11yProps(4)}
         />
-        <Tab
-          className={cx('tab')}
-          sx={{ display: 'inline', textAlign: 'start' }}
-          icon={<PaidIcon className={cx('icon')} sx={{ fontSize: 20 }} />}
-          label="Donate"
-          {...a11yProps(5)}
-        />
       </Tabs>
       <TabPanel value={value} index={0}>
         <SearchRegistrationManage />
@@ -141,9 +134,6 @@ function Admin() {
       </TabPanel>
       <TabPanel value={value} index={4}>
         <AccountManage />
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        <DonateManage />
       </TabPanel>
     </Box>
   );

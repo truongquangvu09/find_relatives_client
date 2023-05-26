@@ -351,3 +351,7 @@ p {
 .advanced-search .submit {
   width: 50%;
 }
+.error {
+  color: red;
+  font-size: 12px;
+}

@@ -81,6 +81,35 @@ function SearchRegistration() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const currentYear = new Date().getFullYear();
+    const reportBirthdayError = document.getElementById(
+      'report_birthday-error'
+    );
+    if (infoSearch.report_birthday > currentYear) {
+      reportBirthdayError.textContent =
+        'Năm sinh không được vượt quá năm hiện tại';
+      toast.error('Năm sinh người báo cáo không hợp lệ');
+      window.scrollTo(0, 0);
+      return;
+    }
+    const peopleBirthdayError = document.getElementById(
+      'pepple_birthday-error'
+    );
+    if (infoSearch.people_birthday > currentYear) {
+      peopleBirthdayError.textContent =
+        'Năm sinh không được vượt quá năm hiện tại';
+      toast.error('Năm sinh người thất lạc không hợp lệ');
+      window.scrollTo(0, 0);
+      return;
+    }
+    const missingBirthdayError = document.getElementById('date_missing-error');
+    if (infoSearch.date_missing > currentYear) {
+      missingBirthdayError.textContent =
+        'Năm thất lạc không được vượt quá năm hiện tại';
+      toast.error('Năm thất lạc không hợp lệ');
+      window.scrollTo(0, 0);
+      return;
+    }
     const formData = new FormData();
     formData.append('report_name', infoSearch.report_name);
     formData.append('report_birthday', infoSearch.report_birthday);
@@ -114,6 +143,7 @@ function SearchRegistration() {
         console.log({ searchRegistration });
         if (searchRegistration.status === 200) {
           toast.success('Đăng kí đơn tìm kiếm thành công');
+          window.scrollTo(0, 0);
           setTimeout(() => {
             navigate('/profile');
           }, 1000);
@@ -159,6 +189,7 @@ function SearchRegistration() {
                     value={infoSearch.report_birthday}
                     onChange={handleChange}
                   />
+                  <div class="error" id="report_birthday-error"></div>
                 </p>
                 <p class="quarter form-radio">
                   <label for="report_gender">Giới tính:</label>
@@ -243,6 +274,7 @@ function SearchRegistration() {
                     value={infoSearch.people_birthday}
                     onChange={handleChange}
                   />
+                  <div id="people_birthday-error"></div>
                 </p>
                 <p class="quarter form-radio">
                   <label for="people_gender">Giới tính:</label>
@@ -330,6 +362,7 @@ function SearchRegistration() {
                     value={infoSearch.date_missing}
                     onChange={handleChange}
                   />
+                  <div id="date_missing-error"></div>
                 </p>
                 <p class="half">
                   <label for="last_seen">Địa điểm:</label>

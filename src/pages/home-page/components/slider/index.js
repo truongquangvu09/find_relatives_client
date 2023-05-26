@@ -148,28 +148,6 @@ function Slider() {
                   </li>
                 );
               })}
-
-              {/* <li className={style['featured-news-bot']}>
-                <a className={style['featured-title']} href="#">
-                  Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại
-                  Ngân hàng quân đội MBBank – số tài khoản 2700
-                </a>
-                <span className={style['featured-news-date']}>07/03/23</span>
-              </li>
-              <li className={style['featured-news-bot']}>
-                <a className={style['featured-title']} href="#">
-                  Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại
-                  Ngân hàng quân đội MBBank – số tài khoản 2700
-                </a>
-                <span className={style['featured-news-date']}>07/03/23</span>
-              </li>
-              <li className={style['featured-news-bot']}>
-                <a className={style['featured-title']} href="#">
-                  Như chưa hề có cuộc chia ly đã lập TÀI KHOẢN THIỆN NGUYỆN tại
-                  Ngân hàng quân đội MBBank – số tài khoản 2700
-                </a>
-                <span className={style['featured-news-date']}>07/03/23</span>
-              </li> */}
             </div>
           </div>
         </div>

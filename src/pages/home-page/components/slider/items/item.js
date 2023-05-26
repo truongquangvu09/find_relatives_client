@@ -18,7 +18,7 @@ function Item() {
   useEffect(() => {
     const listPost = async () => {
       const result = await postServices.listPost();
-      setData(result);
+      setData(result.slice(0, 8));
     };
     listPost();
   }, []);

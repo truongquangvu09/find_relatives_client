@@ -55,7 +55,6 @@ body {
   margin-top: -8px;
 }
 
-
 .header-bottom {
   display: flex;
 }
@@ -98,9 +97,16 @@ body {
   margin-top: 2px;
 }
 
-.close-modal{
+.close-modal {
   position: absolute;
   left: 575px;
   top: 15%;
   z-index: 1;
+}
+
+.btn-search {
+  display: contents;
+}
+input:focus {
+  outline: none;
 }

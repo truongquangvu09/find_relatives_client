@@ -1,77 +1,125 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid';
-// import styles from "./detail.module.css"
+import { DataGrid, GridActionsCellItem, GridToolbar } from '@mui/x-data-grid';
+import DeleteIcon from '@mui/icons-material/Delete';
+import * as reportServices from '../../../api/report';
+import styles from '../SearchRegistrationManage/Registration.module.scss';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 function AccountManage() {
+  const [data, setData] = useState([]);
+
+  const handleCancelClick = async (id) => {
+    try {
+      const deleteTvshow = await reportServices.deleted(id);
+      if (deleteTvshow) {
+        toast.success('xác nhận xóa thành công');
+      }
+      const result = await reportServices.list();
+      setData(result.slice(1, result.length));
+    } catch (error) {
+      toast.error('xác nhận xóa không thành công');
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await reportServices.list();
+      setData(result.slice(1, result.length));
+    };
+    fetchData();
+  }, []);
+
   const columns = [
-    { field: 'id', headerName: 'Number', width: 90 },
+    { field: 'id', headerName: 'ID', width: 100 },
     {
-      field: 'fullName',
-      headerName: 'Họ tên tài khoản',
-      width: 150,
-      editable: true,
-    },
-    {
-      field: 'account',
+      field: 'report_name',
       headerName: 'Tên tài khoản',
+      width: 230,
       editable: true,
-      width: 160,
-
-    },
-    {
-      field: 'password',
-      headerName: 'Mật khẩu',
-      editable: true,
-      width: 150,
-
     },
     {
       field: 'email',
       headerName: 'Email',
-      width: 180,
       editable: true,
+      width: 260,
     },
     {
-      field: 'phone',
-      headerName: 'Số điện thoại',
+      field: 'type',
+      headerName: 'Type',
+      editable: true,
       width: 120,
+    },
+    {
+      field: 'createdAt',
+      headerName: 'createdAt',
+      width: 190,
       editable: true,
     },
     {
-      field: 'IDcitizen',
-      headerName: 'Căn cước công dân',
-      width: 150,
+      field: 'button',
+      headerName: 'delete',
+      width: 80,
       editable: true,
+      type: 'actions',
+      getActions: (params) => [
+        <GridActionsCellItem
+          onClick={() => {
+            handleCancelClick(params.row.id);
+          }}
+          fontSize="large"
+          icon={<DeleteIcon sx={{ fontSize: 25, color: 'red' }} />}
+          label="views"
+        />,
+      ],
     },
-
-  ];
-
-  const rows = [
-    { id: 1,  fullName: 'Le Van Thien', account: 'Thien140901', password:123456, email: 'thien@gmail.com', phone: '08438438', IDcitizen: 34534532524 },
-    { id: 2,  fullName: 'Nguyen Van Tung', account: 'Thien140901', password:123456, email: 'tungito@gmail.com', phone: '08438438', IDcitizen: 34534532524 },
-    { id: 3,  fullName: 'Truong Quang Vu', account: 'Thien140901', password:123456, email: 'quangvu@gmail.com', phone: '08438438', IDcitizen: 34534532524 },
-    { id: 4,  fullName: 'Le Thi Hoa', account: 'Thien140901', password:123456, email: 'hoahoa@gmail.com', phone: '08438438', IDcitizen: 34534532524 },
-    { id: 5,  fullName: 'Le Yen Oanh', account: 'Thien140901', password:123456, email: 'oanhleo@gmail.com', phone: '08438438', IDcitizen: 34534532524 },
-    { id: 6,  fullName: 'Hoang Dinh', account: 'Thien140901', password:123456, email: 'Dinha@gmail.com', phone: '08438438', IDcitizen: 34534532524 },
-    { id: 7,  fullName: 'Hoang Yen', account: 'Thien140901', password:123456, email: 'yen@gmail.com', phone: '08438438', IDcitizen: 34534532524 },
   ];
 
   return (
-    <Box sx={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
+    <>
+      <h1 className={cx('header')}>Quản lý Account</h1>
+      <div className={cx('header-search')}>
+        <h3 className={cx('left')}>Tất cả account</h3>
+      </div>
+      <div style={{ width: 1100 }}></div>
+      <Box>
+        <DataGrid
+          sx={{
+            boxShadow: 2,
+            border: 2,
+            borderColor: 'primary.light',
+            '& .MuiDataGrid-cell:hover': {
+              color: 'primary.main',
             },
-          },
-        }}
-      />
-    </Box>
-  )
+          }}
+          rows={data}
+          columns={columns}
+          components={{
+            Toolbar: GridToolbar,
+          }}
+          componentsProps={{
+            toolbar: {
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 500 },
+            },
+          }}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
+            },
+          }}
+          pageSizeOptions={[5]}
+          checkboxSelection
+        />
+      </Box>
+    </>
+  );
 }
 
 export default AccountManage;

@@ -1,6 +1,6 @@
 import './header.css';
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png';
 // run first npm install --save-dev @fortawesome/fontawesome-free
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -11,6 +11,7 @@ import Login from './Login/index';
 import Profile from '../../../Profile/Profile';
 import { setPostSearchData } from '../../../../redux/Slice/postSearchSlice';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -24,6 +25,41 @@ function Header() {
     p: 13,
     width: '55%',
     height: '100%',
+  };
+
+  const [infoSearch, setInfoSearch] = useState({
+    content_text: '',
+  });
+
+  const navigate = useNavigate();
+  const handleChange = (event) => {
+    const { target } = event;
+    const { name, value } = target;
+    setInfoSearch((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const params = {};
+    if (infoSearch.content_text) {
+      params.content_text = infoSearch.content_text;
+    }
+    try {
+      const result = await axios.get(
+        'http://localhost:8080/api/v1/news/news-list',
+        {
+          params,
+        }
+      );
+      if (result) {
+        dispatch(setPostSearchData(result.data));
+        navigate('/news');
+        window.scrollTo(0, 0);
+      }
+    } catch (error) {}
   };
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -94,9 +130,19 @@ function Header() {
         <p className="tagline">
           Hoạt động Thiện nguyện Tìm kiếm và Đoàn tụ Người thân Miễn phí!
         </p>
-        <form action="" className="search-news">
-          <input type="text" name="" id="" placeholder="Tìm kiếm tin tức..." />
-          <i class="fa-solid fa-magnifying-glass"></i>
+        <form action="" className="search-news" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="content_text"
+            value={infoSearch.content_text}
+            onChange={handleChange}
+            id=""
+            placeholder="Tìm kiếm tin tức..."
+          />
+          <button className="btn-search" type="submit">
+            {' '}
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
         </form>
       </div>
     </div>

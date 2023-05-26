@@ -4,20 +4,34 @@ import * as newsServices from '../../../../api/news';
 import { useEffect, useState } from 'react';
 import { setNewsData } from '../../../../redux/Slice/newsSlice';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function Item() {
   const [news, setNews] = useState([]);
+  const newsSearchData = useSelector(
+    (state) => state.postSearch.postSearchData
+  );
 
+  console.log({ newsSearchData });
   useEffect(() => {
     const fetchApi = async () => {
-      try {
-        const result = await newsServices.getlist();
-        setNews(result);
-      } catch (error) {}
+      let filteredNewsData = [];
+      const result = await newsServices.getlist();
+      if (newsSearchData && newsSearchData.length > 0) {
+        filteredNewsData = result.filter((news) => {
+          for (let i = 0; i < newsSearchData.length; i++) {
+            if (news.id === newsSearchData[i].id) {
+              return true;
+            }
+          }
+          return false;
+        });
+      }
+      setNews(filteredNewsData.length > 0 ? filteredNewsData : result);
     };
 
     fetchApi();
-  }, []);
+  }, [newsSearchData]);
 
   const dispatch = useDispatch();
   const handleClick = async (newsId) => {

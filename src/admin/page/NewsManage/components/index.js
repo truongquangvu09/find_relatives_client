@@ -187,7 +187,7 @@ function NewsManageTable() {
       <div className={cx('header-search')}>
         <h3 className={cx('left')}>Tất cả tin tức</h3>
       </div>
-      <div style={{ height: 425, width: 1100 }}>
+      <div style={{ height: 420, width: 1100 }}>
         <DataGrid
           sx={{
             boxShadow: 2,

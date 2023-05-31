@@ -143,7 +143,7 @@ function SearchRegistrationManage() {
     {
       field: 'status',
       headerName: 'Trạng thái',
-      width: 130,
+      width: 120,
       editable: true,
       cellClassName: (params) =>
         params.value === 'đã xác nhận' ? 'confirmed' : 'disconfirmed',
@@ -151,7 +151,7 @@ function SearchRegistrationManage() {
     {
       field: 'button',
       headerName: 'xác nhận',
-      width: 150,
+      width: 130,
       editable: true,
       type: 'actions',
       getActions: (params) => [
@@ -181,7 +181,7 @@ function SearchRegistrationManage() {
       <div className={cx('header-search')}>
         <h3 className={cx('left')}>Tất cả đơn đăng kí</h3>
       </div>
-      <Box sx={{ height: 420, width: '100%' }}>
+      <Box sx={{ height: 420, width: 1100 }}>
         <DataGrid
           sx={{
             boxShadow: 2,

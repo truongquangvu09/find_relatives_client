@@ -191,7 +191,7 @@ function TvShowManageTable() {
       <div className={cx('header-search')}>
         <h3 className={cx('left')}>Tất cả truyền hình</h3>
       </div>
-      <div style={{ height: 425, width: 1100 }}>
+      <div style={{ height: 420, width: 1100 }}>
         <Box>
           <DataGrid
             sx={{

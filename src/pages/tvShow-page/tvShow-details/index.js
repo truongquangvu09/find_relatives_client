@@ -16,7 +16,7 @@ function TvShowDetails() {
     comment_text: '',
     report_id: '',
     post_id: '',
-    tvShow_id: tvShowData.id,
+    tvShow_id: '',
     news_id: '',
   });
 
@@ -72,6 +72,15 @@ function TvShowDetails() {
       }
     };
     get();
+  }, [tvShowData]);
+
+  useEffect(() => {
+    if (tvShowData) {
+      setComment((prevState) => ({
+        ...prevState,
+        tvShow_id: tvShowData.id,
+      }));
+    }
   }, [tvShowData]);
 
   return (

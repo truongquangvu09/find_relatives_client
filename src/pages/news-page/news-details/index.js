@@ -18,7 +18,7 @@ function NewsDetails() {
     report_id: '',
     post_id: '',
     tvShow_id: '',
-    news_id: newsData.id,
+    news_id: '',
   });
 
   const [commentList, setCommentList] = useState([]);
@@ -73,6 +73,15 @@ function NewsDetails() {
       }
     };
     get();
+  }, [newsData]);
+
+  useEffect(() => {
+    if (newsData) {
+      setComment((prevState) => ({
+        ...prevState,
+        news_id: newsData.id,
+      }));
+    }
   }, [newsData]);
 
   return (

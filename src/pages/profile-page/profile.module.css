@@ -1,52 +1,68 @@
-.wrapper{
-    display: flex;
+.wrapper {
+  display: flex;
 }
 
-.profile-list{
-    width: 68.5%;
-    margin-left: 156px;
+.profile-list {
+  width: 68.5%;
+  margin-left: 156px;
 }
 
-.sidebar{
-    float: right;
-    width: 31%;
-    margin-right: 187px;
+.sidebar {
+  float: right;
+  width: 31%;
+  margin-right: 187px;
 }
 
 .large-button {
-    width: 100%;
-    box-shadow: 0 1px 0 0 #e49295 inset;
-    background: -webkit-linear-gradient(top, #cb0000, #a30000);
-    border-radius: 5px;
-    margin-top: 32px;
-    margin-bottom: 10px;
+  width: 100%;
+  box-shadow: 0 1px 0 0 #e49295 inset;
+  background: -webkit-linear-gradient(top, #cb0000, #a30000);
+  border-radius: 5px;
+  margin-top: 32px;
+  margin-bottom: 10px;
 }
 
-.large-button a{
-    color: #FFFFFF;
-    display: block;
-    text-align: center;
-    text-shadow: 1px 1px 1px #333333;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 1.17em;
-    font-weight: bold;
+.large-button a {
+  color: #ffffff;
+  display: block;
+  text-align: center;
+  text-shadow: 1px 1px 1px #333333;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 1.17em;
+  font-weight: bold;
 }
-
 
 .tagloud {
-    display: flex;
-    flex-wrap: wrap;
-    text-decoration: none;
-    font-size: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  text-decoration: none;
+  font-size: 24px;
 }
 
 .link {
-    text-decoration: none;
-    color: #AD0000;
+  text-decoration: none;
+  color: #ad0000;
 }
 
 .link-tag {
-    margin-right: 10px;
-    color: #AD0000;
+  margin-right: 10px;
+  color: #ad0000;
+}
+.btn-submitsearch {
+  background: none repeat scroll 0 0 #ffffff;
+  border: 1px solid #d6d6d6;
+  border-radius: 6px 6px 6px 6px;
+  display: flex;
+  align-items: center;
+  margin: 10px auto;
+  padding: 3.8%;
+  width: 55%;
+  transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+  color: #333;
+  cursor: pointer;
+  height: 44px;
+  justify-content: center;
 }

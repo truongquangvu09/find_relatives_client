@@ -147,7 +147,7 @@ function PostsManage() {
         <h3 className={cx('left')}>Tất cả bài đăng</h3>
       </div>
       <div style={{ height: 425, width: 1100 }}>
-        <Box sx={{ height: 420, width: '100%' }}>
+        <Box sx={{ height: 420, width: 1100 }}>
           <DataGrid
             sx={{
               boxShadow: 2,
